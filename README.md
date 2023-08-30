@@ -57,6 +57,27 @@ Cleaning "Llama2Robot" scripts...
  Removed: 0 Lines, 0 Blanks, 0 Comments
  Difference: 105 > 105 - 0.00%
 ```
+Result is only 1, comment and blank line, per function...
+```
+# function to list all available models
+def list_available_models():
+    return glob.glob("./models/*.bin")
+
+# shift responses for the model only
+def shift_responses():
+    data = read_yaml()
+    data['model_previous3'] = data['model_previous2']
+    data['model_previous2'] = data['model_previous1']
+    data['model_previous1'] = data['model_current']
+    write_to_yaml('model_previous3', data['model_previous3'])
+    write_to_yaml('model_previous2', data['model_previous2'])
+    write_to_yaml('model_previous1', data['model_previous1'])
+
+# function to read from YAML file
+def read_yaml(file_path='./cache/config.yaml'):
+    with open(file_path, 'r') as file:
+        return yaml.safe_load(file)
+```
 
 ## Usage
 1. Place the Python files you want to clean in the `./Scripts` folder.
