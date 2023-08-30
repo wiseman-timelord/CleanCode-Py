@@ -1,7 +1,6 @@
 # ScriptClean
 
-## Status: Alpha.
-Breaks scripts, its the uses of, "###" in the script I believe, such as "### USER:", attempting to fix...dragging on.
+## Status: Working.
 
 ## Description
 ScriptClean is a Python utility designed to clean Python `.py` and PowerShell `.ps1` scripts. It removes unnecessary comments and blank lines to make your scripts more readable and efficient. The tool provides a user-friendly interface, complete with ASCII art, to guide you through the cleaning process. It leaves the,  comment and blank line, at the start of a function, but that will be the only, comments and blank lines, you will see :sunglasses:.
@@ -64,7 +63,7 @@ Cleaning "Llama2Robot" scripts...
 2. Run `ScriptClean.bat` if you are on Windows for easy launching. Alternatively, you can run the Python script directly, and I advise admin mode.
 3. Follow the on-screen instructions to select a file for cleaning.
 4. Review the cleaning statistics and either choose another file to clean or exit the program.
-*  Warning! If you have use of "#" a bit along the line, it will remove, but, "###" and "##", are ok. 
+*  Warning! If you use of "#" a bit along the line, it will remove, but, "###" and "##", are safe. 
 
 ## Requirements
 - Python 3.x
