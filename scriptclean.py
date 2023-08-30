@@ -23,6 +23,8 @@ def clean_file(selected_file):
     with open(f"./Scripts/{selected_file}", 'r') as f:
         lines = f.readlines()
     
+    total_lines_before = len(lines)
+    
     cleaned_lines = []
     
     for i, line in enumerate(lines):
@@ -31,7 +33,7 @@ def clean_file(selected_file):
         
         # Remove lines with only spaces
         if line.strip() == '':
-            if next_line is None or (not next_line.startswith('#')):
+            if next_line is None or next_line.strip() == '' or next_line.startswith(' '):
                 blank_lines_removed += 1
                 continue
         
@@ -52,7 +54,9 @@ def clean_file(selected_file):
     with open(f"./Cleaned/{selected_file}", 'w') as f:
         f.writelines(cleaned_lines)
     
-    return lines_removed, comments_removed, blank_lines_removed
+    total_lines_after = len(cleaned_lines)
+    
+    return lines_removed, comments_removed, blank_lines_removed, total_lines_before, total_lines_after
 
 def main():
     ensure_directories_exist()
@@ -88,15 +92,20 @@ def main():
         
         shutil.copy(f"./Scripts/{selected_file}", f"./Backup/{selected_file}")
         
-        lines_removed, comments_removed, blank_lines_removed = clean_file(selected_file)
+        lines_removed, comments_removed, blank_lines_removed, total_lines_before, total_lines_after = clean_file(selected_file)
         
         os.remove(f"./Scripts/{selected_file}")
+        
+        percentage_change = ((total_lines_before - total_lines_after) / total_lines_before) * 100
         
         print(f"...cleaning complete.\n\n")
         print(f"                                    Stats:\n")
         print(f"Lines removed: {lines_removed}")
         print(f"Comments removed: {comments_removed}")
         print(f"Blank lines removed: {blank_lines_removed}")
+        print(f"Total lines before: {total_lines_before}")
+        print(f"Total lines after: {total_lines_after}")
+        print(f"Percentage change in total lines: {percentage_change:.2f}%")
         
         time.sleep(5)
 
