@@ -13,7 +13,7 @@ ScriptClean is a Python utility designed to clean Python `.py` and PowerShell `.
 5. **File Backup**: Backs up the selected file to the "./Backup" folder before cleaning.
 6. **File Cleaning**: Removes specific types of comments and blank lines based on user-defined rules.
 7. **File Saving**: Saves the cleaned file to the "./Cleaned" folder.
-8. **Original File Removal**: Deletes the original file from the "./Scripts" folder after cleaning (10/10 it was in "./backup" intact).
+8. **Original File Removal**: Deletes the original file from the "./Scripts" folder after cleaning.
 9. **Statistics Display**: Shows statistics about the cleaning process, including the number of lines and comments removed.
 10. **Looping Interface**: Allows continuous cleaning operations with options to clean another file or exit.
 
