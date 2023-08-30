@@ -3,7 +3,7 @@
 ## Status: Beta (testing).
 
 ## Description
-ScriptClean is a Python utility designed to clean Python `.py` and PowerShell `.ps1` scripts. It removes unnecessary comments and blank lines to make your scripts more readable and efficient. The tool provides a user-friendly interface, complete with ASCII art, to guide you through the cleaning process. It leaves the,  comment and blank line, at the start of a function, but that will be the only, comments and blank lines, you will see :sunglasses:. 1 warning, if you have printed comments like 'print ("# hello world")' or some other bizzare use of "#", it may corrupt this, but, "###" and "##", should be fine now. 
+ScriptClean is a Python utility designed to clean Python `.py` and PowerShell `.ps1` scripts. It removes unnecessary comments and blank lines to make your scripts more readable and efficient. The tool provides a user-friendly interface, complete with ASCII art, to guide you through the cleaning process. It leaves the,  comment and blank line, at the start of a function, but that will be the only, comments and blank lines, you will see :sunglasses:. 1 warning, if you have some bizzare use of "#" in teh script, like 'print ("# hello world")', it may corrupt this, but, "###" and "##", should be ok. 
 
 ## Features
 1. **ASCII Art Display**: Enhances the console output with visually appealing ASCII art.
