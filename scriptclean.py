@@ -20,6 +20,7 @@ def clean_file(selected_file):
     comments_removed = 0
     blank_lines_removed = 0
     
+    print(f"\n Cleaning scripts...")
     with open(f"./Scripts/{selected_file}", 'r') as f:
         lines = f.readlines()
     
@@ -58,6 +59,21 @@ def clean_file(selected_file):
     
     return lines_removed, comments_removed, blank_lines_removed, total_lines_before, total_lines_after
 
+def clean_and_backup_file(selected_file):
+    shutil.copy(f"./Scripts/{selected_file}", f"./Backup/{selected_file}")
+    lines_removed, comments_removed, blank_lines_removed, total_lines_before, total_lines_after = clean_file(selected_file)
+    os.remove(f"./Scripts/{selected_file}")
+    percentage_change = ((total_lines_before - total_lines_after) / total_lines_before) * 100
+    print(f" ...cleaning complete.")
+    print(f"                                    Stats:\n")
+    print(f"Lines removed: {lines_removed}")
+    print(f"Comments removed: {comments_removed}")
+    print(f"Blank lines removed: {blank_lines_removed}")
+    print(f"Total lines before: {total_lines_before}")
+    print(f"Total lines after: {total_lines_after}")
+    print(f"Percentage change in total lines: {percentage_change:.2f}%")
+    time.sleep(5)
+
 def main():
     ensure_directories_exist()
     
@@ -76,38 +92,32 @@ def main():
         
         print(" ...Scripts Found.\n")
         
-        for i, f in enumerate(file_types, start=1):
-            print(f"         {i}. {f}")
+        # Display only the first 9 files in the menu
+        for i, f in enumerate(file_types[:9], start=1):
+            print(f"                       {i}. {f}")
+        
+        # Show option for cleaning all files
+        print("                       0. Clean All Sripts In Folder")
+        
+        # Show overflow files if any
+        if len(file_types) > 9:
+            print("\n         ...and more files not shown")
         
         choice = input("\n Select a file to clean (or 'quit' to exit): ")
         
         if choice.lower() == 'quit':
             return
+        elif choice == '0':
+            for f in file_types:
+                clean_and_backup_file(f)
+            continue
         
         try:
             selected_file = file_types[int(choice) - 1]
+            clean_and_backup_file(selected_file)
         except (ValueError, IndexError):
             print("Invalid choice.")
             continue
-        
-        shutil.copy(f"./Scripts/{selected_file}", f"./Backup/{selected_file}")
-        
-        lines_removed, comments_removed, blank_lines_removed, total_lines_before, total_lines_after = clean_file(selected_file)
-        
-        os.remove(f"./Scripts/{selected_file}")
-        
-        percentage_change = ((total_lines_before - total_lines_after) / total_lines_before) * 100
-        
-        print(f"...cleaning complete.\n\n")
-        print(f"                                    Stats:\n")
-        print(f"Lines removed: {lines_removed}")
-        print(f"Comments removed: {comments_removed}")
-        print(f"Blank lines removed: {blank_lines_removed}")
-        print(f"Total lines before: {total_lines_before}")
-        print(f"Total lines after: {total_lines_after}")
-        print(f"Percentage change in total lines: {percentage_change:.2f}%")
-        
-        time.sleep(5)
 
 if __name__ == "__main__":
     main()
