@@ -63,7 +63,7 @@ Cleaning the "Llama2Robot" scripts...
 2. Run `ScriptClean.bat` if you are on Windows for easy launching. Alternatively, you can run the Python script directly, and I advise admin mode.
 3. Follow the on-screen instructions to select a file for cleaning.
 4. Review the cleaning statistics and either choose another file to clean or exit the program.
-*  Warning! If you have some bizzare use of "#" in teh script, like 'print ("# hello world")', it may corrupt this, but, "###" and "##", should be ok. 
+*  Warning! If you have bizzare use of "#" a bit along the line in script, it will remove, but, "###" and "##", are ok. 
 
 ## Requirements
 - Python 3.x
