@@ -84,7 +84,6 @@ def read_yaml(file_path='./cache/config.yaml'):
 2. Run `ScriptClean.bat` if you are on Windows for easy launching. Alternatively, you can run the Python script directly, and I advise admin mode.
 3. Follow the on-screen instructions to select a file for cleaning.
 4. Review the cleaning statistics and either choose another file to clean or exit the program.
-*  Warning! If you use of "#" a bit along the line, it will remove, but, "###" and "##", are safe. 
 
 ## Requirements
 - Python 3.x
@@ -95,5 +94,7 @@ def read_yaml(file_path='./cache/config.yaml'):
 - Always back up important files before running any script that modifies them.
 
 ## Disclaimer
+While this program takes the error out of processing scripts, it also introduces the issue of moving scripts around, so remember to always exercise some level of caution with organizing the movements of your Master scripts.
+If you use of "#" a bit along the line in some abnormal method, it will also remove this, but, "###" and "##", such as for example "### USER:", are, tested and safe. This was the only rule update required during testing on the the 4 scripts for "Llama2Robot" at the time. 
 This tool is provided "as is" without any warranties. Always test the script on sample files before using it on important data. The authors are not responsible for any loss of data or functionality.
 The scripts produce, "Backup" and "Cleaned", versions of the scripts, if it broke your script, then use the backup for that one, and if there are no Backups, thats because you, moved or deleted, them.
