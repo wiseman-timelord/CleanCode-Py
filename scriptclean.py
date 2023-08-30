@@ -43,12 +43,13 @@ def clean_file(selected_file):
             lines_removed += 1
             continue
         
-        # Remove inline comments
-        if '# ' in line:  # Modified this line to check for '# ' instead of just '#'
-            parts = line.split('# ', 1)
-            if parts[0].strip() != '':
-                line = parts[0] + '\n'
-                comments_removed += 1
+        # Remove inline comments based on new rule
+        if '# ' in line and not line.lstrip().startswith('# '):
+            if '##' not in line and '###' not in line:
+                parts = line.split('# ', 1)
+                if parts[0].strip() != '':
+                    line = parts[0] + '\n'
+                    comments_removed += 1
         
         cleaned_lines.append(line)
     
