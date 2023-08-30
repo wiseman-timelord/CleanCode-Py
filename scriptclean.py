@@ -20,7 +20,7 @@ def clean_file(selected_file):
     comments_removed = 0
     blank_lines_removed = 0
     
-    print(f"\n Cleaning Script...")
+    print(f"\n Cleaning Script '{selected_file}'...")
     with open(f"./Scripts/{selected_file}", 'r') as f:
         lines = f.readlines()
     
