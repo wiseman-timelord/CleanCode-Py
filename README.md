@@ -47,6 +47,11 @@ ScriptClean is a Python utility designed to clean Python `.py` and PowerShell `.
 
  Cleaning Script...
  ...Script Cleaned.
+ Removed: 18 Blanks, 4 Comments
+ Difference: 82/121 - 32.23%
+
+ Cleaning Script...
+ ...Script Cleaned.
  Removed: 14 Blanks, 7 Comments
  Difference: 119/158 - 24.68%
 
@@ -56,6 +61,7 @@ ScriptClean is a Python utility designed to clean Python `.py` and PowerShell `.
  Difference: 105/105 - 0.00%
 
 ```
+
 ## Usage
 1. Place the Python files you want to clean in the `./Scripts` folder.
 2. Run `ScriptClean.bat` if you are on Windows for easy launching. Alternatively, you can run the Python script directly.
