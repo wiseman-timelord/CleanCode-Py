@@ -43,19 +43,19 @@ Cleaning the scripts for "Llama2Robot"...
 ```
  Cleaning Script...
  Removed: 0 Lines,  10 Blanks, 2 Comments
- Difference: 150>140 - 6.67%
+ Difference: 150 > 140 - 6.67%
 
  Cleaning Script...
  Removed: 18 Lines,  21 Blanks, 4 Comments
- Difference: 121>82 - 32.23%
+ Difference: 121 > 82 - 32.23%
 
  Cleaning Script...
  Removed: 14 Lines,  25 Blanks, 7 Comments
- Difference: 158>119 - 24.68%
+ Difference: 158 > 119 - 24.68%
 
  Cleaning Script...
  Removed: 0 Lines,  0 Blanks, 0 Comments
- Difference: 105>105 - 0.00%
+ Difference: 105 > 105 - 0.00%
 ```
 
 ## Usage
