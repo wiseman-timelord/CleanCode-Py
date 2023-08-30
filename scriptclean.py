@@ -65,13 +65,8 @@ def clean_and_backup_file(selected_file):
     os.remove(f"./Scripts/{selected_file}")
     percentage_change = ((total_lines_before - total_lines_after) / total_lines_before) * 100
     print(f" ...Script Cleaned.")
-    print(f"                                    Stats:\n")
-    print(f"Lines removed: {lines_removed}")
-    print(f"Comments removed: {comments_removed}")
-    print(f"Blank lines removed: {blank_lines_removed}")
-    print(f"Total lines before: {total_lines_before}")
-    print(f"Total lines after: {total_lines_after}")
-    print(f"Percentage change in total lines: {percentage_change:.2f}%")
+    print(f" Removed: {lines_removed} Blanks, {comments_removed} Comments")
+    print(f" Difference: {total_lines_after}/{total_lines_before} - {percentage_change:.2f}%")
     time.sleep(5)
 
 def main():
@@ -90,14 +85,14 @@ def main():
             print(" No Scripts Found!\n")
             return
         
-        print(" ...Scripts Found.\n")
+        print(" ...Scripts Found.")
         
         # Display only the first 9 files in the menu
         for i, f in enumerate(file_types[:9], start=1):
-            print(f"                       {i}. {f}")
+            print(f"                             {i}. {f}")
         
         # Show option for cleaning all files
-        print("                       0. Clean All Sripts In Folder")
+        print("                             0. Clean All Sripts")
         
         # Show overflow files if any
         if len(file_types) > 9:

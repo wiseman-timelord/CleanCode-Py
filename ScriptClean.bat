@@ -16,17 +16,16 @@ if %errorLevel% == 0 (
 
 :: Change to the directory of the batch file
 cd /d "%CurrentDir%"
-Echo.
+echo.
 
 :: Run the scriptclean.py script
 echo Launching ScriptClean...
-echo.
 @echo on
 wsl python3 scriptclean.py
 @echo off
 
 :: Exiting
-echo Llama2Robot shutting down...
+echo ScriptClean Shutdown...
 echo.
 pause
 exit /b
