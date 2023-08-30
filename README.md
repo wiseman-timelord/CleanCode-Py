@@ -1,6 +1,6 @@
 # ScriptClean
 
-## Status: Alpha (testing)
+## Status: Beta (testing).
 
 ## Description
 ScriptClean is a Python utility designed to clean Python `.py` and PowerShell `.ps1` scripts. It removes unnecessary comments and blank lines to make your scripts more readable and efficient. The tool provides a user-friendly interface, complete with ASCII art, to guide you through the cleaning process. It leaves the,  comment and blank line, at the start of a function, but that will be the only, comments and blank lines, you will see :sunglasses:. I could develop it a little further, but it does what I need for now..
@@ -60,13 +60,13 @@ Cleaning the "Llama2Robot" scripts...
 
 ## Usage
 1. Place the Python files you want to clean in the `./Scripts` folder.
-2. Run `ScriptClean.bat` if you are on Windows for easy launching. Alternatively, you can run the Python script directly.
+2. Run `ScriptClean.bat` if you are on Windows for easy launching. Alternatively, you can run the Python script directly, and I advise admin mode.
 3. Follow the on-screen instructions to select a file for cleaning.
 4. Review the cleaning statistics and either choose another file to clean or exit the program.
 
 ## Requirements
 - Python 3.x
-- Windows or Linux Operating System
+- Windows or Linux (untested), Operating System
 
 ## Notes
 - The script automatically creates the necessary directories if they don't exist.
@@ -74,3 +74,4 @@ Cleaning the "Llama2Robot" scripts...
 
 ## Disclaimer
 This tool is provided "as is" without any warranties. Always test the script on sample files before using it on important data. The authors are not responsible for any loss of data or functionality.
+The scripts produce, "Backup" and "Cleaned", versions of the scripts, if it broke your script, then use the backup for that one, and if there are no Backups, thats because you, moved or deleted, them.
