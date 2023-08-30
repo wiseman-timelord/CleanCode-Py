@@ -20,7 +20,7 @@ def clean_file(selected_file):
     comments_removed = 0
     blank_lines_removed = 0
     
-    print(f"\n Cleaning scripts...")
+    print(f"\n Cleaning Script...")
     with open(f"./Scripts/{selected_file}", 'r') as f:
         lines = f.readlines()
     
@@ -64,7 +64,7 @@ def clean_and_backup_file(selected_file):
     lines_removed, comments_removed, blank_lines_removed, total_lines_before, total_lines_after = clean_file(selected_file)
     os.remove(f"./Scripts/{selected_file}")
     percentage_change = ((total_lines_before - total_lines_after) / total_lines_before) * 100
-    print(f" ...cleaning complete.")
+    print(f" ...Script Cleaned.")
     print(f"                                    Stats:\n")
     print(f"Lines removed: {lines_removed}")
     print(f"Comments removed: {comments_removed}")
