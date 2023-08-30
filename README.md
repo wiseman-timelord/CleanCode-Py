@@ -1,6 +1,7 @@
 # ScriptClean
 
-## Status: Beta (testing).
+## Status: Alpha.
+Breaks scripts, its the uses of, "###" in the script I believe, such as "### USER:", attempting to fix...dragging on.
 
 ## Description
 ScriptClean is a Python utility designed to clean Python `.py` and PowerShell `.ps1` scripts. It removes unnecessary comments and blank lines to make your scripts more readable and efficient. The tool provides a user-friendly interface, complete with ASCII art, to guide you through the cleaning process. It leaves the,  comment and blank line, at the start of a function, but that will be the only, comments and blank lines, you will see :sunglasses:.
