@@ -19,7 +19,8 @@ ScriptClean is a Python utility designed to clean Python `.py` and PowerShell `.
 
 ## Output
 The Main Menu...
-```============================================================================
+```
+============================================================================
   _________            .__        __   _________ .__
  /   _____/ ___________|__|______/  |_ \_   ___ \|  |   ____ _____    ____
  \_____  \_/ ___\_  __ \  \____ \   __\/    \  \/|  | _/ __ \\__  \  /    \
@@ -39,7 +40,8 @@ The Main Menu...
 ```
 
 Cleaning the scripts for "Llama2Robot"...
-```Cleaning Script...
+```
+ Cleaning Script...
  Removed: 0 Lines,  10 Blanks, 2 Comments
  Difference: 150>140 - 6.67%
 
@@ -54,8 +56,6 @@ Cleaning the scripts for "Llama2Robot"...
  Cleaning Script...
  Removed: 0 Lines,  0 Blanks, 0 Comments
  Difference: 105>105 - 0.00%
-
-
 ```
 
 ## Usage
