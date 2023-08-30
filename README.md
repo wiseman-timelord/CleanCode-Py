@@ -17,6 +17,50 @@ ScriptClean is a Python utility designed to clean Python `.py` and PowerShell `.
 9. **Statistics Display**: Shows statistics about the cleaning process, including the number of lines and comments removed.
 10. **Looping Interface**: Allows continuous cleaning operations with options to clean another file or exit.
 
+## Output
+```
+============================================================================
+  _________            .__        __   _________ .__
+ /   _____/ ___________|__|______/  |_ \_   ___ \|  |   ____ _____    ____
+ \_____  \_/ ___\_  __ \  \____ \   __\/    \  \/|  | _/ __ \\__  \  /    \
+ /        \  \___|  | \/  |  |_> >  |  \     \___|  |_\  ___/ / __ \|   |  \
+/_______  /\___  >__|  |__|   __/|__|   \______  /____/\___  >____  /___|  /
+        \/     \/         |__|                 \/          \/     \/     \/
+============================================================================
+
+ Scanning Folder...
+ ...Scripts Found.
+
+                       1. interface.py
+                       2. model.py
+                       3. utility.py
+                       0. Clean All Sripts In Folder
+
+ Select a file to clean (or 'quit' to exit):
+
+```
+```
+...cleaning complete.
+                                    Stats:
+
+Lines removed: 0
+Comments removed: 2
+Blank lines removed: 10
+Total lines before: 150
+Total lines after: 140
+Percentage change in total lines: 6.67%
+
+...cleaning complete.
+                                    Stats:
+
+Lines removed: 14
+Comments removed: 7
+Blank lines removed: 25
+Total lines before: 158
+Total lines after: 119
+Percentage change in total lines: 24.68%
+
+```
 ## Usage
 1. Place the Python files you want to clean in the `./Scripts` folder.
 2. Run `ScriptClean.bat` if you are on Windows for easy launching. Alternatively, you can run the Python script directly.
