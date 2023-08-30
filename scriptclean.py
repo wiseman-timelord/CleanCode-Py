@@ -44,8 +44,8 @@ def clean_file(selected_file):
             continue
         
         # Remove inline comments
-        if '#' in line:
-            parts = line.split('#', 1)
+        if '# ' in line:  # Modified this line to check for '# ' instead of just '#'
+            parts = line.split('# ', 1)
             if parts[0].strip() != '':
                 line = parts[0] + '\n'
                 comments_removed += 1
