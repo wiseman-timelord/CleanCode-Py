@@ -67,7 +67,7 @@ def clean_and_backup_file(selected_file):
     percentage_change = ((total_lines_before - total_lines_after) / total_lines_before) * 100
     print(f" Removed: {lines_removed} Lines, {blank_lines_removed} Blanks, {comments_removed} Comments")
     print(f" Difference: {total_lines_before} > {total_lines_after} - {percentage_change:.2f}%")
-    time.sleep(5)
+    time.sleep(2)
 
 def main():
     ensure_directories_exist()
