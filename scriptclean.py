@@ -10,10 +10,53 @@ ASCII_ART = r"""  _________            .__        __   _________ .__
 /_______  /\___  >__|  |__|   __/|__|   \______  /____/\___  >____  /___|  /
         \/     \/         |__|                 \/          \/     \/     \/ """
 
+
+
 def ensure_directories_exist():
     for dir_name in ["Scripts", "Backup", "Cleaned"]:
         if not os.path.exists(dir_name):
             os.makedirs(dir_name)
+
+def identify_script_type(lines):
+    # Counters for different script types
+    python_count = 0
+    powershell_count = 0
+    cpp_count = 0
+    batch_count = 0
+    
+    for line in lines:
+        if line.startswith("def "):
+            python_count += 1
+        elif line.startswith("echo "):
+            batch_count += 1
+        elif line.startswith("function "):
+            powershell_count += 1
+        elif line.startswith("#include "):
+            cpp_count += 1
+    
+    # Identify the script type based on the counters
+    max_count = max(python_count, powershell_count, cpp_count, batch_count)
+    
+    if max_count == python_count:
+        return "Python"
+    elif max_count == powershell_count:
+        return "PowerShell"
+    elif max_count == cpp_count:
+        return "C++"
+    elif max_count == batch_count:
+        return "Batch"
+    else:
+        return "Unknown"
+
+def add_comments_to_python_script(lines):
+    new_lines = []
+    for i, line in enumerate(lines):
+        if i > 0 and line.startswith("def ") and not lines[i-1].lstrip().startswith("#"):
+            new_lines.append("# function\n")
+        elif i > 0 and line.startswith("class ") and not lines[i-1].lstrip().startswith("#"):
+            new_lines.append("# class\n")
+        new_lines.append(line)
+    return new_lines
 
 def clean_file(selected_file):
     lines_removed = 0
@@ -25,6 +68,14 @@ def clean_file(selected_file):
         lines = f.readlines()
     
     total_lines_before = len(lines)
+    
+    # Identify the script type
+    script_type = identify_script_type(lines)
+    print(f" Identified as {script_type} script.")
+    
+    # Add comments to Python script if needed
+    if script_type == "Python":
+        lines = add_comments_to_python_script(lines)
     
     cleaned_lines = []
     
@@ -59,6 +110,7 @@ def clean_file(selected_file):
     total_lines_after = len(cleaned_lines)
     
     return lines_removed, comments_removed, blank_lines_removed, total_lines_before, total_lines_after
+
 
 def clean_and_backup_file(selected_file):
     shutil.copy(f"./Scripts/{selected_file}", f"./Backup/{selected_file}")
