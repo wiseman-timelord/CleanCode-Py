@@ -6,12 +6,13 @@ Status: Working.
 ScriptClean is a Python utility designed to clean Python `.py` and PowerShell `.ps1` scripts. It removes unnecessary comments and blank lines to make your scripts more readable and efficient. The tool provides a user-friendly interface, complete with ASCII art, to guide you through the cleaning process. It leaves the,  comment and blank line, at the start of a function, but that will be the only, comments and blank lines, you will see :sunglasses:. In short, cleaning files for smaller context can be a drag resulting in errors, this is a, reliable and safe and logical, method saving on, time and hastle.
 
 ## Features
-1. **ASCII Art Display**: Enhances the console output with visually appealing ASCII art.
-2. **Directory Management**: Automatically creates the necessary directories ("Scripts", "Backup", "Cleaned") if they don't exist.
-3. **File Scanning**: Scans the "./Scripts" folder for `.py` and `.ps1` files.
-4. **User Interface**: Offers a numbered list of found script files for easy selection.
-5. **File Backup**: Backs up the selected file to the "./Backup" folder before cleaning.
-6. **File Cleaning**: Removes specific types of comments and blank lines based on user-defined rules.
+1. **Identification of script**: It will use simple rules to identify what type of script it is.
+1. **Directory Management**: Automatically creates the necessary directories ("Scripts", "Backup", "Cleaned") if they don't exist.
+2. **File Scanning**: Scans the "./Scripts" folder for `.py` and `.ps1` files.
+3. **User Interface**: Offers a numbered list of found script files for easy selection.
+4. **File Backup**: Backs up the selected file to the "./Backup" folder before cleaning.
+5. **File Cleaning**: Removes specific types of comments and blank lines based on user-defined rules.
+6. **Essential Comments**: (currently only) For python, it will ensure there is 1 comment before all functions/classes.
 7. **File Saving**: Saves the cleaned file to the "./Cleaned" folder.
 8. **Original File Removal**: Deletes the original file from the "./Scripts" folder after cleaning.
 9. **Statistics Display**: Shows statistics about the cleaning process, including the number of lines and comments removed.
