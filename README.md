@@ -13,7 +13,7 @@ ScriptClean is a Python utility designed to clean Python `.py`, PowerShell `.ps1
 ### Features
 1. **Identification of Script**: Uses simple rules to determine the type of script.
 2. **Directory Management**: Automatically creates essential directories ("Scripts", "Backup", "Cleaned") if they don't exist.
-3. **File Scanning**: Scans the "./Scripts" folder for `.py`, `.ps1`, and other script files.
+3. **File Scanning**: Scans the "./Scripts" folder for `.Py`, `.Ps1`, `.Bat`, `.Mql5`, script files.
 4. **User Interface**: Presents a numbered list of discovered script files for easy selection.
 5. **File Backup**: Backs up the chosen file to the "./Backup" folder before cleaning.
 6. **File Cleaning**: Removes specific types of comments and blank lines based on user-defined rules.
