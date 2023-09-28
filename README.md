@@ -109,7 +109,7 @@ Program exited, press any key to continue...
 
 ### Notes
 -Batch is somewhat more untested, but all formats require further, testing and refining.
--Separate display for processing of scripts would be nice.
+-Improvement of display needed, processing of scripts needs to be in its own separated text section.
 
 ### Disclaimer
 * While this program takes the error out of processing scripts, it also introduces the issue of moving scripts around, so remember to always exercise some level of caution with organizing the movements of your Master scripts.
