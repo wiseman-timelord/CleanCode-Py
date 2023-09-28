@@ -5,6 +5,7 @@ Status: Working.
 - ScriptClean now supports, Python, Batch, Powershell and Mql5, and identifies some amount of syntax for each.
 - Enhancements include color-coded console output, with distinct colors for regular text, lines, and errors.
 - Improved the script through, optimizations, misc upgrades, implementation of maps and refracturing to 2 scripts.
+- Screen width is now OS aware compatible with, linux and windows, shells.
 
 ### Description
 ScriptClean is a Python utility designed to clean Python `.py`, PowerShell `.ps1`, Batch `.bat`, MetaTrader5 `.mt5`, and other script types. It removes unnecessary comments and blank lines to make your scripts more readable and efficient. The tool provides a user-friendly interface, complete with, color text and ASCII art, to guide you through the cleaning process. While it retains a comment and blank line at the start of functions or classes, those will be the only comments and blank lines you'll see :sunglasses:. In essence, cleaning files for a more concise context can be tedious and prone to errors. ScriptClean offers a reliable, safe, and logical method, saving you time and hassle.
