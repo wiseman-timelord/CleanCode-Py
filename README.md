@@ -1,13 +1,14 @@
+<span style="color:yellow">
 # ScriptClean
 Status: Working.
 
-### Updated - 2023/09/28
-- ScriptClean now supports, Python, Batch, Powershell and Mql5, and identifies some amount of syntax for each.
+### <span style="color:green">Updated - 2023/09/28</span>
+- ScriptClean now supports Python, Batch, PowerShell, and Mql5, and identifies some amount of syntax for each.
 - Enhancements include color-coded console output, with distinct colors for regular text, lines, and errors.
-- Improved the script through, optimizations, misc upgrades, implementation of maps and refracturing to 2 scripts.
+- Improved the script through optimizations, miscellaneous upgrades, implementation of maps, and refactoring into two scripts.
 
 ### Description
-ScriptClean is a Python utility designed to clean Python `.py`, PowerShell `.ps1`, Batch `.bat`, MetaTrader5 `.mt5`, and other script types. It removes unnecessary comments and blank lines to make your scripts more readable and efficient. The tool provides a user-friendly interface, complete with, color text and ASCII art, to guide you through the cleaning process. While it retains a comment and blank line at the start of functions or classes, those will be the only comments and blank lines you'll see :sunglasses:. In essence, cleaning files for a more concise context can be tedious and prone to errors. ScriptClean offers a reliable, safe, and logical method, saving you time and hassle.
+ScriptClean is a Python utility designed to clean Python `.py`, PowerShell `.ps1`, Batch `.bat`, MetaTrader5 `.mt5`, and other script types. It removes unnecessary comments and blank lines to make your scripts more readable and efficient. The tool provides a user-friendly interface, complete with color text and ASCII art, to guide you through the cleaning process. While it retains a comment and blank line at the start of functions or classes, those will be the only comments and blank lines you'll see :sunglasses:. In essence, cleaning files for a more concise context can be tedious and prone to errors. ScriptClean offers a reliable, safe, and logical method, saving you time and hassle.
 
 ### Features
 1. **Identification of Script**: Uses simple rules to determine the type of script.
@@ -108,11 +109,13 @@ Program exited, press any key to continue...
 - Windows or Linux (untested) Operating System
 
 ### Notes
--Batch is somewhat more untested, but all formats require further, testing and refining.
--Improvement of display needed, processing of scripts needs to be in its own separated text section.
+- Batch is somewhat more untested, but all formats require further testing and refining.
+- Improvement of display needed, processing of scripts needs to be in its own separated text section.
 
-### Disclaimer
+### <span style="color:red">Disclaimer</span>
 * While this program takes the error out of processing scripts, it also introduces the issue of moving scripts around, so remember to always exercise some level of caution with organizing the movements of your Master scripts.
-* If you use of "#" a bit along the line in some abnormal method, it will also remove this, but, "###" and "##", such as for example "### USER:", are, tested and safe. This was the only rule update required during testing on the the 4 scripts for "Llama2Robot" at the time. 
+* If you use of "#" a bit along the line in some abnormal method, it will also remove this, but, "###" and "##", such as for example "### USER:", are tested and safe. This was the only rule update required during testing on the four scripts for "Llama2Robot" at the time. 
 * This tool is provided "as is" without any warranties. Always test the script on sample files before using it on important data. The authors are not responsible for any loss of data or functionality.
-* The scripts produce, "Backup" and "Cleaned", versions of the scripts, if it broke your script, then use the backup for that one, and if there are no Backups, thats because you, moved or deleted, them.
+* The scripts produce "Backup" and "Cleaned" versions of the scripts. If it broke your script, then use the backup for that one, and if there are no Backups, that's because you moved or deleted them.
+</span>
+
