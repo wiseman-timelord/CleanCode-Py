@@ -106,7 +106,7 @@ Program exited, press any key to continue...
 
 ### Requirements
 - Python 3.x
-- Windows or Linux (untested) Operating System
+- Windows or Linux (untested), Operating System
 
 ### Notes
 -Batch is somewhat more untested, but all formats require further, testing and refining.
