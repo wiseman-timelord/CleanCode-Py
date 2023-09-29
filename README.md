@@ -1,5 +1,7 @@
 # ScriptClean
-Status: Working.
+
+### Status:
+Since the revisit, there have been issues, I have stopped other projects to work on it. 
 
 ### Updated - 2023/09/28
 - ScriptClean now supports, Python, Batch, Powershell and Mql5, and identifies some amount of syntax for each.
