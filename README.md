@@ -61,7 +61,7 @@ Script Operations
  Difference: 105 > 105 - 0.00%
 
 ```
-
+##
 
 ### Usage - Windows
 1. Deposit the script files you wish to clean in the `./Scripts` folder.
