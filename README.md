@@ -1,7 +1,10 @@
 # ScriptClean
 
 ### Status:
-Since the revisit, there have been issues, I have stopped other projects to work on it. 
+Under development - Since the revisit, there have been issues... 
+- Issue with rules not being applied correctly after map upgrade, now requires reworking rules system
+- Improvement of display needed, processing of scripts needs to be in its own separated text section.
+
 
 ### Updated - 2023/09/28
 - ScriptClean now supports, Python, Batch, Powershell and Mql5, and identifies some amount of syntax for each.
@@ -78,10 +81,6 @@ Script Operations
 ### Requirements
 - Python 3.x
 - Windows or Linux (untested), Operating System
-
-### Notes
--Batch is somewhat more untested, but all formats require further, testing and refining.
--Improvement of display needed, processing of scripts needs to be in its own separated text section.
 
 ### Disclaimer
 * While this program takes the error out of processing scripts, it also introduces the issue of moving scripts around, so remember to always exercise some level of caution with organizing the movements of your Master scripts.
