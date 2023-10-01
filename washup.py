@@ -115,6 +115,10 @@ def add_standard_comments(lines, script_type, script_name, file_extension):
                     current_section = section
                     break
         
+        # Check for dictionary starts
+        if line.strip().endswith(" = {"):
+            current_section = "dictionaries"
+        
         # Add the section comment if the line is in the global scope (not indented)
         if current_section and current_section != prev_section and not line.startswith("    "):  # Assuming 4 spaces for indentation
             new_lines.append("\n")  # Add a blank line before the comment
@@ -138,5 +142,6 @@ def add_standard_comments(lines, script_type, script_name, file_extension):
         final_lines.append(new_lines[i])
     
     return final_lines
+
 
 
