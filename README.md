@@ -2,7 +2,7 @@
 
 ### Status: Under development.
 There are still issues... 
-- Requires further testing and updating of rules, it kinda works currently, just not, dictionaries and global variables, and this is just for python. It may need a different function for each file format, feels like im going to fix it for one, and break it for the others, each time I update the rules, while its all dynamic.
+- Requires further testing and updating of rules, it kinda works currently, just not global variables, and this is just for python. It may need a different function for each file format, so updating is clear, updating a complicated dynamic function, seems to be breaking things for the other file formats.
 
 <br>Updates done for next release...
 - More complete implementations of interface, now with separate display for processing of scripts.
