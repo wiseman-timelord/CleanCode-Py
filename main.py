@@ -11,9 +11,9 @@ from ascii import ASCII_ART
 # Set window title + size
 sys.stdout.write("\x1b]2;Llama2Robot-Window1\x07")
 sys.stdout.flush()
-if os.name == 'nt':  # Windows
+if os.name == 'nt':
     os.system('mode con: cols=78 lines=44')
-else:  # Linux or macOS
+else:
     os.system('echo -e "\e[8;44;78t"')
 terminal_width = shutil.get_terminal_size().columns
 
@@ -64,8 +64,6 @@ def clean_file(selected_file):
         with open(f"./Cleaned/{selected_file}", 'w') as f:
             f.writelines(cleaned_lines)
         total_lines_after = len(cleaned_lines)
-        total_blank_and_lines_removed = lines_removed + blank_lines_removed
-        print_color(f"     Actions: {total_blank_and_lines_removed} Blanks, {comments_removed} Comments", "YELLOW")
         return lines_removed, comments_removed, blank_lines_removed, total_lines_before, total_lines_after
     except Exception as e:
         print_color(f"Error: {e}", "RED")
@@ -78,10 +76,28 @@ def clean_and_backup_file(selected_file):
         shutil.copy(f"./Scripts/{selected_file}", f"./Backup/{selected_file}")
         lines_removed, comments_removed, blank_lines_removed, total_lines_before, total_lines_after = clean_file(selected_file)
         os.remove(f"./Scripts/{selected_file}")
-        print_color(f"     Change: {total_lines_after} > {total_lines_before} = {((total_lines_before - total_lines_after) / total_lines_before) * 100:.2f}%", "YELLOW")
+        
+        # Calculate added lines and comments
+        lines_added = total_lines_after - total_lines_before + lines_removed
+        comments_added = comments_removed  # Assuming no new comments are added
+        
+        # Ensure added lines and comments are positive
+        lines_added = abs(lines_added)
+        comments_added = abs(comments_added)
+        
+        # Calculate the change
+        change = (lines_removed + comments_removed) - (lines_added + comments_added)
+        change_percentage = change / total_lines_before * 100
+        
+        # Print the stats
+        print_color(f"     Removed: {lines_removed} Blanks, {comments_removed} Comments,", "YELLOW")
+        print_color(f"     Added: {lines_added} Blanks, {comments_added} Comments,", "YELLOW")
+        print_color(f"     Change: {total_lines_before} > {total_lines_after} = {change_percentage:.2f}%.", "YELLOW")
+        
         time.sleep(2)
     except Exception as e:
         print_color(f"Error: {e}", "RED")
+
 
 def main():
     ensure_directories_exist()
