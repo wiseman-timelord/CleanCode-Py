@@ -3,10 +3,10 @@
 ### Status:
 Under development - Since the revisit, there have been issues... 
 - Issue with rules not being applied correctly after map upgrade, now requires reworking rules system
-- Improvement of display needed, processing of scripts needs to be in its own separated text section.
 
 
-### Updated - 2023/09/28
+
+### Updated - 2023/10/01
 - ScriptClean now supports, Python, Batch, Powershell and Mql5, and identifies some amount of syntax for each.
 - Enhancements include color-coded console output, with distinct colors for regular text, lines, and errors.
 - Improved the script through, optimizations, misc upgrades, implementation of maps and refracturing to 2 scripts.
