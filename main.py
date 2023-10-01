@@ -22,6 +22,7 @@ COLORS = {
     "RED": "\033[91m",
     "YELLOW": "\033[93m",
     "BLUE": "\033[94m",
+    "GREEN": "\033[92m",
     "RESET": "\033[0m"
 }
 
@@ -31,6 +32,19 @@ def print_color(text, color):
 def center_text(text, width):
     """Center the text within the given width."""
     return text.center(width)
+
+def display_header(title, color="YELLOW"):
+    os.system('cls' if os.name == 'nt' else 'clear')
+    equals_line = "=" * 78
+    plus_line = "+" * 78
+    minus_line = "-" * 78
+    centered_ascii_art = center_text(ASCII_ART, terminal_width)
+    print_color(equals_line, "BLUE")
+    print_color(centered_ascii_art, "YELLOW")
+    print_color(equals_line, "BLUE")
+    print_color(plus_line, "BLUE")
+    print_color(title, color)
+    print_color(minus_line, "BLUE")
 
 def ensure_directories_exist():
     for dir_name in ["Scripts", "Backup", "Cleaned"]:
@@ -72,65 +86,43 @@ def clean_and_backup_file(selected_file):
 def main():
     ensure_directories_exist()
     while True:
-        os.system('cls' if os.name == 'nt' else 'clear')
         terminal_width = shutil.get_terminal_size().columns
-        equals_line = "=" * 78
-        plus_line = "+" * 78
-        minus_line = "-" * 78
-        centered_ascii_art = center_text(ASCII_ART, terminal_width)
-        print_color(equals_line, "BLUE")
-        print_color(centered_ascii_art, "YELLOW")
-        print_color(equals_line, "BLUE")
-        print_color(plus_line, "BLUE") 
-        print_color(" Script Choices:", "YELLOW")
-        print_color(minus_line, "BLUE") 
+        display_header(" Script Choices:", "YELLOW")
         print_color("\n Scanning Folder...", "YELLOW")
         file_types = [f for f in os.listdir("./Scripts") if f.lower().endswith(('.py', '.ps1', '.mql5', '.bat'))]
         if not file_types:
-            print_color(" No Scripts Found!", "RED")
-            print_color("                             0. Re-Detect Scripts", "YELLOW")
+            print_color(" No Scripts Found!\n                             0. Re-Detect Scripts", "RED")
             choice = input(f"\n{COLORS['YELLOW']} Select an option (or 'q' to exit): {COLORS['RESET']}")
             if choice.lower() == 'q':
-                print ("")
-                print_color(plus_line, "BLUE")
+                print_color("\n" + "+" * 78, "BLUE")
                 time.sleep(2)
                 break
             elif choice == '0':
-                print ("")
-                print_color(plus_line, "BLUE")
+                print_color("\n" + "+" * 78, "BLUE")
                 time.sleep(2)
                 continue
-        print_color(" ...Scripts Found.", "YELLOW")
-        for i, f in enumerate(file_types[:9], start=1):
-            print_color(f"                             {i}. {f}", "YELLOW")
-        print_color("                             0. Clean All Sripts", "YELLOW")
-        if len(file_types) > 9:
-            print_color("\n         ...and more files not shown", "YELLOW")
-        choice = input(f"\n{COLORS['YELLOW']} Select an option (or 'q' to exit): {COLORS['RESET']}")
-        if choice.lower() == 'q':
-            break
-        elif choice == '0':
-            print ("")
-            print_color(plus_line, "BLUE")
-            time.sleep(2)
-            print_color(plus_line, "BLUE")
-            print_color(" Script Operations:", "YELLOW")
-            print_color(minus_line, "BLUE") 
-            for f in file_types:
-                clean_and_backup_file(f)
-            continue
-        try:
-            print ("")
-            print_color(plus_line, "BLUE")
-            time.sleep(2)
-            print_color(plus_line, "BLUE")
-            print_color(" Script Operations", "YELLOW")
-            print_color(minus_line, "BLUE") 
-            selected_file = file_types[int(choice) - 1]
-            clean_and_backup_file(selected_file)
-        except (ValueError, IndexError):
-            print_color("Invalid choice.", "RED")
-            continue
+        else:
+            print_color(" ...Scripts Found.", "GREEN")
+            for i, f in enumerate(file_types[:9], start=1):
+                print_color(f"                             {i}. {f}", "YELLOW")
+            print_color("                             0. Clean All Sripts", "YELLOW")
+            if len(file_types) > 9:
+                print_color("\n         ...and more files not shown", "YELLOW")
+            choice = input(f"\n{COLORS['YELLOW']} Select an option (or 'q' to exit): {COLORS['RESET']}")
+            if choice.lower() == 'q':
+                break
+            elif choice == '0':
+                display_header(" Script Operations:")
+                for f in file_types:
+                    clean_and_backup_file(f)
+                continue
+            try:
+                display_header(" Script Operations")
+                selected_file = file_types[int(choice) - 1]
+                clean_and_backup_file(selected_file)
+            except (ValueError, IndexError):
+                print_color("Invalid choice.", "RED")
+                continue
 
 if __name__ == "__main__":
     main()
