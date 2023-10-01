@@ -1,4 +1,4 @@
-# main.py
+# Script: main.py
 
 # Imports
 import os
@@ -6,6 +6,7 @@ import shutil
 import time
 import sys
 from washup import identify_script_type, clean_file_content
+from ascii import ASCII_ART
 
 # Set window title + size
 sys.stdout.write("\x1b]2;Llama2Robot-Window1\x07")
@@ -17,25 +18,15 @@ else:  # Linux or macOS
 terminal_width = shutil.get_terminal_size().columns
 
 # ANSI color codes
-COLOR_RED = "\033[91m"
-COLOR_YELLOW = "\033[93m"
-COLOR_BLUE = "\033[94m"
-COLOR_RESET = "\033[0m"
-def print_blue(text):
-    print(f"{COLOR_BLUE}{text}{COLOR_RESET}")
-def print_yellow(text):
-    print(f"{COLOR_YELLOW}{text}{COLOR_RESET}")
-def print_red(text):
-    print(f"{COLOR_RED}{text}{COLOR_RESET}")
+COLORS = {
+    "RED": "\033[91m",
+    "YELLOW": "\033[93m",
+    "BLUE": "\033[94m",
+    "RESET": "\033[0m"
+}
 
-# Ascii Art for the console display
-ASCII_ART = r"""   _________            .__        __   _________ .__                        
-  /   _____/ ___________|__|______/  |_ \_   ___ \|  |   ____ _____    ____  
-  \_____  \_/ ___\_  __ \  \____ \   __\/    \  \/|  | _/ __ \\__  \  /    \ 
-  /        \  \___|  | \/  |  |_> >  |  \     \___|  |_\  ___/ / __ \|   |  \
- /_______  /\___  >__|  |__|   __/|__|   \______  /____/\___  >____  /___|  /
-         \/     \/         |__|                 \/          \/     \/     \/ """
-
+def print_color(text, color):
+    print(f"{COLORS[color]}{text}{COLORS['RESET']}")
 
 def center_text(text, width):
     """Center the text within the given width."""
@@ -46,28 +37,37 @@ def ensure_directories_exist():
         if not os.path.exists(dir_name):
             os.makedirs(dir_name)
 
+# Function to Clean the File
 def clean_file(selected_file):
-    print_yellow(f"\n Cleaning Script '{selected_file}'...")
-    with open(f"./Scripts/{selected_file}", 'r') as f:
-        lines = f.readlines()
-    total_lines_before = len(lines)
-    script_type = identify_script_type(lines)
-    print_yellow(f" Identified as {script_type} script.")
-    cleaned_lines, lines_removed, comments_removed, blank_lines_removed = clean_file_content(lines, selected_file)
-    with open(f"./Cleaned/{selected_file}", 'w') as f:
-        f.writelines(cleaned_lines)
-    total_lines_after = len(cleaned_lines)
-    return lines_removed, comments_removed, blank_lines_removed, total_lines_before, total_lines_after
+    try:
+        with open(f"./Scripts/{selected_file}", 'r') as f:
+            lines = f.readlines()
+        total_lines_before = len(lines)
+        script_type = identify_script_type(lines)
+        print_color(f"\n Identified {script_type} script: '{selected_file}'...", "YELLOW")
+        file_extension = os.path.splitext(selected_file)[1].lstrip('.')
+        cleaned_lines, lines_removed, comments_removed, blank_lines_removed = clean_file_content(lines, selected_file, file_extension)
+        with open(f"./Cleaned/{selected_file}", 'w') as f:
+            f.writelines(cleaned_lines)
+        total_lines_after = len(cleaned_lines)
+        total_blank_and_lines_removed = lines_removed + blank_lines_removed
+        print_color(f"     Actions: {total_blank_and_lines_removed} Blanks, {comments_removed} Comments", "YELLOW")
+        return lines_removed, comments_removed, blank_lines_removed, total_lines_before, total_lines_after
+    except Exception as e:
+        print_color(f"Error: {e}", "RED")
+        return 0, 0, 0, 0, 0  # Return a default tuple in case of an exception
 
 
+# Clean and Backup File
 def clean_and_backup_file(selected_file):
-    shutil.copy(f"./Scripts/{selected_file}", f"./Backup/{selected_file}")
-    lines_removed, comments_removed, blank_lines_removed, total_lines_before, total_lines_after = clean_file(selected_file)
-    os.remove(f"./Scripts/{selected_file}")
-    percentage_change = ((total_lines_before - total_lines_after) / total_lines_before) * 100
-    print_yellow(f" Removed: {lines_removed} Lines, {blank_lines_removed} Blanks, {comments_removed} Comments")
-    print_yellow(f" Difference: {total_lines_before} > {total_lines_after} - {percentage_change:.2f}%")
-    time.sleep(2)
+    try:
+        shutil.copy(f"./Scripts/{selected_file}", f"./Backup/{selected_file}")
+        lines_removed, comments_removed, blank_lines_removed, total_lines_before, total_lines_after = clean_file(selected_file)
+        os.remove(f"./Scripts/{selected_file}")
+        print_color(f"     Change: {total_lines_after} > {total_lines_before} = {((total_lines_before - total_lines_after) / total_lines_before) * 100:.2f}%", "YELLOW")
+        time.sleep(2)
+    except Exception as e:
+        print_color(f"Error: {e}", "RED")
 
 def main():
     ensure_directories_exist()
@@ -78,36 +78,58 @@ def main():
         plus_line = "+" * 78
         minus_line = "-" * 78
         centered_ascii_art = center_text(ASCII_ART, terminal_width)
-        print_blue(equals_line)
-        print_yellow(centered_ascii_art)
-        print_blue(equals_line)
-        print_blue(plus_line) 
-        print_yellow(" Script Operations")
-        print_blue(minus_line) 
-        print_yellow("\n Scanning Folder...")
-        file_types = [f for f in os.listdir("./Scripts") if f.lower().endswith(('.py', '.ps1', '.mql5'))]
+        print_color(equals_line, "BLUE")
+        print_color(centered_ascii_art, "YELLOW")
+        print_color(equals_line, "BLUE")
+        print_color(plus_line, "BLUE") 
+        print_color(" Script Choices:", "YELLOW")
+        print_color(minus_line, "BLUE") 
+        print_color("\n Scanning Folder...", "YELLOW")
+        file_types = [f for f in os.listdir("./Scripts") if f.lower().endswith(('.py', '.ps1', '.mql5', '.bat'))]
         if not file_types:
-            print_red(" No Scripts Found!\n")
-            print_blue(plus_line)
-            return
-        print_yellow(" ...Scripts Found.")
+            print_color(" No Scripts Found!", "RED")
+            print_color("                             0. Re-Detect Scripts", "YELLOW")
+            choice = input(f"\n{COLORS['YELLOW']} Select an option (or 'q' to exit): {COLORS['RESET']}")
+            if choice.lower() == 'q':
+                print ("")
+                print_color(plus_line, "BLUE")
+                time.sleep(2)
+                break
+            elif choice == '0':
+                print ("")
+                print_color(plus_line, "BLUE")
+                time.sleep(2)
+                continue
+        print_color(" ...Scripts Found.", "YELLOW")
         for i, f in enumerate(file_types[:9], start=1):
-            print_yellow(f"                             {i}. {f}")
-        print_yellow("                             0. Clean All Sripts")
+            print_color(f"                             {i}. {f}", "YELLOW")
+        print_color("                             0. Clean All Sripts", "YELLOW")
         if len(file_types) > 9:
-            print_yellow("\n         ...and more files not shown")
-        choice = input(f"\n{COLOR_YELLOW} Select a file to clean (or 'quit' to exit): {COLOR_RESET}")
-        if choice.lower() == 'quit':
-            return
+            print_color("\n         ...and more files not shown", "YELLOW")
+        choice = input(f"\n{COLORS['YELLOW']} Select an option (or 'q' to exit): {COLORS['RESET']}")
+        if choice.lower() == 'q':
+            break
         elif choice == '0':
+            print ("")
+            print_color(plus_line, "BLUE")
+            time.sleep(2)
+            print_color(plus_line, "BLUE")
+            print_color(" Script Operations:", "YELLOW")
+            print_color(minus_line, "BLUE") 
             for f in file_types:
                 clean_and_backup_file(f)
             continue
         try:
+            print ("")
+            print_color(plus_line, "BLUE")
+            time.sleep(2)
+            print_color(plus_line, "BLUE")
+            print_color(" Script Operations", "YELLOW")
+            print_color(minus_line, "BLUE") 
             selected_file = file_types[int(choice) - 1]
             clean_and_backup_file(selected_file)
         except (ValueError, IndexError):
-            print_red("Invalid choice.")
+            print_color("Invalid choice.", "RED")
             continue
 
 if __name__ == "__main__":

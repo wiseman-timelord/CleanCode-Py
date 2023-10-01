@@ -1,5 +1,4 @@
 @echo off
-mode 76, 30
 
 :: Get the current directory
 set "CurrentDir=%~dp0"
@@ -19,13 +18,12 @@ cd /d "%CurrentDir%"
 echo.
 
 :: Run the scriptclean.py script
-echo Launching ScriptClean...
+echo Launching Python script...
 @echo on
-wsl python3 scriptclean.py
+wsl python3 main.py
 @echo off
 
 :: Exiting
-echo ScriptClean Shutdown...
 echo.
-pause
-exit /b
+echo Program exited, press any key to continue...
+pause >nul
