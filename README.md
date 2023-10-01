@@ -3,6 +3,7 @@
 ### Status: Under development.
 There are still issues... 
 - Requires further testing and updating of rules, it kinda works currently, just not global variables, and this is just for python. It may need a different function for each file format, so updating is clear, updating a complicated dynamic function, seems to be breaking things for the other file formats.
+- Requires stats for cleaning to be tweaked, is currently not displaying correctly.
 
 <br>Updates done for next release...
 - More complete implementations of interface, now with separate display for processing of scripts.
