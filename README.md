@@ -1,10 +1,10 @@
 # ScriptClean
 
 ### Status: Under development.
-There are issues... 
+There are still issues... 
 - Requires further testing and updating of rules, it kinda works currently, just not, dictionaries and global variables, and this is just for python. It may need a different function for each file format, feels like im going to fix it for one, and break it for the others, each time I update the rules, while its all dynamic.
 
-<br>Updates done for next release
+<br>Updates done for next release...
 - More complete implementations of interface, now with separate display for processing of scripts.
 - General code, improvements & optimizations.
 
