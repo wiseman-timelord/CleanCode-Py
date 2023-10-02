@@ -95,10 +95,9 @@ The Main Menu, and processing scripts...
 4. Check folder "./Cleaned" after processes complete, backups are in ".\Backup".
 
 ### Requirements
-Python Version: Ensure you have Python 3.4-3.12 installed. You can verify this by running python --version or python3 --version in your terminal or command prompt.
-Operating System: ScriptClean is designed to work on Windows and Linux. While it has been primarily tested on Windows, Linux users should be able to use it, though it remains largely untested on this platform. Mac OS users might also be able to run the script, but this hasn't been verified.
-Dependencies: No external Python libraries are required. The script utilizes standard libraries like os, shutil, and time.
-Permissions: Ensure you have read and write permissions for the directory where ScriptClean is located. This is essential for creating directories, backing up scripts, and saving cleaned files.
+- **Python Version**: Ensure you have Python 3.4-3.12 installed. You can verify this by running `python --version` or `python3 --version` in your terminal or command prompt.
+- **Operating System**: ScriptClean is designed to work on Windows and Linux. While it has been primarily tested on Windows, Linux users should be able to use it, though it remains largely untested on this platform. Mac OS users might also be able to run the script, but this hasn't been verified.
+- **Dependencies**: No external Python libraries are required. The script utilizes standard libraries like `os`, `shutil`, and `time`.
 
 ### Disclaimer
 * While this program takes the error out of processing scripts, it also introduces the issue of moving scripts around, so remember to always exercise some level of caution with organizing the movements of your Master scripts.
