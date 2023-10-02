@@ -60,26 +60,27 @@ def clean_file(selected_file):
         script_type = identify_script_type(lines)
         print_color(f"\n Identified {script_type} script: '{selected_file}'...", "YELLOW")
         file_extension = os.path.splitext(selected_file)[1].lstrip('.')
-        cleaned_lines, lines_removed, comments_removed, blank_lines_removed = clean_file_content(lines, selected_file, file_extension)
+        cleaned_lines, lines_removed, comments_removed, blank_lines_removed, standard_comments_added = clean_file_content(lines, selected_file, file_extension)
         with open(f"./Cleaned/{selected_file}", 'w') as f:
             f.writelines(cleaned_lines)
         total_lines_after = len(cleaned_lines)
-        return lines_removed, comments_removed, blank_lines_removed, total_lines_before, total_lines_after
+        return lines_removed, comments_removed, blank_lines_removed, total_lines_before, total_lines_after, standard_comments_added
     except Exception as e:
         print_color(f"Error: {e}", "RED")
-        return 0, 0, 0, 0, 0  # Return a default tuple in case of an exception
+        return 0, 0, 0, 0, 0, 0  # Return a default tuple in case of an exception
+
 
 
 # Clean and Backup File
 def clean_and_backup_file(selected_file):
     try:
         shutil.copy(f"./Scripts/{selected_file}", f"./Backup/{selected_file}")
-        lines_removed, comments_removed, blank_lines_removed, total_lines_before, total_lines_after = clean_file(selected_file)
+        lines_removed, comments_removed, blank_lines_removed, total_lines_before, total_lines_after, standard_comments_added = clean_file(selected_file)
         os.remove(f"./Scripts/{selected_file}")
         
         # Calculate added lines and comments
-        lines_added = total_lines_after - total_lines_before + lines_removed
-        comments_added = 1  # Only the standard comment is added
+        lines_added = total_lines_after - total_lines_before
+        comments_added = standard_comments_added
         
         # Calculate the change
         change = total_lines_before - total_lines_after
@@ -93,6 +94,7 @@ def clean_and_backup_file(selected_file):
         time.sleep(2)
     except Exception as e:
         print_color(f"Error: {e}", "RED")
+
 
 
 
