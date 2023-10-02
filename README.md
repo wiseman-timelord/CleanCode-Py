@@ -2,7 +2,7 @@
 
 ### Status: Under development.
 There are still issues, works for reduction, doesnt work for complete re-integration of basic comments. will revisit later... 
-- Expand compatibility to incorporate, mql4 and mql5, for work on, EA and Indicators.
+- Expand compatibility to incorporate, batch and mql4 and mql5.
 - Stats for cleaning scripts still buggy, requires update of logic.
 
 ### Description
