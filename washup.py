@@ -1,5 +1,7 @@
 # Script: washup.py
 
+import re
+
 # COMMENT_MAP
 COMMENT_MAP = {
     "Python": "#",
@@ -9,16 +11,16 @@ COMMENT_MAP = {
 # SECTION_MAP
 SECTION_MAP = {
     "Python": {
-        "import": ["import ", "from "],
-        "variable": [" = "],
-        "map": [" = {", ": {"],
-        "function": "def ",
+        "import": [r"import\s+\w+", r"from\s+\w+\s+import\s+\w+"],
+        "variable": [r"^\w+\s*=\s*.+"],
+        "map": [r"[a-zA-Z_]+ = \[", r"[a-zA-Z_]+ = \{"],
+        "function": r"def\s+\w+\(.*\):"
     },
     "PowerShell": {
-        "import": ["Import-Module "],
-        "variable": ["$", "$global:"],
-        "map": ["@{"],
-        "function": "function ",
+        "import": [r"Import-Module\s+\w+"],
+        "variable": [r"\$\w+", r"\$global:\w+"],
+        "map": [r"@{.*}"],
+        "function": r"function\s+\w+\s*{"
     }
 }
 
@@ -27,10 +29,10 @@ def identify_script_type(lines):
     for script, identifiers in SECTION_MAP.items():
         for _, value in identifiers.items():
             if isinstance(value, list):
-                if any(line.startswith(v) for v in value for line in lines):
+                if any(re.match(v, line) for v in value for line in lines):
                     return script
             else:
-                if any(line.startswith(value) for line in lines):
+                if any(re.match(value, line) for line in lines):
                     return script
     return "Unknown"
 
@@ -88,22 +90,22 @@ def add_python_comments(lines):
         stripped_line = line.strip()
 
         # Import section
-        if any(stripped_line.startswith(prefix) for prefix in SECTION_MAP["Python"]["import"]) and not import_section_added:
+        if any(re.match(prefix, stripped_line) for prefix in SECTION_MAP["Python"]["import"]) and not import_section_added:
             new_lines.append("\n# Imports\n")
             import_section_added = True
 
         # Variable section
-        elif any(stripped_line.startswith(prefix) for prefix in SECTION_MAP["Python"]["variable"]) and not variable_section_added:
+        elif any(re.match(prefix, stripped_line) for prefix in SECTION_MAP["Python"]["variable"]) and not variable_section_added:
             new_lines.append("\n# Variables\n")
             variable_section_added = True
 
         # Map section
-        elif any(stripped_line.startswith(prefix) for prefix in SECTION_MAP["Python"]["map"]) and not map_section_added:
-            new_lines.append("\n# Map\n")
+        elif any(re.match(prefix, stripped_line) for prefix in SECTION_MAP["Python"]["map"]) and not map_section_added:
+            new_lines.append("\n# Dictionary\n")
             map_section_added = True
 
         # Function section
-        elif stripped_line.startswith(SECTION_MAP["Python"]["function"]) and not line.startswith("    def"):
+        elif re.match(SECTION_MAP["Python"]["function"], stripped_line) and not line.startswith("    def"):
             new_lines.append("\n# Function\n")
 
         new_lines.append(line)
@@ -120,22 +122,22 @@ def add_powershell_comments(lines):
         stripped_line = line.strip()
 
         # Import section
-        if any(stripped_line.startswith(prefix) for prefix in SECTION_MAP["PowerShell"]["import"]) and not import_section_added:
+        if any(re.match(prefix, stripped_line) for prefix in SECTION_MAP["PowerShell"]["import"]) and not import_section_added:
             new_lines.append("\n# Import\n")
             import_section_added = True
 
         # Variable section
-        elif any(stripped_line.startswith(prefix) for prefix in SECTION_MAP["PowerShell"]["variable"]) and not variable_section_added:
+        elif any(re.match(prefix, stripped_line) for prefix in SECTION_MAP["PowerShell"]["variable"]) and not variable_section_added:
             new_lines.append("\n# Variable\n")
             variable_section_added = True
 
         # Map section
-        elif any(stripped_line.startswith(prefix) for prefix in SECTION_MAP["PowerShell"]["map"]) and not map_section_added:
+        elif any(re.match(prefix, stripped_line) for prefix in SECTION_MAP["PowerShell"]["map"]) and not map_section_added:
             new_lines.append("\n# Map\n")
             map_section_added = True
 
         # Function section
-        elif stripped_line.startswith(SECTION_MAP["PowerShell"]["function"]) and not line.startswith(" function "):
+        elif re.match(SECTION_MAP["PowerShell"]["function"], stripped_line) and not line.startswith(" function "):
             new_lines.append("\n# Function\n")
 
         new_lines.append(line)
