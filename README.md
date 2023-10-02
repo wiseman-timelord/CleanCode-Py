@@ -22,7 +22,6 @@ ScriptClean is a Python utility designed to clean Python `.py`, PowerShell `.ps1
 11. **Looping Interface**: Facilitates cleaning operations with options to, re-detect new files and clean again, or exit.
 
 ### Output
-**Script Detection**: Scans the "./Scripts" folder for specific file types.
 **Display Options**: Lists detected scripts and offers an option to "Clean All Scripts".
 ```
 ==============================================================================
@@ -52,8 +51,7 @@ ScriptClean is a Python utility designed to clean Python `.py`, PowerShell `.ps1
 
 
 ```
-**Feedback**: After cleaning, displays statistics or error messages.
-**Loop**: Re-displays the menu until the user decides to exit.
+**Feedback**: During cleaning, displays statistics, this is being improved.
 ```
 
 
@@ -83,6 +81,36 @@ ScriptClean is a Python utility designed to clean Python `.py`, PowerShell `.ps1
      Removed: 4 Blanks, 12 Comments,
      Added: -17 Blanks, 4 Comments,
      Change: 145 > 128 = 11.72%.
+
+```
+**Loop**: After process, then re-displays the menu until the user exits.
+```
+==============================================================================
+   _________            .__        __   _________ .__
+  /   _____/ ___________|__|______/  |_ \_   ___ \|  |   ____ _____    ____
+  \_____  \_/ ___\_  __ \  \____ \   __\/    \  \/|  | _/ __ \\__  \  /    \
+  /        \  \___|  | \/  |  |_> >  |  \     \___|  |_\  ___/ / __ \|   |  \
+ /_______  /\___  >__|  |__|   __/|__|   \______  /____/\___  >____  /___|  /
+         \/     \/         |__|                 \/          \/     \/     \/
+==============================================================================
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ Script Choices:
+------------------------------------------------------------------------------
+
+ Scanning Folder...
+ No Scripts Found!
+                             0. Re-Detect Scripts
+
+ Select an option (or 'q' to exit):
+
+
+
+
+
+
+
+
+
 
 ```
 ##
