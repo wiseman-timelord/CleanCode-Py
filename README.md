@@ -1,10 +1,9 @@
 # ScriptClean
 
 ### Status: Under development.
-There are still issues, will revisit later... 
-- Requires further testing and updating of rules, still an issue with, Global Variables and Maps, not having comment.
-- requires rules making for each file format, to be entered into the new 2 functions.
-- Stats for cleaning scripts still buggy, dont fix this until other bits done, or it will just break again.
+There are still issues, works for reduction, doesnt work for complete re-integration of basic comments. will revisit later... 
+- Requires further testing and updating of rules, still an issue with, Global Variables and Maps, not, being ideitified and having comment. requires rules making for each file format, to be entered into the new 2 functions.
+- Stats for cleaning scripts still buggy, wont fix this until other bits done, or it will just break again, seems to do that every time I update anything.
 
 ### Description
 ScriptClean is a Python utility designed to clean Python `.py`, PowerShell `.ps1`, and possibly later also other script types. It removes unnecessary comments and blank lines to make your scripts more readable and efficient. The tool provides a user-friendly interface, complete with, color text and ASCII art, to guide you through the cleaning process. While it retains a comment and blank line at the start of functions or classes, those will be the only comments and blank lines you'll see :sunglasses:. In essence, cleaning files for a more concise context can be tedious and prone to errors. ScriptClean offers a reliable, safe, and logical method, saving you time and hassle.
