@@ -3,9 +3,10 @@
 ### Status: Under development.
 There are still issues, works for reduction, doesnt work for complete re-integration of basic comments. will revisit later... 
 - Stats for cleaning scripts still buggy, wont fix this until other bits done, or it will just break again, seems to do that every time I update anything.
+- Expand compatibility to incorporate, mql4 and mql5, for work on, EA and Indicators.
 
 ### Description
-ScriptClean is a Python utility designed to clean Python `.py`, PowerShell `.ps1`, and possibly later also other script types. It removes unnecessary comments and blank lines to make your scripts more readable and efficient. The tool provides a user-friendly interface, complete with, color text and ASCII art, to guide you through the cleaning process. While it retains a comment and blank line at the start of functions or classes, those will be the only comments and blank lines you'll see :sunglasses:. In essence, cleaning files for a more concise context can be tedious and prone to errors. ScriptClean offers a reliable, safe, and logical method, saving you time and hassle.
+ScriptClean is a Python utility designed to clean Python `.py`, PowerShell `.ps1`. It removes unnecessary comments and blank lines to make your scripts more readable and efficient. The tool provides a user-friendly interface, complete with color text and ASCII art, to guide you through the cleaning process. While it retains a comment and blank line at the start of functions or classes, those will be the only comments and blank lines you'll see :sunglasses:. Cleaning files for a more concise context can be tedious and prone to errors. ScriptClean offers a reliable, safe, and logical method, saving you time and hassle. It's recommended to review both the original and cleaned outputs the first time you run the program to understand the differences the filter produces.
 
 ### Features
 1. **Identification of Script**: Uses simple rules to determine the type of script.
@@ -94,8 +95,10 @@ The Main Menu, and processing scripts...
 4. Check folder "./Cleaned" after processes complete, backups are in ".\Backup".
 
 ### Requirements
-- Python 3.x
-- Windows or Linux (untested), Operating System
+Python Version: Ensure you have Python 3.4-3.12 installed. You can verify this by running python --version or python3 --version in your terminal or command prompt.
+Operating System: ScriptClean is designed to work on Windows and Linux. While it has been primarily tested on Windows, Linux users should be able to use it, though it remains largely untested on this platform. Mac OS users might also be able to run the script, but this hasn't been verified.
+Dependencies: No external Python libraries are required. The script utilizes standard libraries like os, shutil, and time.
+Permissions: Ensure you have read and write permissions for the directory where ScriptClean is located. This is essential for creating directories, backing up scripts, and saving cleaned files.
 
 ### Disclaimer
 * While this program takes the error out of processing scripts, it also introduces the issue of moving scripts around, so remember to always exercise some level of caution with organizing the movements of your Master scripts.
