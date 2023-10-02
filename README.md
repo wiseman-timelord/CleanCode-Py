@@ -2,7 +2,6 @@
 
 ### Status: Under development.
 There are still issues, works for reduction, doesnt work for complete re-integration of basic comments. will revisit later... 
-- Requires further testing and updating of rules, still an issue with, Global Variables and Maps, not, being ideitified and having comment. requires rules making for each file format, to be entered into the new 2 functions.
 - Stats for cleaning scripts still buggy, wont fix this until other bits done, or it will just break again, seems to do that every time I update anything.
 
 ### Description
