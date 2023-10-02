@@ -1,7 +1,7 @@
 # ScriptClean
 
 ### Status: Under development.
-There are still issues... 
+There are still issues, will revisit later... 
 - Requires further testing and updating of rules, still an issue with, Global Variables and Maps, not having comment.
 - requires rules making for each file format, to be entered into the new 2 functions.
 - Stats for cleaning scripts still buggy, dont fix this until other bits done, or it will just break again.
