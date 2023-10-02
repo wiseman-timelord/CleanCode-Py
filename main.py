@@ -79,24 +79,21 @@ def clean_and_backup_file(selected_file):
         
         # Calculate added lines and comments
         lines_added = total_lines_after - total_lines_before + lines_removed
-        comments_added = comments_removed  # Assuming no new comments are added
-        
-        # Ensure added lines and comments are positive
-        lines_added = abs(lines_added)
-        comments_added = abs(comments_added)
+        comments_added = 1  # Only the standard comment is added
         
         # Calculate the change
-        change = (lines_removed + comments_removed) - (lines_added + comments_added)
-        change_percentage = change / total_lines_before * 100
+        change = total_lines_before - total_lines_after
+        change_percentage = (change / total_lines_before) * 100
         
         # Print the stats
-        print_color(f"     Removed: {lines_removed} Blanks, {comments_removed} Comments,", "YELLOW")
+        print_color(f"     Removed: {blank_lines_removed} Blanks, {comments_removed} Comments,", "YELLOW")
         print_color(f"     Added: {lines_added} Blanks, {comments_added} Comments,", "YELLOW")
         print_color(f"     Change: {total_lines_before} > {total_lines_after} = {change_percentage:.2f}%.", "YELLOW")
         
         time.sleep(2)
     except Exception as e:
         print_color(f"Error: {e}", "RED")
+
 
 
 def main():
