@@ -66,20 +66,19 @@ The Main Menu, and processing scripts...
 ------------------------------------------------------------------------------
 
  Identified Python script: 'interface.py'...
-     Actions: -20 Blanks, -6 Comments
-     Change: 159 > 175 = 9.14%
+     Removed: 7 Blanks, 17 Comments,
+     Added: -32 Blanks, 5 Comments,
+     Change: 175 > 143 = 18.29%.
 
  Identified Python script: 'message.py'...
-     Actions: -14 Blanks, -4 Comments
-     Change: 75 > 78 = 3.85%
+     Removed: 1 Blanks, 7 Comments,
+     Added: -19 Blanks, 4 Comments,
+     Change: 78 > 59 = 24.36%.
 
  Identified Python script: 'model.py'...
-     Actions: -17 Blanks, -5 Comments
-     Change: 136 > 145 = 6.21%
-
- Identified Python script: 'utility.py'...
-     Actions: -47 Blanks, -15 Comments
-     Change: 164 > 168 = 2.38%
+     Removed: 4 Blanks, 12 Comments,
+     Added: -17 Blanks, 4 Comments,
+     Change: 145 > 128 = 11.72%.
 
 ```
 ##
