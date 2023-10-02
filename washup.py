@@ -80,40 +80,64 @@ def add_standard_comments(lines, script_type, script_name, file_extension):
 
 def add_python_comments(lines):
     new_lines = []
-    import_section = False
-    function_section = False
+    import_section_added = False
+    variable_section_added = False
+    map_section_added = False
+
     for line in lines:
         stripped_line = line.strip()
-        if stripped_line.startswith(tuple(SECTION_MAP["Python"]["import"])):
-            if not import_section:
-                new_lines.append("\n# Import\n")
-                import_section = True
-        # Modified condition to check if stripped line starts with "def "
-        elif stripped_line.startswith(SECTION_MAP["Python"]["function"]):
-            if not function_section:
-                new_lines.append("\n# Function\n")
-                function_section = True
-            else:
-                function_section = False
+
+        # Import section
+        if any(stripped_line.startswith(prefix) for prefix in SECTION_MAP["Python"]["import"]) and not import_section_added:
+            new_lines.append("\n# Imports\n")
+            import_section_added = True
+
+        # Variable section
+        elif any(stripped_line.startswith(prefix) for prefix in SECTION_MAP["Python"]["variable"]) and not variable_section_added:
+            new_lines.append("\n# Variables\n")
+            variable_section_added = True
+
+        # Map section
+        elif any(stripped_line.startswith(prefix) for prefix in SECTION_MAP["Python"]["map"]) and not map_section_added:
+            new_lines.append("\n# Map\n")
+            map_section_added = True
+
+        # Function section
+        elif stripped_line.startswith(SECTION_MAP["Python"]["function"]) and not line.startswith("    def"):
+            new_lines.append("\n# Function\n")
+
         new_lines.append(line)
+
     return new_lines
 
 def add_powershell_comments(lines):
     new_lines = []
-    import_section = False
-    function_section = False
+    import_section_added = False
+    variable_section_added = False
+    map_section_added = False
+
     for line in lines:
         stripped_line = line.strip()
-        if stripped_line.startswith(tuple(SECTION_MAP["PowerShell"]["import"])):
-            if not import_section:
-                new_lines.append("\n# Import\n")
-                import_section = True
-        # Modified condition to check if stripped line starts with "function "
-        elif stripped_line.startswith(SECTION_MAP["PowerShell"]["function"]):
-            if not function_section:
-                new_lines.append("\n# Function\n")
-                function_section = True
-            else:
-                function_section = False
+
+        # Import section
+        if any(stripped_line.startswith(prefix) for prefix in SECTION_MAP["PowerShell"]["import"]) and not import_section_added:
+            new_lines.append("\n# Import\n")
+            import_section_added = True
+
+        # Variable section
+        elif any(stripped_line.startswith(prefix) for prefix in SECTION_MAP["PowerShell"]["variable"]) and not variable_section_added:
+            new_lines.append("\n# Variable\n")
+            variable_section_added = True
+
+        # Map section
+        elif any(stripped_line.startswith(prefix) for prefix in SECTION_MAP["PowerShell"]["map"]) and not map_section_added:
+            new_lines.append("\n# Map\n")
+            map_section_added = True
+
+        # Function section
+        elif stripped_line.startswith(SECTION_MAP["PowerShell"]["function"]) and not line.startswith(" function "):
+            new_lines.append("\n# Function\n")
+
         new_lines.append(line)
+
     return new_lines
