@@ -7,6 +7,8 @@ import time
 import sys
 from washup import determine_type, sanitize_script_content
 from ascii import ASCII_ART
+
+# Display
 sys.stdout.write("\x1b]2;Llama2Robot-Window1\x07")
 sys.stdout.flush()
 if os.name == 'nt':

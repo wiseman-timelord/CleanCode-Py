@@ -30,13 +30,13 @@ SECTION_MAP = {
         "import": [r"import\s+\w+", r"from\s+\w+\s+import\s+\w+"],
         "variable": [r"\w+\s*=\s*.+"],
         "dictionary": [r"[a-zA-Z_]+ = \[", r"[a-zA-Z_]+ = {"],
-        "function": r"def\s+\w+\(.*\):"
+        "function": [r"def\s+\w+\(.*\):"]
     },
     "PowerShell": {
         "import": [r"Import-Module\s+\w+"],
         "variable": [r"\$\w+", r"\$global:\w+"],
         "dictionary": [r"@{.*}"],
-        "function": r"function\s+\w+\s*{"
+        "function": [r"function\s+\w+\s*{"]
     },
     "Batch": {
         "import": [r"REM IMPORT \w+"],
@@ -45,17 +45,17 @@ SECTION_MAP = {
         "function": [r":[a-zA-Z_][a-zA-Z0-9_]*"]
     },
     "MQL4": {
-        "import": [r"#include\s+<\w+\.mqh>", r"#import \"\w+\.dll\"", r"#import \"\w+\.ex4\""],
-        "variable": [r"int ", r"double ", r"string ", r"extern "],
-        "dictionary": [r"double\[\] ", r"int\[\] ", r"string\[\] "],
-        "function": [r"int [a-zA-Z_][a-zA-Z0-9_]*\(", r"double [a-zA-Z_][a-zA-Z0-9_]*\(", r"string [a-zA-Z_][a-zA-Z0-9_]*\("]
+        "import": [r"#include\s+<\w+\.mqh>"],
+        "variable": [r"int\s+\w+;", r"double\s+\w+;", r"string\s+\w+;"],
+        "dictionary": [r"double\[\]\s+\w+;", r"int\[\]\s+\w+;", r"string\[\]\s+\w+;"],
+        "function": [r"(int|double|string|void)\s+[a-zA-Z_][a-zA-Z0-9_]*\("]
     },
     "MQL5": {
-        "import": [r"#import \"\w+\.dll\"", r"#import \"\w+\.ex5\""],
-        "variable": [r"int ", r"double ", r"string ", r"extern "],
-        "dictionary": [r"double\[\] ", r"int\[\] ", r"string\[\] "],
-        "function": [r"int [a-zA-Z_][a-zA-Z0-9_]*\(", r"double [a-zA-Z_][a-zA-Z0-9_]*\(", r"string [a-zA-Z_][a-zA-Z0-9_]*\("]
-    }
+        "import": [r"import\s+\w+"],
+        "variable": [r"int\s+\w+;", r"double\s+\w+;", r"string\s+\w+;"],
+        "dictionary": [r"double\[\]\s+\w+;", r"int\[\]\s+\w+;", r"string\[\]\s+\w+;"],
+        "function": [r"(int|double|string|void)\s+[a-zA-Z_][a-zA-Z0-9_]*\("]
+    },
 }
 
 
