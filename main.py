@@ -145,7 +145,7 @@ def main():
         terminal_width = shutil.get_terminal_size().columns
         show_title_header(" Script Choices:", "YELLOW")
         display_colored_text("\n Scanning Folder...", "YELLOW")
-        file_types = [f for f in os.listdir("./Scripts") if f.lower().endswith(('.py', '.bat', '.ps1', '.mql4', '.mql5'))]
+        file_types = [f for f in os.listdir("./Scripts") if f.lower().endswith(('.py', '.bat', '.ps1', '.mql5'))]
         if not file_types:
             display_colored_text(" No Scripts Found!\n                           No Scripts In './Scripts'", "RED")
         else:

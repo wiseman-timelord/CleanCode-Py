@@ -19,7 +19,6 @@ COLORS = {
 COMMENT_MAP = {
     "Python": "#",
     "PowerShell": "#",
-    "MQL4": "//",
     "MQL5": "//",
     "Batch": "REM"
 }
@@ -44,12 +43,6 @@ SECTION_MAP = {
         "dictionary": [r"REM MAP .+"],
         "function": [r":[a-zA-Z_][a-zA-Z0-9_]*"]
     },
-    "MQL4": {
-        "import": [r"#include\s+<\w+\.mqh>"],
-        "variable": [r"int\s+\w+;", r"double\s+\w+;", r"string\s+\w+;"],
-        "dictionary": [r"double\[\]\s+\w+;", r"int\[\]\s+\w+;", r"string\[\]\s+\w+;"],
-        "function": [r"(int|double|string|void)\s+[a-zA-Z_][a-zA-Z0-9_]*\("]
-    },
     "MQL5": {
         "import": [r"import\s+\w+"],
         "variable": [r"int\s+\w+;", r"double\s+\w+;", r"string\s+\w+;"],
@@ -65,7 +58,6 @@ FILE_EXTENSION_TO_TYPE_MAP = {
     ".py": "Python",
     ".ps1": "PowerShell",
     ".mql5": "MQL5",
-    ".mql4": "MQL4",
     ".bat": "Batch"
 }
 
