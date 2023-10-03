@@ -1,145 +1,159 @@
 # Script: washup.py
 
+# Imports
 import re
+import os
+import shutil
 
-# COMMENT_MAP
-COMMENT_MAP = {
-    "Python": "#",
-    "PowerShell": "#"
+
+# Dictionary for colors
+COLORS = {
+    "RED": "\033[91m",
+    "YELLOW": "\033[93m",
+    "BLUE": "\033[94m",
+    "GREEN": "\033[92m",
+    "RESET": "\033[0m"
 }
 
-# SECTION_MAP
+# Dictionary
+COMMENT_MAP = {
+    "Python": "#",
+    "PowerShell": "#",
+    "MQL4": "//",
+    "MQL5": "//",
+    "Batch": "REM"
+}
+
+# Dictionary
 SECTION_MAP = {
     "Python": {
         "import": [r"import\s+\w+", r"from\s+\w+\s+import\s+\w+"],
-        "variable": [r"^\w+\s*=\s*.+"],
-        "map": [r"[a-zA-Z_]+ = \[", r"[a-zA-Z_]+ = \{"],
+        "variable": [r"\w+\s*=\s*.+"],
+        "dictionary": [r"[a-zA-Z_]+ = \[", r"[a-zA-Z_]+ = {"],
         "function": r"def\s+\w+\(.*\):"
     },
     "PowerShell": {
         "import": [r"Import-Module\s+\w+"],
         "variable": [r"\$\w+", r"\$global:\w+"],
-        "map": [r"@{.*}"],
+        "dictionary": [r"@{.*}"],
         "function": r"function\s+\w+\s*{"
+    },
+    "Batch": {
+        "import": [r"REM IMPORT \w+"],
+        "variable": [r"set "],
+        "dictionary": [r"REM MAP .+"],
+        "function": [r":[a-zA-Z_][a-zA-Z0-9_]*"]
+    },
+    "MQL4": {
+        "import": [r"#include\s+<\w+\.mqh>", r"#import \"\w+\.dll\"", r"#import \"\w+\.ex4\""],
+        "variable": [r"int ", r"double ", r"string ", r"extern "],
+        "dictionary": [r"double\[\] ", r"int\[\] ", r"string\[\] "],
+        "function": [r"int [a-zA-Z_][a-zA-Z0-9_]*\(", r"double [a-zA-Z_][a-zA-Z0-9_]*\(", r"string [a-zA-Z_][a-zA-Z0-9_]*\("]
+    },
+    "MQL5": {
+        "import": [r"#import \"\w+\.dll\"", r"#import \"\w+\.ex5\""],
+        "variable": [r"int ", r"double ", r"string ", r"extern "],
+        "dictionary": [r"double\[\] ", r"int\[\] ", r"string\[\] "],
+        "function": [r"int [a-zA-Z_][a-zA-Z0-9_]*\(", r"double [a-zA-Z_][a-zA-Z0-9_]*\(", r"string [a-zA-Z_][a-zA-Z0-9_]*\("]
     }
 }
 
-# Function identify_script_type
-def identify_script_type(lines):
-    for script, identifiers in SECTION_MAP.items():
-        for _, value in identifiers.items():
-            if isinstance(value, list):
-                if any(re.match(v, line) for v in value for line in lines):
-                    return script
-            else:
-                if any(re.match(value, line) for line in lines):
-                    return script
-    return "Unknown"
 
-# Function to clean contents
-def clean_file_content(lines, script_name, file_extension):
-    script_type = identify_script_type(lines)
+
+# Dictionary
+FILE_EXTENSION_TO_TYPE_MAP = {
+    ".py": "Python",
+    ".ps1": "PowerShell",
+    ".mql5": "MQL5",
+    ".mql4": "MQL4",
+    ".bat": "Batch"
+}
+
+# Function
+def display_colored_text(text, color):
+    print(f"{COLORS[color]}{text}{COLORS['RESET']}")
+
+# Function
+def determine_type(filename):
+    file_extension = os.path.splitext(filename)[1].lower()
+    script_type = FILE_EXTENSION_TO_TYPE_MAP.get(file_extension, "Unknown")
     if script_type == "Unknown":
-        print("Warning: Unknown script type. No changes made.")
-        return lines, 0, 0, 0, 0
+        shutil.copy(f"./Scripts/{filename}", f"./Backup/{filename}")
+        print(f"Unknown script type for '{filename}'. File has been backed up.")
+    return script_type
 
-    # Calculate initial stats
+# Function
+def dict_to_regex(d):
+    regex_patterns = {}
+    for key, value in d.items():
+        new_value = {}
+        for sub_key, sub_value in value.items():
+            if isinstance(sub_value, list):
+                new_value[sub_key] = "|".join(sub_value)
+            else:
+                new_value[sub_key] = sub_value
+        regex_patterns[key] = new_value
+    return regex_patterns
+
+# Function
+def sanitize_script_content(lines, script_name, file_extension):
+    script_type = determine_type(script_name)
+    if script_type == "Unknown":
+        print(" Warning: Unknown script type. No changes made.")
+        return lines, 0, 0, 0, 0
+    
+    display_colored_text(f" Script type is '{script_type}' with extension '{file_extension}'.", "YELLOW")
+    
     initial_comments_count = sum(1 for line in lines if line.strip().startswith(COMMENT_MAP[script_type]))
     initial_blank_lines_count = sum(1 for line in lines if not line.strip())
-
-    # Remove comments and blank lines
     comment_symbol = COMMENT_MAP[script_type]
-    cleaned_lines = [line for line in lines if comment_symbol not in line and line.strip() != ""]
-
-    # Add the standard comment at the beginning
+    cleaned_lines = []
+    for line in lines:
+        if comment_symbol in line:
+            line = line.split(comment_symbol, 1)[0].rstrip()
+        if line.strip(): 
+            cleaned_lines.append(line)
     cleaned_lines_before = len(cleaned_lines)
-    cleaned_lines = add_standard_comments(cleaned_lines, script_type, script_name, file_extension)
+    cleaned_lines = insert_comments(cleaned_lines, script_type, script_name, file_extension)
     standard_comments_added = len(cleaned_lines) - cleaned_lines_before
-
-    # Calculate the differences
     comments_removed = initial_comments_count - sum(1 for line in cleaned_lines if line.strip().startswith(comment_symbol))
     blank_lines_removed = initial_blank_lines_count - sum(1 for line in cleaned_lines if not line.strip())
     lines_removed = len(lines) - len(cleaned_lines)
 
-    return cleaned_lines, lines_removed, blank_lines_removed, comments_removed, standard_comments_added
+    return (cleaned_lines, lines_removed, blank_lines_removed, comments_removed, standard_comments_added)
 
-
-# Function to add standard comments
-def add_standard_comments(lines, script_type, script_name, file_extension):
+# Function
+def insert_comments(lines, script_type, script_name, file_extension):
     new_lines = []
     if not lines:
         return []
-    comment_prefix = COMMENT_MAP.get(script_type, "//")
-    new_lines.append(f"{comment_prefix} Script: {script_name}\n")
-    new_lines.extend(lines)
     
-    # Call the specific function based on script type
-    if script_type == "Python":
-        new_lines = add_python_comments(new_lines)
-    elif script_type == "PowerShell":
-        new_lines = add_powershell_comments(new_lines)
-    return new_lines
+    comment_prefix = COMMENT_MAP.get(script_type)
+    if not comment_prefix:
+        raise ValueError(f"Unsupported script type: {script_type}")
 
-def add_python_comments(lines):
-    new_lines = []
-    import_section_added = False
-    variable_section_added = False
-    map_section_added = False
-
+    new_lines.append(f"{comment_prefix} Script: {script_name}\n")
+    
+    sections_added = {
+        "import": False,
+        "variable": False,
+        "dictionary": False,
+        "function": False
+    }
+    
     for line in lines:
         stripped_line = line.strip()
-
-        # Import section
-        if any(re.match(prefix, stripped_line) for prefix in SECTION_MAP["Python"]["import"]) and not import_section_added:
-            new_lines.append("\n# Imports\n")
-            import_section_added = True
-
-        # Variable section
-        elif any(re.match(prefix, stripped_line) for prefix in SECTION_MAP["Python"]["variable"]) and not variable_section_added:
-            new_lines.append("\n# Variables\n")
-            variable_section_added = True
-
-        # Map section
-        elif any(re.match(prefix, stripped_line) for prefix in SECTION_MAP["Python"]["map"]) and not map_section_added:
-            new_lines.append("\n# Dictionary\n")
-            map_section_added = True
-
-        # Function section
-        elif re.match(SECTION_MAP["Python"]["function"], stripped_line) and not line.startswith("    def"):
-            new_lines.append("\n# Function\n")
-
+        for section, patterns in SECTION_MAP[script_type].items():
+            for pattern in patterns:
+                try:
+                    if re.search(str(pattern), stripped_line) and not sections_added[section]:
+                        new_lines.append(f"\n{comment_prefix} {section.capitalize()}\n")
+                        sections_added[section] = True
+                        break
+                except re.error as re_err:
+                    continue
         new_lines.append(line)
-
+    
     return new_lines
 
-def add_powershell_comments(lines):
-    new_lines = []
-    import_section_added = False
-    variable_section_added = False
-    map_section_added = False
 
-    for line in lines:
-        stripped_line = line.strip()
-
-        # Import section
-        if any(re.match(prefix, stripped_line) for prefix in SECTION_MAP["PowerShell"]["import"]) and not import_section_added:
-            new_lines.append("\n# Import\n")
-            import_section_added = True
-
-        # Variable section
-        elif any(re.match(prefix, stripped_line) for prefix in SECTION_MAP["PowerShell"]["variable"]) and not variable_section_added:
-            new_lines.append("\n# Variable\n")
-            variable_section_added = True
-
-        # Map section
-        elif any(re.match(prefix, stripped_line) for prefix in SECTION_MAP["PowerShell"]["map"]) and not map_section_added:
-            new_lines.append("\n# Map\n")
-            map_section_added = True
-
-        # Function section
-        elif re.match(SECTION_MAP["PowerShell"]["function"], stripped_line) and not line.startswith(" function "):
-            new_lines.append("\n# Function\n")
-
-        new_lines.append(line)
-
-    return new_lines
