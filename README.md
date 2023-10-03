@@ -1,6 +1,6 @@
 # ScriptClean
 
-### Status: (Under development, ensure to download release versions.
+### Status: Under development (download release versions)
 <p>**Planned Work**: (Things I am working on) 
 <br>* Maps and Code, for adding comments requires, tuning and bugfixing, since moving to RegEx.
 <br>* Stats for cleaning scripts still buggy, requires update of logic.
