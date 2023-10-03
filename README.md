@@ -2,12 +2,12 @@
 
 ### Status: Under development (ensure to download release versions).
 **Planned Work** - There are still issues, works for reduction, doesnt work for complete re-integration of basic comments. will revisit later... 
-* - Maps and Code, for adding comments requires, tuning and bugfixing, since moving to RegEx.
-* - Stats for cleaning scripts still buggy, requires update of logic.
-**Work Done** - Things done for next release
-* - Expand compatibility to incorporate, batch and mql4 and mql5.
-* - Implementation of RegEx (better handling of processes).
-* - Improvements to interface ('r'=Re-Detect, 'd'=Debug, 'q'=Exit).
+* Maps and Code, for adding comments requires, tuning and bugfixing, since moving to RegEx.
+* Stats for cleaning scripts still buggy, requires update of logic.
+**Work Done** - Things done for next release:
+* Expand compatibility to incorporate, batch and mql4 and mql5.
+* Implementation of RegEx (better handling of processes).
+* Improvements to interface ('r'=Re-Detect, 'd'=Debug, 'q'=Exit).
 
 ### Description
 ScriptClean is a Python utility designed to clean Python `.py`, PowerShell `.ps1`. It removes unnecessary comments and blank lines to make your scripts more readable and efficient. The tool provides a user-friendly interface, complete with color text and ASCII art, to guide you through the cleaning process. While it retains a comment and blank line at the start of functions or classes, those will be the only comments and blank lines you'll see :sunglasses:. Cleaning files for a more concise context can be tedious and prone to errors. ScriptClean offers a reliable, safe, and logical method, saving you time and hassle. It's recommended to review both the original and cleaned outputs the first time you run the program to understand the differences the filter produces.
