@@ -1,6 +1,6 @@
 # ScriptClean
 
-### Status: Under development (ensure to download relese versions).
+### Status: Under development (ensure to download release versions).
 **Planned Work** - There are still issues, works for reduction, doesnt work for complete re-integration of basic comments. will revisit later... 
 - Maps and Code, for adding comments requires, tuning and bugfixing, since moving to RegEx.
 - Stats for cleaning scripts still buggy, requires update of logic.
