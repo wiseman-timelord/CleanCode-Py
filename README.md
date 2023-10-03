@@ -5,7 +5,7 @@
 <br>* Maps and Code, for adding comments requires, tuning and bugfixing, since moving to RegEx.
 <br>* Stats for cleaning scripts still buggy, requires update of logic.
 <p>**Work Done**: (Things done for next release)
-<br>* Expand compatibility to incorporate, batch and mql4 and mql5.
+<br>* Expand compatibility to incorporate, batch and mql5.
 <br>* Implementation of RegEx (better handling of processes).
 <br>* Improvements to interface ('r'=Re-Detect, 'd'=Debug, 'q'=Exit).
 
