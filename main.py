@@ -38,14 +38,27 @@ def align_center(text, width):
     return text.center(width)
 
 # Function
-def show_title_header(title, color="YELLOW"):
+def show_title_header(title="", color="YELLOW", show_ascii=True, mode="menu"):
     equals_line = "=" * 78
     plus_line = "+" * 78
     minus_line = "-" * 78
-    centered_ascii_art = align_center(ASCII_ART, terminal_width)
+    if mode == "processing":
+        centered_title = "                                 SCRIPT CLEAN"
+        display_colored_text(equals_line, "BLUE")
+        display_colored_text(centered_title, "YELLOW")
+        display_colored_text(equals_line, "BLUE")
+        display_colored_text(plus_line, "BLUE")
+        display_colored_text(" Processing Scripts:", "YELLOW")
+        display_colored_text(minus_line, "BLUE")
+        return
+    elif mode == "post_processing":
+        display_colored_text(plus_line, "BLUE")
+        return
     display_colored_text(equals_line, "BLUE")
-    display_colored_text(centered_ascii_art, "YELLOW")
-    display_colored_text(equals_line, "BLUE")
+    if show_ascii:
+        centered_ascii_art = align_center(ASCII_ART, terminal_width)
+        display_colored_text(centered_ascii_art, "YELLOW")
+        display_colored_text(equals_line, "BLUE")
     display_colored_text(plus_line, "BLUE")
     display_colored_text(title, color)
     display_colored_text(minus_line, "BLUE")
@@ -87,7 +100,6 @@ def sanitize_script(selected_file):
         script_type = determine_type(selected_file)
         if script_type == "Unknown":
             return (0, 0, 0, 0, 0)
-        display_colored_text(f"\n Next script from './Scripts' is: '{selected_file}',", "YELLOW")
         file_extension = os.path.splitext(selected_file)[1].lstrip('.')
         results = sanitize_script_content(lines, selected_file, file_extension)
         if results:
@@ -117,6 +129,8 @@ def process_script(selected_file):
             change_percentage = 0
         else:
             change_percentage = (change / total_lines_before) * 100
+        display_colored_text(f"\n Next script from './Scripts' is: '{selected_file}',", "YELLOW")
+        display_colored_text(f" Script type is '{determine_type(selected_file)}' with extension '{os.path.splitext(selected_file)[1].lstrip('.')}'.", "YELLOW")
         display_colored_text(f"     Removed: {blank_lines_removed} Blanks, {comments_removed} Comments,", "YELLOW")
         display_colored_text(f"     Added: {lines_added} Blanks, {comments_added} Comments,", "YELLOW")
         display_colored_text(f"     Change: {total_lines_before} > {total_lines_after} = {change_percentage:.2f}%.", "YELLOW")
@@ -132,7 +146,6 @@ def main():
         show_title_header(" Script Choices:", "YELLOW")
         display_colored_text("\n Scanning Folder...", "YELLOW")
         file_types = [f for f in os.listdir("./Scripts") if f.lower().endswith(('.py', '.bat', '.ps1', '.mql4', '.mql5'))]
-        
         if not file_types:
             display_colored_text(" No Scripts Found!\n                           No Scripts In './Scripts'", "RED")
         else:
@@ -142,9 +155,8 @@ def main():
             display_colored_text("                             0. Clean All Scripts", "YELLOW")
             if len(file_types) > 9:
                 display_colored_text("\n         ...and more files not shown", "YELLOW")
-        
         choice = input(f"\n{COLORS['YELLOW']} Select, '0-9' = Choice, 'r' = Re-detect, 'd' = Debug, 'q' = Exit: {COLORS['RESET']}")
-        
+        display_colored_text("\n" + "+" * 78, "BLUE")
         if choice.lower() == 'q':
             break
         elif choice.lower() == 'r':
@@ -152,15 +164,19 @@ def main():
         elif choice.lower() == 'd':
             debug_scripts()
             continue
-        elif choice == '0' and file_types:  # Ensure there are scripts available before processing '0'
-            show_title_header(" Script Operations:")
+        elif choice == '0' and file_types:
+            show_title_header(mode="processing")
             for f in file_types:
                 process_script(f)
+            print()
+            show_title_header(mode="post_processing")
             continue
         try:
-            show_title_header(" Script Operations")
+            show_title_header(mode="processing")
             selected_file = file_types[int(choice) - 1]
             process_script(selected_file)
+            print()
+            show_title_header(mode="post_processing")
         except (ValueError, IndexError):
             display_colored_text("Invalid choice.", "RED")
             continue

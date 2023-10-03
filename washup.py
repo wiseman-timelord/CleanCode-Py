@@ -102,8 +102,6 @@ def sanitize_script_content(lines, script_name, file_extension):
         print(" Warning: Unknown script type. No changes made.")
         return lines, 0, 0, 0, 0
     
-    display_colored_text(f" Script type is '{script_type}' with extension '{file_extension}'.", "YELLOW")
-    
     initial_comments_count = sum(1 for line in lines if line.strip().startswith(COMMENT_MAP[script_type]))
     initial_blank_lines_count = sum(1 for line in lines if not line.strip())
     comment_symbol = COMMENT_MAP[script_type]
