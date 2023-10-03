@@ -1,10 +1,11 @@
 # ScriptClean
 
-### Status: Under development (ensure to download release versions).
-** Planned Work - There are still issues, works for reduction, doesnt work for complete re-integration of basic comments. will revisit later... 
+### Status: (Under development, ensure to download release versions.
+**Planned Work**: There are still issues, works for reduction, doesnt work for complete re-integration of basic comments. will revisit later... 
 * Maps and Code, for adding comments requires, tuning and bugfixing, since moving to RegEx.
 * Stats for cleaning scripts still buggy, requires update of logic.
-<br>** Work Done - Things done for next release:
+<br>
+**Work Done**: Things done for next release:
 * Expand compatibility to incorporate, batch and mql4 and mql5.
 * Implementation of RegEx (better handling of processes).
 * Improvements to interface ('r'=Re-Detect, 'd'=Debug, 'q'=Exit).
