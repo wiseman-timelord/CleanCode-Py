@@ -6,7 +6,7 @@
 <br>* Stats for cleaning scripts still buggy, requires update of logic.
 <p>**Work Done**: (Things done for next release)
 <br>* Expand compatibility to incorporate, batch and mql5.
-<br>* Implementation of RegEx (better handling of processes).
+<br>* Implementation of RegEx (upgraded text filters).
 <br>* Multiple improvements to interface.
 
 ### Description
