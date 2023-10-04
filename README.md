@@ -20,7 +20,7 @@ ScriptClean is a versatile utility crafted for AI programmers and developers to 
 11. **Looping Interface**: Enables continuous cleaning operations with options to re-detect, clean anew, or gracefully exit.
 
 ### Output
-**Display Options**: Lists detected scripts and offers an option to "Clean All Scripts".
+**Display Options**: Lists detected scripts, and provides options...
 ```
 ==============================================================================
    _________            .__        __   _________ .__
@@ -52,7 +52,7 @@ ScriptClean is a versatile utility crafted for AI programmers and developers to 
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ```
-**Feedback**: During cleaning, displays statistics, this is being improved.
+**Feedback**: During cleaning, displays statistics...
 ```
 ==============================================================================
                                  SCRIPT CLEAN
@@ -87,7 +87,7 @@ ScriptClean is a versatile utility crafted for AI programmers and developers to 
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ```
-**Loop**: After process, then re-displays the menu until the user exits.
+**Loop**: After process, then re-displays the menu until the user exits...
 ```
 ==============================================================================
    _________            .__        __   _________ .__
