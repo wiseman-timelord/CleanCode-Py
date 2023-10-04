@@ -39,6 +39,7 @@ def align_center(text, width):
 
 # Function
 def show_title_header(title="", color="YELLOW", show_ascii=True, mode="menu"):
+    os.system('cls' if os.name == 'nt' else 'clear')
     equals_line = "=" * 78
     plus_line = "+" * 78
     minus_line = "-" * 78

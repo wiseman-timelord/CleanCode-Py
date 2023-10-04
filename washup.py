@@ -32,16 +32,16 @@ SECTION_MAP = {
         "function": [r"def\s+\w+\(.*\):"]
     },
     "PowerShell": {
-        "import": [r"Import-Module\s+\w+"],
+        "import": [r"Import-Module\s+\w+", r"\.\s+\.\\[a-zA-Z0-9_\-]+\.ps1"],
         "variable": [r"\$\w+", r"\$global:\w+"],
         "dictionary": [r"@{.*}"],
-        "function": [r"function\s+\w+\s*{"]
+        "function": [r"function\s+[a-zA-Z_][a-zA-Z0-9_]*", r"function\s+[a-zA-Z_][a-zA-Z0-9_]*\s*{"]
     },
     "Batch": {
         "import": [r"REM IMPORT \w+"],
         "variable": [r"set "],
         "dictionary": [r"REM MAP .+"],
-        "function": [r":[a-zA-Z_][a-zA-Z0-9_]*"]
+        "function": [r":[a-zA-Z_][a-zA-Z0-9_]*", r"^if .*\(", r"^for .*\("]
     },
     "MQL5": {
         "import": [r"import\s+\w+"],
@@ -133,17 +133,28 @@ def insert_comments(lines, script_type, script_name, file_extension):
     
     for line in lines:
         stripped_line = line.strip()
+
+        # Skip lines that start with a space
+        if line.startswith(' '):
+            new_lines.append(line)
+            continue
+
         for section, patterns in SECTION_MAP[script_type].items():
             for pattern in patterns:
                 try:
-                    if re.search(str(pattern), stripped_line) and not sections_added[section]:
-                        new_lines.append(f"\n{comment_prefix} {section.capitalize()}\n")
-                        sections_added[section] = True
+                    if re.search(str(pattern), stripped_line):
+                        if section in ["import", "variable"] and not sections_added[section]:
+                            new_lines.append(f"\n{comment_prefix} {section.capitalize()}s\n")
+                            sections_added[section] = True
+                        elif section in ["dictionary", "function"]:
+                            new_lines.append(f"\n{comment_prefix} {section.capitalize()}\n")
+                            sections_added[section] = True
                         break
                 except re.error as re_err:
                     continue
         new_lines.append(line)
     
     return new_lines
+
 
 
