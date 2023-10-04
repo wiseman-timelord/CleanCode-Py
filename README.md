@@ -138,7 +138,7 @@ ScriptClean is a versatile utility crafted for AI programmers and developers to 
 - **Dependencies**: No external Python libraries are required. The script utilizes standard libraries like `os`, `shutil`, and `time`.
 
 ### Notes
-- 'd' for debug will, copy back all the backed up files to scripts and delete the cleaned ones, its used for development.
+- The 'd' for debug option, will, copy back all the backed up files to scripts and delete the cleaned files, its used for, testing and development.
 
 ### Disclaimer
 * While this program takes the error out of processing scripts, it also introduces the issue of moving scripts around, so remember to always exercise some level of caution with organizing the movements of your Master scripts.
