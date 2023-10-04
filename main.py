@@ -123,21 +123,23 @@ def process_script(selected_file):
         shutil.copy(f"./Scripts/{selected_file}", f"./Backup/{selected_file}")
         lines_removed, comments_removed, blank_lines_removed, total_lines_before, total_lines_after, standard_comments_added = sanitize_script(selected_file)
         os.remove(f"./Scripts/{selected_file}")
-        lines_added = total_lines_after - total_lines_before
-        comments_added = standard_comments_added
-        change = total_lines_before - total_lines_after
+        total_removed = lines_removed + comments_removed
+        total_added = standard_comments_added
+        change = total_removed - total_added
         if total_lines_before == 0:
             change_percentage = 0
         else:
             change_percentage = (change / total_lines_before) * 100
+        
         display_colored_text(f"\n Next script from './Scripts' is: '{selected_file}',", "YELLOW")
         display_colored_text(f" Script type is '{determine_type(selected_file)}' with extension '{os.path.splitext(selected_file)[1].lstrip('.')}'.", "YELLOW")
         display_colored_text(f"     Removed: {blank_lines_removed} Blanks, {comments_removed} Comments,", "YELLOW")
-        display_colored_text(f"     Added: {lines_added} Blanks, {comments_added} Comments,", "YELLOW")
+        display_colored_text(f"     Added: {total_added - blank_lines_removed} Blanks, {standard_comments_added} Comments,", "YELLOW")
         display_colored_text(f"     Change: {total_lines_before} > {total_lines_after} = {change_percentage:.2f}%.", "YELLOW")
         time.sleep(2)
     except Exception as e:
         display_colored_text(f"Error: {e}", "RED")
+
 
 # Function
 def main():

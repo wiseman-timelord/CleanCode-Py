@@ -45,7 +45,7 @@ SECTION_MAP = {
     },
     "MQL5": {
         "import": [r"import\s+\w+"],
-        "variable": [r"int\s+\w+;", r"double\s+\w+;", r"string\s+\w+;"],
+        "variable": [r"^\s*input\s+(int|double|string|ENUM_TIMEFRAMES)\s+\w+\s*=", r"^\s*(int|double|string)\s+\w+\s*="],
         "dictionary": [r"double\[\]\s+\w+;", r"int\[\]\s+\w+;", r"string\[\]\s+\w+;"],
         "function": [r"(int|double|string|void)\s+[a-zA-Z_][a-zA-Z0-9_]*\("]
     },
@@ -106,9 +106,9 @@ def sanitize_script_content(lines, script_name, file_extension):
     cleaned_lines_before = len(cleaned_lines)
     cleaned_lines = insert_comments(cleaned_lines, script_type, script_name, file_extension)
     standard_comments_added = len(cleaned_lines) - cleaned_lines_before
-    comments_removed = initial_comments_count - sum(1 for line in cleaned_lines if line.strip().startswith(comment_symbol))
-    blank_lines_removed = initial_blank_lines_count - sum(1 for line in cleaned_lines if not line.strip())
-    lines_removed = len(lines) - len(cleaned_lines)
+    comments_removed = abs(initial_comments_count - sum(1 for line in cleaned_lines if line.strip().startswith(comment_symbol)))
+    blank_lines_removed = abs(initial_blank_lines_count - sum(1 for line in cleaned_lines if not line.strip()))
+    lines_removed = abs(len(lines) - len(cleaned_lines))
 
     return (cleaned_lines, lines_removed, blank_lines_removed, comments_removed, standard_comments_added)
 
