@@ -1,29 +1,23 @@
 # ScriptClean
 
-### Status: Under development (download release versions)
-<p> **Planned Work**: (Things I am working on) 
-<br>* Stats for cleaning scripts still buggy, requires update of logic.
-<p> **Work Done**: (Things done for next release)
-<br>* Expand compatibility to incorporate, batch and mql5.
-<br>* Implementation of RegEx (upgraded text filters).
-<br>* Multiple improvements to interface.
-<br>* Maps and Code, for adding comments tuned.
+### Status: 
+All features working.
 
 ### Description
-ScriptClean is a Python utility designed to clean Python `.py`, PowerShell `.ps1`. It removes unnecessary comments and blank lines to make your scripts more readable and efficient. The tool provides a user-friendly interface, complete with color text and ASCII art, to guide you through the cleaning process. While it retains a comment and blank line at the start of functions or classes, those will be the only comments and blank lines you'll see :sunglasses:. Cleaning files for a more concise context can be tedious and prone to errors. ScriptClean offers a reliable, safe, and logical method, saving you time and hassle. It's recommended to review both the original and cleaned outputs the first time you run the program to understand the differences the filter produces.
+ScriptClean is a versatile utility crafted for AI programmers and developers to streamline scripts, making them more readable and efficient, especially crucial when working within a limited context. This Python tool supports cleaning Python `.py`, PowerShell `.ps1`, Batch `.bat`, and MQL5 `.mql5` scripts. It meticulously removes unnecessary comments and blank lines, leaving behind a crisp and concise script. The intuitive interface, adorned with color text and ASCII art, ensures a seamless user experience. While essential comments and blank lines at the start of functions, classes, or sections are retained, they are the only ones you'll encounter. Given the intricacies of script streamlining, ScriptClean stands out as a reliable and logical solution, eliminating manual errors and saving precious time. For a comprehensive understanding, it's advisable to compare the original and cleaned scripts after the initial run.
 
 ### Features
-1. **Identification of Script**: Uses simple rules to determine the type of script.
-2. **Directory Management**: Automatically creates essential directories ("Scripts", "Backup", "Cleaned") if they don't exist.
-3. **File Scanning**: Scans the "./Scripts" folder for `.Py`, `.Ps1`, script files.
-4. **User Interface**: Presents a numbered list of discovered script files for easy selection.
-5. **File Backup**: Backs up the chosen file to the "./Backup" folder before cleaning.
-6. **File Cleaning**: Removes specific types of comments and blank lines based on user-defined rules.
-7. **Essential Comments**: For Python scripts, it ensures there's a comment before all functions and classes.
-8. **File Saving**: Stores the cleaned file in the "./Cleaned" folder.
-9. **Original File Removal**: Deletes the original file from the "./Scripts" folder post-cleaning.
-10. **Statistics Display**: Provides insights about the cleaning process, including the number of lines and comments removed.
-11. **Looping Interface**: Facilitates cleaning operations with options to, re-detect new files and clean again, or exit.
+1. **Script Identification**: Employs rules to ascertain the script type, supporting `.py`, `.ps1`, `.bat`, and `.mql5`.
+2. **Directory Management**: Seamlessly sets up vital directories ("Scripts", "Backup", "Cleaned") if absent.
+3. **File Scanning**: Probes the "./Scripts" directory for supported script files.
+4. **Interactive UI**: Showcases a numbered list of detected scripts for effortless selection.
+5. **File Backup**: Safeguards the selected file in the "./Backup" directory pre-cleaning.
+6. **Script Streamlining**: Excises specific comments and blank lines based on refined rules.
+7. **Preserving Essentials**: Ensures the presence of a comment before functions, classes, or vital sections.
+8. **File Archiving**: Deposits the refined script in the "./Cleaned" directory.
+9. **Original File Management**: Erases the initial script from the "./Scripts" directory after refinement.
+10. **Insightful Statistics**: Offers a detailed breakdown of the cleaning process, highlighting the number of lines and comments modified.
+11. **Looping Interface**: Enables continuous cleaning operations with options to re-detect, clean anew, or gracefully exit.
 
 ### Output
 **Display Options**: Lists detected scripts and offers an option to "Clean All Scripts".
