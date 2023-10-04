@@ -120,9 +120,6 @@ ScriptClean is a versatile utility crafted for AI programmers and developers to 
 ```
 ##
 
-### Usage - General
-* its all pretty logical when it comes to the menus, however, 'd' for debug will, copy back all the backed up files to scripts and delete the cleaned ones, its used for development.
-
 ### Usage - Windows
 1. Deposit the script files you wish to clean in the `./Scripts` folder.
 2. Double-click `ScriptClean.bat` for easy launching.
@@ -139,6 +136,9 @@ ScriptClean is a versatile utility crafted for AI programmers and developers to 
 - **Python Version**: Ensure you have Python 3.4-3.12 installed. You can verify this by running `python --version` or `python3 --version` in your terminal or command prompt.
 - **Operating System**: ScriptClean is designed to work on Windows and Linux. While it has been primarily tested on Windows, Linux users should be able to use it, though it remains largely untested on this platform. Mac OS users might also be able to run the script, but this hasn't been verified.
 - **Dependencies**: No external Python libraries are required. The script utilizes standard libraries like `os`, `shutil`, and `time`.
+
+### Notes
+- 'd' for debug will, copy back all the backed up files to scripts and delete the cleaned ones, its used for development.
 
 ### Disclaimer
 * While this program takes the error out of processing scripts, it also introduces the issue of moving scripts around, so remember to always exercise some level of caution with organizing the movements of your Master scripts.
