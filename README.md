@@ -120,6 +120,9 @@ ScriptClean is a versatile utility crafted for AI programmers and developers to 
 ```
 ##
 
+### Usage - General
+* its all pretty logical when it comes to the menus, however, 'd' for debug will, copy back all the backed up files to scripts and delete the cleaned ones, its used for development.
+
 ### Usage - Windows
 1. Deposit the script files you wish to clean in the `./Scripts` folder.
 2. Double-click `ScriptClean.bat` for easy launching.
