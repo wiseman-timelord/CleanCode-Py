@@ -42,13 +42,16 @@ ScriptClean is a Python utility designed to clean Python `.py`, PowerShell `.ps1
 
  Scanning Folder...
  ...Scripts Found.
-                             1. interface.py
-                             2. message.py
-                             3. model.py
-                             4. utility.py
-                             0. Clean All Sripts
+                             1. batch_test.bat
+                             2. mql5_test.Mql5
+                             3. powershell_test.ps1
+                             4. python_test.py
+                             0. Clean All Scripts
 
- Select an option (or 'q' to exit):
+ Select, '0-9' = Choice, 'r' = Re-detect, 'd' = Debug, 'q' = Exit:
+
+
+
 
 
 
@@ -59,7 +62,7 @@ ScriptClean is a Python utility designed to clean Python `.py`, PowerShell `.ps1
 ```
 
 
-==============================================================================
+**==============================================================================
    _________            .__        __   _________ .__
   /   _____/ ___________|__|______/  |_ \_   ___ \|  |   ____ _____    ____
   \_____  \_/ ___\_  __ \  \____ \   __\/    \  \/|  | _/ __ \\__  \  /    \
@@ -85,6 +88,37 @@ ScriptClean is a Python utility designed to clean Python `.py`, PowerShell `.ps1
      Removed: 4 Blanks, 12 Comments,
      Added: -17 Blanks, 4 Comments,
      Change: 145 > 128 = 11.72%.
+**==============================================================================
+                                 SCRIPT CLEAN
+==============================================================================
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ Processing Scripts:
+------------------------------------------------------------------------------
+
+ Next script from './Scripts' is: 'batch_test.bat',
+ Script type is 'Batch' with extension 'bat'.
+     Removed: 11 Blanks, 14 Comments,
+     Added: 2 Blanks, 13 Comments,
+     Change: 191 > 188 = 2.09%.
+
+ Next script from './Scripts' is: 'mql5_test.Mql5',
+ Script type is 'MQL5' with extension 'Mql5'.
+     Removed: 12 Blanks, 44 Comments,
+     Added: 4 Blanks, 16 Comments,
+     Change: 410 > 378 = 14.63%.
+
+ Next script from './Scripts' is: 'powershell_test.ps1',
+ Script type is 'PowerShell' with extension 'ps1'.
+     Removed: 2 Blanks, 10 Comments,
+     Added: 7 Blanks, 9 Comments,
+     Change: 200 > 188 = 6.50%.
+
+ Next script from './Scripts' is: 'python_test.py',
+ Script type is 'Python' with extension 'py'.
+     Removed: 2 Blanks, 17 Comments,
+     Added: 8 Blanks, 10 Comments,
+     Change: 175 > 156 = 14.86%.
+
 
 ```
 **Loop**: After process, then re-displays the menu until the user exits.
@@ -103,9 +137,10 @@ ScriptClean is a Python utility designed to clean Python `.py`, PowerShell `.ps1
 
  Scanning Folder...
  No Scripts Found!
-                             0. Re-Detect Scripts
+                           No Scripts In './Scripts'
 
- Select an option (or 'q' to exit):
+ Select, '0-9' = Choice, 'r' = Re-detect, 'd' = Debug, 'q' = Exit:
+
 
 
 
