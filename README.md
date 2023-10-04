@@ -138,10 +138,8 @@ ScriptClean is a versatile utility crafted for AI programmers and developers to 
 - **Dependencies**: No external Python libraries are required. The script utilizes standard libraries like `os`, `shutil`, `re` and `time`.
 
 ### Notes
-- The 'd' for debug option, will, copy back all the backed up files to scripts and delete the cleaned files, its used for, testing and development.
+- The scripts produce, "Backup" and "Cleaned", versions of the scripts, if your script does not end up in the backup folder, then possibly, you selected 'd' or there was a python/os issue. The 'd' for debug option, will, copy back all the backed up files to scripts and delete the cleaned files, its used for, testing and development, do not use it.
 
 ### Disclaimer
 * While this program takes the error out of processing scripts, it also introduces the issue of moving scripts around, so remember to always exercise some level of caution with organizing the movements of your Master scripts.
-* If you use of "#" a bit along the line in some abnormal method, it will also remove this, but, "###" and "##", such as for example "### USER:", are, tested and safe. This was the only rule update required during testing on the the 4 scripts for "Llama2Robot" at the time. 
 * This tool is provided "as is" without any warranties. Always test the script on sample files before using it on important data. The authors are not responsible for any loss of data or functionality.
-* The scripts produce, "Backup" and "Cleaned", versions of the scripts, if it broke your script, then use the backup for that one, and if there are no Backups, thats because you, moved or deleted, them.
