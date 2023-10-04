@@ -50,7 +50,7 @@ ScriptClean is a versatile utility crafted for AI programmers and developers to 
 
 
 
-
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ```
 **Feedback**: During cleaning, displays statistics, this is being improved.
 ```
@@ -85,7 +85,7 @@ ScriptClean is a versatile utility crafted for AI programmers and developers to 
      Added: 8 Blanks, 10 Comments,
      Change: 175 > 156 = 14.86%.
 
-
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ```
 **Loop**: After process, then re-displays the menu until the user exits.
 ```
@@ -116,7 +116,7 @@ ScriptClean is a versatile utility crafted for AI programmers and developers to 
 
 
 
-
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ```
 ##
 
