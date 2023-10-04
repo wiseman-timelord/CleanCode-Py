@@ -52,7 +52,7 @@ ScriptClean is a utility designed for AI developers to optimize scripts, enhanci
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ```
-**Feedback**: Script cleaning statistics (already somewhat clean scripts)...
+**Feedback**: Script cleaning statistics (on already somewhat clean scripts)...
 ```
 ==============================================================================
                                  SCRIPT CLEAN
