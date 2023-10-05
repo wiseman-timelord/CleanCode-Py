@@ -2,7 +2,6 @@
 
 ### Status: 
 - All features working.
-- In the next update...1) Two word concise naming, taking the first and last words from the name of the, maps or functions, for, python and powershell, and just for functions in Mql5, and such things are not possible in batch.
 
 ### Description
 ScriptClean is a utility designed for AI developers to optimize scripts, enhancing readability and efficiency. Supporting Python .py, PowerShell .ps1, Batch .bat, and MQL5 .mql5 formats, it efficiently trims unnecessary comments and spaces, producing a streamlined script. Its user-friendly interface, highlighted with colored text and ASCII art, guarantees a smooth experience. The tool retains only essential comments and spaces, typically at the beginning of functions, classes, or sections. ScriptClean ensures precision, reducing manual errors and time consumption. After using it, comparing the original with the cleaned version is recommended. The tool prioritizes comments for Imports, Variables, Maps, and Functions. While tailored for AI developers, other programmers can also benefit from its capabilities for final script refinement.
@@ -19,6 +18,7 @@ ScriptClean is a utility designed for AI developers to optimize scripts, enhanci
 9. **Original File Management**: Erases the initial script from the "./Scripts" directory after refinement.
 10. **Insightful Statistics**: Offers a detailed breakdown of the cleaning process, highlighting the number of lines and comments modified.
 11. **Looping Interface**: Enables continuous cleaning operations with options to re-detect, clean anew, or gracefully exit.
+12. **Concise Comments**: As applicable, then extra comment details from existing, maps or functions, name.
 
 ### Output
 **Display Options**: Lists detected scripts, and provides options...
