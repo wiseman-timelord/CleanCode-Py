@@ -5,8 +5,9 @@ import re
 import os
 import shutil
 
+# Variables
 
-# Dictionary for colors
+# Dictionary Colors
 COLORS = {
     "RED": "\033[91m",
     "YELLOW": "\033[93m",
@@ -15,7 +16,7 @@ COLORS = {
     "RESET": "\033[0m"
 }
 
-# Dictionary
+# Dictionary Comment Map
 COMMENT_MAP = {
     "Python": "#",
     "PowerShell": "#",
@@ -23,37 +24,35 @@ COMMENT_MAP = {
     "Batch": "REM"
 }
 
-# Dictionary
+# Dictionary Section Map
 SECTION_MAP = {
     "Python": {
-        "import": [r"import\s+\w+", r"from\s+\w+\s+import\s+\w+"],
-        "variable": [r"\w+\s*=\s*.+"],
-        "dictionary": [r"[a-zA-Z_]+ = \[", r"[a-zA-Z_]+ = {"],
-        "function": [r"def\s+\w+\(.*\):"]
+        "import": [r"^import\s+\w+", r"^from\s+\w+\s+import\s+\w+"],
+        "variable": [r"^\w+\s*=\s*.+"],
+        "dictionary": [r"^[a-zA-Z_]+ = \[", r"^[a-zA-Z_]+ = {"],
+        "function": [r"^def\s+\w+\(.*\):"]
     },
     "PowerShell": {
-        "import": [r"Import-Module\s+\w+", r"\.\s+\.\\[a-zA-Z0-9_\-]+\.ps1"],
-        "variable": [r"\$\w+", r"\$global:\w+"],
+        "import": [r"^Import-Module\s+\w+", r"^\.\s+\.\\[a-zA-Z0-9_\-]+\.ps1"],
+        "variable": [r"^\$\w+", r"\$global:\w+"],
         "dictionary": [r"^\$global:(\w+)\s*=\s*@{"],
-        "function": [r"function\s+[a-zA-Z_][a-zA-Z0-9_]*", r"function\s+[a-zA-Z_][a-zA-Z0-9_]*\s*{"]
+        "function": [r"^function\s+[a-zA-Z_][a-zA-Z0-9_]*", r"^function\s+[a-zA-Z_][a-zA-Z0-9_]*\s*{"]
     },
     "Batch": {
-        "import": [r"REM IMPORT \w+"],
-        "variable": [r"set "],
-        "dictionary": [r"REM MAP .+"],
-        "function": [r":[a-zA-Z_][a-zA-Z0-9_]*", r"^if .*\(", r"^for .*\("]
+        "import": [r"^REM IMPORT \w+"],
+        "variable": [r"^set "],
+        "dictionary": [r"^REM MAP .+"],
+        "function": [r"^:[a-zA-Z_][a-zA-Z0-9_]*", r"^if .*\(", r"^for .*\("]
     },
     "MQL5": {
-        "import": [r"import\s+\w+"],
+        "import": [r"^import\s+\w+"],
         "variable": [r"^\s*input\s+(int|double|string|ENUM_TIMEFRAMES)\s+\w+\s*=", r"^\s*(int|double|string)\s+\w+\s*="],
-        "dictionary": [r"double\[\]\s+\w+;", r"int\[\]\s+\w+;", r"string\[\]\s+\w+;"],
-        "function": [r"(int|double|string|void)\s+[a-zA-Z_][a-zA-Z0-9_]*\("]
+        "dictionary": [r"^double\[\]\s+\w+;", r"^int\[\]\s+\w+;", r"string\[\]\s+\w+;"],
+        "function": [r"^(int|double|string|void)\s+[a-zA-Z_][a-zA-Z0-9_]*\("]
     },
 }
 
-
-
-# Dictionary
+# Dictionary File Map
 FILE_EXTENSION_TO_TYPE_MAP = {
     ".py": "Python",
     ".ps1": "PowerShell",
@@ -61,11 +60,11 @@ FILE_EXTENSION_TO_TYPE_MAP = {
     ".bat": "Batch"
 }
 
-# Function
+# Function Display Text
 def display_colored_text(text, color):
     print(f"{COLORS[color]}{text}{COLORS['RESET']}")
 
-# Function
+# Function Determine Type
 def determine_type(filename):
     file_extension = os.path.splitext(filename)[1].lower()
     script_type = FILE_EXTENSION_TO_TYPE_MAP.get(file_extension, "Unknown")
@@ -74,7 +73,7 @@ def determine_type(filename):
         print(f"Unknown script type for '{filename}'. File has been backed up.")
     return script_type
 
-# Function
+# Function Dict Regex
 def dict_to_regex(d):
     regex_patterns = {}
     for key, value in d.items():
@@ -87,20 +86,20 @@ def dict_to_regex(d):
         regex_patterns[key] = new_value
     return regex_patterns
 
-# Function
+# Function Sanitize Content
 def sanitize_script_content(lines, script_name, file_extension):
     script_type = determine_type(script_name)
     if script_type == "Unknown":
         print(" Warning: Unknown script type. No changes made.")
         return lines, 0, 0, 0, 0
-    
     initial_comments_count = sum(1 for line in lines if line.strip().startswith(COMMENT_MAP[script_type]))
     initial_blank_lines_count = sum(1 for line in lines if not line.strip())
     comment_symbol = COMMENT_MAP[script_type]
     cleaned_lines = []
     for line in lines:
         if comment_symbol in line:
-            line = line.split(comment_symbol, 1)[0].rstrip()
+            if '"' not in line.split(comment_symbol, 1)[1]:
+                line = line.split(comment_symbol, 1)[0] + '\n'  
         if line.strip(): 
             cleaned_lines.append(line)
     cleaned_lines_before = len(cleaned_lines)
@@ -109,58 +108,45 @@ def sanitize_script_content(lines, script_name, file_extension):
     comments_removed = abs(initial_comments_count - sum(1 for line in cleaned_lines if line.strip().startswith(comment_symbol)))
     blank_lines_removed = abs(initial_blank_lines_count - sum(1 for line in cleaned_lines if not line.strip()))
     lines_removed = abs(len(lines) - len(cleaned_lines))
-
     return (cleaned_lines, lines_removed, blank_lines_removed, comments_removed, standard_comments_added)
 
-# Function
+# Function Format Name
 def format_name(name, script_type):
     """Format the name based on the given rules."""
     if script_type == "Python":
         words = [word for word in name.split("_") if word]
     elif script_type == "PowerShell":
-        # Split on hyphens and underscores, then capitalize each word
         words = [word.capitalize() for part in name.split("-") for word in part.split("_")]
     elif script_type == "MQL5":
-        words = re.findall(r'[A-Z][a-z]*', name)  # Split based on capital letters
+        words = re.findall(r'[A-Z][a-z]*', name)  
     else:
         words = [name]
-
-    # If there's only one word, return that word
     if len(words) == 1:
         return words[0].capitalize()
-    # If there are two or more words, use the first and last words
     else:
         return ' '.join([words[0].capitalize(), words[-1].capitalize()])
 
-# Function
+# Function Insert Comments
 def insert_comments(lines, script_type, script_name, file_extension):
     new_lines = []
     if not lines:
         return []
-
     comment_prefix = COMMENT_MAP.get(script_type)
     if not comment_prefix:
         raise ValueError(f"Unsupported script type: {script_type}")
-
     new_lines.append(f"{comment_prefix} Script: {script_name}\n")
-
     sections_added = {
         "import": False,
         "variable": False,
         "dictionary": False,
         "function": False
     }
-
     for line in lines:
-        stripped_line = line.strip()
-
-        # Skip lines that start with a space
         if line.startswith(' '):
             new_lines.append(line)
             continue
-
-        formatted_name = ""  # Initialize to avoid UnboundLocalError
-
+        stripped_line = line.strip()
+        formatted_name = ""
         for section, patterns in SECTION_MAP[script_type].items():
             for pattern in patterns:
                 try:
@@ -177,7 +163,6 @@ def insert_comments(lines, script_type, script_name, file_extension):
                                 func_name_match = re.search(r"^function ([\w-]+)", stripped_line)
                             else:
                                 func_name_match = re.search(r"\b\w+(\s+\w+)?\(", stripped_line)
-                            
                             if func_name_match:
                                 func_name = func_name_match.group(1)
                                 formatted_name = f"{comment_prefix} Function {format_name(func_name, script_type)}"
@@ -193,5 +178,4 @@ def insert_comments(lines, script_type, script_name, file_extension):
                 except re.error as re_err:
                     continue
         new_lines.append(line)
-
     return new_lines

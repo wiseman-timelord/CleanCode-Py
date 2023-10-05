@@ -7,8 +7,6 @@ import time
 import sys
 from washup import determine_type, sanitize_script_content
 from ascii import ASCII_ART
-
-# Display
 sys.stdout.write("\x1b]2;Llama2Robot-Window1\x07")
 sys.stdout.flush()
 if os.name == 'nt':
@@ -19,7 +17,7 @@ else:
 # Variables
 terminal_width = shutil.get_terminal_size().columns
 
-# Dictionary
+# Dictionary Colors
 COLORS = {
     "RED": "\033[91m",
     "YELLOW": "\033[93m",
@@ -28,16 +26,16 @@ COLORS = {
     "RESET": "\033[0m"
 }
 
-# Function
+# Function Display Text
 def display_colored_text(text, color):
     print(f"{COLORS[color]}{text}{COLORS['RESET']}")
 
-# Function
+# Function Align Center
 def align_center(text, width):
     """Center the text within the given width."""
     return text.center(width)
 
-# Function
+# Function Show Header
 def show_title_header(title="", color="YELLOW", show_ascii=True, mode="menu"):
     os.system('cls' if os.name == 'nt' else 'clear')
     equals_line = "=" * 78
@@ -64,13 +62,13 @@ def show_title_header(title="", color="YELLOW", show_ascii=True, mode="menu"):
     display_colored_text(title, color)
     display_colored_text(minus_line, "BLUE")
 
-# Function
+# Function Create Dirs
 def create_dirs():
     for dir_name in ["Scripts", "Backup", "Cleaned"]:
         if not os.path.exists(dir_name):
             os.makedirs(dir_name)
 
-# Function
+# Function Debug Scripts
 def debug_scripts():
     for filename in os.listdir("./Cleaned"):
         file_path = os.path.join("./Cleaned", filename)
@@ -92,7 +90,7 @@ def debug_scripts():
         except Exception:
             pass
 
-# Function
+# Function Sanitize Script
 def sanitize_script(selected_file):
     try:
         with open(f"./Scripts/{selected_file}", 'r') as f:
@@ -117,7 +115,7 @@ def sanitize_script(selected_file):
         traceback.print_exc()
         return 0, 0, 0, 0, 0, 0
 
-# Function
+# Function Process Script
 def process_script(selected_file):
     try:
         shutil.copy(f"./Scripts/{selected_file}", f"./Backup/{selected_file}")
@@ -130,7 +128,6 @@ def process_script(selected_file):
             change_percentage = 0
         else:
             change_percentage = (change / total_lines_before) * 100
-        
         display_colored_text(f"\n Next script from './Scripts' is: '{selected_file}',", "YELLOW")
         display_colored_text(f" Script type is '{determine_type(selected_file)}' with extension '{os.path.splitext(selected_file)[1].lstrip('.')}'.", "YELLOW")
         display_colored_text(f"     Removed: {blank_lines_removed} Blanks, {comments_removed} Comments,", "YELLOW")
@@ -140,8 +137,7 @@ def process_script(selected_file):
     except Exception as e:
         display_colored_text(f"Error: {e}", "RED")
 
-
-# Function
+# Function Main
 def main():
     create_dirs()
     while True:
@@ -183,6 +179,5 @@ def main():
         except (ValueError, IndexError):
             display_colored_text("Invalid choice.", "RED")
             continue
-
 if __name__ == "__main__":
     main()
