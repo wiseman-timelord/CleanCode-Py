@@ -113,48 +113,92 @@ def sanitize_script_content(lines, script_name, file_extension):
     return (cleaned_lines, lines_removed, blank_lines_removed, comments_removed, standard_comments_added)
 
 # Function
+def format_name(name, script_type):
+    """Format the name based on the given rules."""
+    if script_type == "Python":
+        words = [word for word in name.split("_")]
+    elif script_type == "PowerShell":
+        words = [word.capitalize() for word in name.split("-") if word[0].isupper()]  # Only consider words that start with an uppercase letter
+    elif script_type == "MQL5":
+        words = re.findall(r'[A-Z][a-z]*', name)  # Split based on capital letters
+    else:
+        words = [name]
+
+    # If there's only one word, return that word
+    if len(words) == 1:
+        return words[0].capitalize()
+    # If there are two or more words, use the first and last words
+    else:
+        return ' '.join([words[0].capitalize(), words[-1].capitalize()])
+
+# Function
 def insert_comments(lines, script_type, script_name, file_extension):
     new_lines = []
     if not lines:
         return []
-    
+
     comment_prefix = COMMENT_MAP.get(script_type)
     if not comment_prefix:
         raise ValueError(f"Unsupported script type: {script_type}")
 
     new_lines.append(f"{comment_prefix} Script: {script_name}\n")
-    
+
     sections_added = {
         "import": False,
         "variable": False,
         "dictionary": False,
         "function": False
     }
-    
+
     for line in lines:
         stripped_line = line.strip()
+
+        # Debug: Print the current line being processed
+        print(f"Processing line: {stripped_line}")
 
         # Skip lines that start with a space
         if line.startswith(' '):
             new_lines.append(line)
             continue
 
+        formatted_name = ""  # Initialize to avoid UnboundLocalError
+
         for section, patterns in SECTION_MAP[script_type].items():
             for pattern in patterns:
                 try:
-                    if re.search(str(pattern), stripped_line):
-                        if section in ["import", "variable"] and not sections_added[section]:
+                    match = re.search(str(pattern), stripped_line)
+                    if match:
+                        # Debug: Print the matched pattern and section
+                        print(f"Matched pattern: {pattern} for section: {section}")
+
+                        if section == "function":
+                            if script_type == "Batch":
+                                formatted_name = f"{comment_prefix} Function"
+                                new_lines.append("\n" + formatted_name + "\n")
+                                continue
+                            elif script_type == "Python":
+                                func_name_match = re.search(r"^def (\w+)", stripped_line)
+                            elif script_type == "PowerShell":
+                                func_name_match = re.search(r"^function ([\w-]+)", stripped_line)  # Adjusted regex here
+                            else:
+                                func_name_match = re.search(r"\b\w+(\s+\w+)?\(", stripped_line)
+                            
+                            if func_name_match:
+                                func_name = func_name_match.group(1)
+                                # Debug: Print the extracted function name
+                                print(f"Extracted function name: {func_name}")
+                                formatted_name = f"{comment_prefix} Function {format_name(func_name, script_type)}"
+                                new_lines.append("\n" + formatted_name + "\n")
+                        elif section == "dictionary":
+                            dict_name = match.group().split("=")[0].strip().replace("$", "").replace("@", "")
+                            formatted_name = f"{comment_prefix} Dictionary {format_name(dict_name, script_type)}"
+                            new_lines.append("\n" + formatted_name + "\n")
+                        elif section in ["import", "variable"] and not sections_added[section]:
                             new_lines.append(f"\n{comment_prefix} {section.capitalize()}s\n")
-                            sections_added[section] = True
-                        elif section in ["dictionary", "function"]:
-                            new_lines.append(f"\n{comment_prefix} {section.capitalize()}\n")
                             sections_added[section] = True
                         break
                 except re.error as re_err:
                     continue
         new_lines.append(line)
-    
+
     return new_lines
-
-
-
