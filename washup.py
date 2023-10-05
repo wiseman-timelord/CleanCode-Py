@@ -154,9 +154,6 @@ def insert_comments(lines, script_type, script_name, file_extension):
     for line in lines:
         stripped_line = line.strip()
 
-        # Debug: Print the current line being processed
-        print(f"Processing line: {stripped_line}")
-
         # Skip lines that start with a space
         if line.startswith(' '):
             new_lines.append(line)
@@ -169,9 +166,6 @@ def insert_comments(lines, script_type, script_name, file_extension):
                 try:
                     match = re.search(str(pattern), stripped_line)
                     if match:
-                        # Debug: Print the matched pattern and section
-                        print(f"Matched pattern: {pattern} for section: {section}")
-
                         if section == "function":
                             if script_type == "Batch":
                                 formatted_name = f"{comment_prefix} Function"
@@ -186,8 +180,6 @@ def insert_comments(lines, script_type, script_name, file_extension):
                             
                             if func_name_match:
                                 func_name = func_name_match.group(1)
-                                # Debug: Print the extracted function name
-                                print(f"Extracted function name: {func_name}")
                                 formatted_name = f"{comment_prefix} Function {format_name(func_name, script_type)}"
                                 new_lines.append("\n" + formatted_name + "\n")
                         elif section == "dictionary":
