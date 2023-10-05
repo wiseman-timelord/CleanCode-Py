@@ -34,7 +34,7 @@ SECTION_MAP = {
     "PowerShell": {
         "import": [r"Import-Module\s+\w+", r"\.\s+\.\\[a-zA-Z0-9_\-]+\.ps1"],
         "variable": [r"\$\w+", r"\$global:\w+"],
-        "dictionary": [r"@{.*}"],
+        "dictionary": [r"^\$global:(\w+)\s*=\s*@{"],
         "function": [r"function\s+[a-zA-Z_][a-zA-Z0-9_]*", r"function\s+[a-zA-Z_][a-zA-Z0-9_]*\s*{"]
     },
     "Batch": {
@@ -116,9 +116,10 @@ def sanitize_script_content(lines, script_name, file_extension):
 def format_name(name, script_type):
     """Format the name based on the given rules."""
     if script_type == "Python":
-        words = [word for word in name.split("_")]
+        words = [word for word in name.split("_") if word]
     elif script_type == "PowerShell":
-        words = [word.capitalize() for word in name.split("-") if word[0].isupper()]  # Only consider words that start with an uppercase letter
+        # Split on hyphens and underscores, then capitalize each word
+        words = [word.capitalize() for part in name.split("-") for word in part.split("_")]
     elif script_type == "MQL5":
         words = re.findall(r'[A-Z][a-z]*', name)  # Split based on capital letters
     else:
@@ -179,7 +180,7 @@ def insert_comments(lines, script_type, script_name, file_extension):
                             elif script_type == "Python":
                                 func_name_match = re.search(r"^def (\w+)", stripped_line)
                             elif script_type == "PowerShell":
-                                func_name_match = re.search(r"^function ([\w-]+)", stripped_line)  # Adjusted regex here
+                                func_name_match = re.search(r"^function ([\w-]+)", stripped_line)
                             else:
                                 func_name_match = re.search(r"\b\w+(\s+\w+)?\(", stripped_line)
                             
@@ -190,7 +191,7 @@ def insert_comments(lines, script_type, script_name, file_extension):
                                 formatted_name = f"{comment_prefix} Function {format_name(func_name, script_type)}"
                                 new_lines.append("\n" + formatted_name + "\n")
                         elif section == "dictionary":
-                            dict_name = match.group().split("=")[0].strip().replace("$", "").replace("@", "")
+                            dict_name = match.group().split("=")[0].strip().replace("$", "").replace("@", "").replace("global:", "")  # Strip "global:"
                             formatted_name = f"{comment_prefix} Dictionary {format_name(dict_name, script_type)}"
                             new_lines.append("\n" + formatted_name + "\n")
                         elif section in ["import", "variable"] and not sections_added[section]:
