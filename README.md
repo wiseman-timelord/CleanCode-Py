@@ -1,7 +1,7 @@
 # ScriptClean
 
 ### Status: 
-- All features, tested and working.
+- All current features, tested and working.
 
 ### Description
 ScriptClean is a utility designed for AI developers to optimize scripts, enhancing readability and efficiency. Supporting Python .py, PowerShell .ps1, Batch .bat, and MQL5 .mql5 formats, it efficiently trims unnecessary comments and spaces, producing a streamlined script. Its user-friendly interface, highlighted with colored text and ASCII art, guarantees a smooth experience. The tool retains only essential comments and spaces, typically at the beginning of functions, classes, or sections. ScriptClean ensures precision, reducing manual errors and time consumption. After using it, comparing the original with the cleaned version is recommended. The tool prioritizes comments for Imports, Variables, Maps, and Functions. While tailored for AI developers, other programmers can also benefit from its capabilities for final script refinement. The scripts for ScriptClean have now been cleaned with, ScriptClean and the new commenting system, so, if you want examples, then examine the scripts.
