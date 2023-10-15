@@ -123,7 +123,7 @@ ScriptClean is a utility designed for AI developers to optimize scripts, enhanci
 ##
 
 ### Usage - Windows
-1. Deposit the script files you wish to clean in the `./Scripts` folder.
+1. Deposit the script files you wish to clean in the `.\Scripts` folder.
 2. Double-click `ScriptClean.bat` for easy launching.
 3. Adhere to the on-screen prompts to select a file for cleaning.
 4. Check folder ".\Cleaned" after processes complete, backups are in ".\Backup".
@@ -132,7 +132,7 @@ ScriptClean is a utility designed for AI developers to optimize scripts, enhanci
 1. Deposit the script files you wish to clean in the `./Scripts` folder.
 2. Run `python main.py`, this may additionally require admin mode.
 3. Adhere to the on-screen prompts to select a file for cleaning.
-4. Check folder "./Cleaned" after processes complete, backups are in ".\Backup".
+4. Check folder "./Cleaned" after processes complete, backups are in "./Backup".
 
 ### Requirements
 - **Python Version**: Ensure you have Python 3.4-3.12, you can verify this by running `python --version` or `python3 --version` in your, terminal or command prompt.
