@@ -18,7 +18,7 @@ ScriptClean is a utility designed for AI developers to optimize scripts, enhanci
 9. **Original File Management**: Erases the initial script from the "./Scripts" directory after refinement.
 10. **Insightful Statistics**: Offers a detailed breakdown of the cleaning process, highlighting the number of lines and comments modified.
 11. **Looping Interface**: Enables continuous cleaning operations with options to re-detect, clean anew, or gracefully exit.
-12. **Concise Comments**: As applicable, then extra comment details from existing, maps or functions, name.
+12. **Concise Comments**: Comment details for, imports, variables, maps, functions, not yet perfected for all formats.
 13. **Color Text**: Through use of colorama library, the color text is safe for, windows and linux.
 
 ### Output
