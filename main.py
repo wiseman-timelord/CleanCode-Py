@@ -5,6 +5,7 @@ import os
 import shutil
 import time
 import sys
+from colorama import init, Fore, Style
 from washup import determine_type, sanitize_script_content
 from ascii import ASCII_ART
 sys.stdout.write("\x1b]2;ScriptClean\x07")
@@ -13,22 +14,23 @@ if os.name == 'nt':
     os.system('mode con: cols=78 lines=44')
 else:
     os.system('echo -e "\e[8;44;78t"')
+init(autoreset=True)
 
 # Variables
 terminal_width = shutil.get_terminal_size().columns
 
 # Dictionary Colors
 COLORS = {
-    "RED": "\033[91m",
-    "YELLOW": "\033[93m",
-    "BLUE": "\033[94m",
-    "GREEN": "\033[92m",
-    "RESET": "\033[0m"
+    "RED": Fore.RED,
+    "YELLOW": Fore.YELLOW,
+    "BLUE": Fore.BLUE,
+    "GREEN": Fore.GREEN,
+    "RESET": Style.RESET_ALL
 }
 
 # Function Display Text
 def display_colored_text(text, color):
-    print(f"{COLORS[color]}{text}{COLORS['RESET']}")
+    print(f"{COLORS[color]}{text}")
 
 # Function Align Center
 def align_center(text, width):
@@ -154,7 +156,8 @@ def main():
             display_colored_text("                             0. Clean All Scripts", "YELLOW")
             if len(file_types) > 9:
                 display_colored_text("\n         ...and more files not shown", "YELLOW")
-        choice = input(f"\n{COLORS['YELLOW']} Select, '0-9' = Choice, 'r' = Re-detect, 'd' = Debug, 'q' = Exit: {COLORS['RESET']}")
+        display_colored_text("\n Select, '0-9' = Choice, 'r' = Re-detect, 'd' = Debug, 'q' = Exit: ", "YELLOW")
+        choice = input()
         display_colored_text("\n" + "+" * 78, "BLUE")
         if choice.lower() == 'q':
             break

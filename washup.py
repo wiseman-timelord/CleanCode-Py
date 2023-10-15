@@ -4,16 +4,18 @@
 import re
 import os
 import shutil
+from colorama import init, Fore, Style
+init(autoreset=True)
 
 # Variables
 
 # Dictionary Colors
 COLORS = {
-    "RED": "\033[91m",
-    "YELLOW": "\033[93m",
-    "BLUE": "\033[94m",
-    "GREEN": "\033[92m",
-    "RESET": "\033[0m"
+    "RED": Fore.RED,
+    "YELLOW": Fore.YELLOW,
+    "BLUE": Fore.BLUE,
+    "GREEN": Fore.GREEN,
+    "RESET": Style.RESET_ALL
 }
 
 # Dictionary Comment Map
@@ -62,7 +64,7 @@ FILE_EXTENSION_TO_TYPE_MAP = {
 
 # Function Display Text
 def display_colored_text(text, color):
-    print(f"{COLORS[color]}{text}{COLORS['RESET']}")
+    print(f"{COLORS[color]}{text}")
 
 # Function Determine Type
 def determine_type(filename):
