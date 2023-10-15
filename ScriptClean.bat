@@ -20,7 +20,7 @@ echo.
 :: Run the scriptclean.py script
 echo Launching Python script...
 @echo on
-wsl python3 main.py
+python.exe main.py
 @echo off
 
 :: Exiting
