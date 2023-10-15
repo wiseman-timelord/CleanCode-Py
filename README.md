@@ -4,7 +4,7 @@
 - Plan for next update includes: identification and processing of variables for `.Mq5` format.
 
 ### Description
-ScriptClean is a utility designed for AI developers to optimize scripts, enhancing readability and efficiency. Supporting Python .py, PowerShell .ps1, Batch .bat, and MQL5 .mql5 formats, it efficiently trims unnecessary comments and spaces, producing a streamlined script. Its user-friendly interface, highlighted with colored text and ASCII art, guarantees a smooth experience. The tool retains only essential comments and spaces, typically at the beginning of functions, classes, or sections. ScriptClean ensures precision, reducing errors and time consumption, from manually cleaning scripts. The tool prioritizes comments for Imports, Variables, Maps, and Functions. While tailored for AI developers, other programmers can also benefit from its capabilities for final script refinement. The scripts for ScriptClean have now been cleaned with, ScriptClean, so, if you want examples, then examine the scripts.
+ScriptClean is a utility designed for AI developers to optimize scripts, enhancing readability and efficiency. Supporting Python .py, PowerShell .ps1, Batch .bat, and MQL5 .mql5 formats, it efficiently trims unnecessary comments and spaces, producing a streamlined script. Its user-friendly interface, highlighted with colored text and ASCII art, guarantees a smooth experience. The tool retains only essential comments and spaces, typically at the beginning of functions, classes, or sections. ScriptClean ensures precision, reducing errors and time consumption, from manually cleaning scripts. The tool prioritizes comments for Imports, Variables, Maps, and Functions. While tailored for AI developers, other programmers can also benefit from its capabilities for final script refinement. The scripts for ScriptClean have now been cleaned with, ScriptClean, so, if you want examples, then examine the scripts. 
 
 ### Features
 1. **Script Identification**: Employs rules to ascertain the script type, supporting `.py`, `.ps1`, `.bat`, and `.mql5`.
@@ -19,6 +19,7 @@ ScriptClean is a utility designed for AI developers to optimize scripts, enhanci
 10. **Insightful Statistics**: Offers a detailed breakdown of the cleaning process, highlighting the number of lines and comments modified.
 11. **Looping Interface**: Enables continuous cleaning operations with options to re-detect, clean anew, or gracefully exit.
 12. **Concise Comments**: As applicable, then extra comment details from existing, maps or functions, name.
+13. **Color Text**: Through use of colorama library, the color text is safe for, windows and linux.
 
 ### Output
 **Display Options**: Lists detected scripts, and provides options...
@@ -127,14 +128,14 @@ ScriptClean is a utility designed for AI developers to optimize scripts, enhanci
 3. Adhere to the on-screen prompts to select a file for cleaning.
 4. Check folder ".\Cleaned" after processes complete, backups are in ".\Backup".
 
-### Usage - Linux (Untested)
+### Usage - Linux & wsl
 1. Deposit the script files you wish to clean in the `./Scripts` folder.
 2. Run `python main.py`, this may additionally require admin mode.
 3. Adhere to the on-screen prompts to select a file for cleaning.
 4. Check folder "./Cleaned" after processes complete, backups are in ".\Backup".
 
 ### Requirements
-- **Python Version**: Ensure you have Python 3.4-3.12 installed. You can verify this by running `python --version` or `python3 --version` in your terminal or command prompt.
+- **Python Version**: Ensure you have Python 3.4-3.12, you can verify this by running `python --version` or `python3 --version` in your, terminal or command prompt.
 - **Operating System**: ScriptClean is designed to work on Windows and Linux. While it has been primarily tested on Windows, Linux users should be able to use it, though it remains largely untested on this platform. Mac OS users might also be able to run the script, but this hasn't been verified.
 - **Dependencies**: No external Python libraries are required. The script utilizes standard libraries like `os`, `shutil`, `re` and `time`.
 
