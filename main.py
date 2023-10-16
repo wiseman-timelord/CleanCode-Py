@@ -40,9 +40,9 @@ def align_center(text, width):
 # Function Show Header
 def show_title_header(title="", color="YELLOW", show_ascii=True, mode="menu"):
     os.system('cls' if os.name == 'nt' else 'clear')
-    equals_line = "=" * 78
-    plus_line = "+" * 78
-    minus_line = "-" * 78
+    equals_line = "=" * 77
+    plus_line = "+" * 77
+    minus_line = "-" * 77
     if mode == "processing":
         centered_title = "                                 SCRIPT CLEAN"
         display_colored_text(equals_line, "BLUE")
