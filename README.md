@@ -146,4 +146,4 @@ ScriptClean is a utility designed for AI developers to optimize scripts, enhanci
 - The 'd' for debug option, will, copy back all the "./Backup" files to "./Scripts" and delete the "./Cleaned" files; its used for, testing and development, basically do not use it unless you are developing the code.
 
 ## DISCLAIMER
-The "License.Txt" covers, this and relating, stuff.
+This software is subject to the terms in License.Txt, covering usage, distribution, and modifications. For full details on your rights and obligations, refer to License.Txt.
