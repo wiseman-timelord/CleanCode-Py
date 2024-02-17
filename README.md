@@ -3,9 +3,11 @@
 ### Status: Working.
 Working(ish). The batches for this program may only run on Windows 10 due to the different PowerShell launch commands required for various OS versions, that microsoft have bizarly chosen to use for each OS, and may cause endless launch loop on other systems.
 - Plan for next update includes:
+0) Refractor all code into themes used in other recent programs.
 1) identification and processing of variables for `.Mq5` scripts.
 2) identification of "while" as main loop in ".Ps1" scripts.
 3) Clean Ansii Codes From Ps Error Logs.
+4) Carry over other improvements from CleanCode-Ps
 
 ### Description
 CleanCode-Py is a utility designed for AI developers to optimize scripts, enhancing readability and efficiency. Supporting Python .py, PowerShell .ps1, Batch .bat, and MQL5 .mql5 formats, it efficiently trims unnecessary comments and spaces, producing a streamlined script. Its user-friendly interface, highlighted with colored text and ASCII art, guarantees a smooth experience. The tool retains only essential comments and spaces, typically at the beginning of functions, classes, or sections. CleanCode-Py ensures precision, reducing errors and time consumption, from manually cleaning scripts. The tool prioritizes comments for Imports, Variables, Maps, and Functions. While tailored for AI developers, other programmers can also benefit from its capabilities for final script refinement. The scripts for CleanCode-Py have now been cleaned with, CleanCode-Py, so, if you want examples, then examine the scripts. 
