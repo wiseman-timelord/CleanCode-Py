@@ -1,4 +1,4 @@
-# ScriptClean
+# CleanCode-Py
 
 ### Status: Working.
 Working(ish). The batches for this program may only run on Windows 10 due to the different PowerShell launch commands required for various OS versions, that microsoft have bizarly chosen to use for each OS, and may cause endless launch loop on other systems.
@@ -8,7 +8,7 @@ Working(ish). The batches for this program may only run on Windows 10 due to the
 3) Clean Ansii Codes From Ps Error Logs.
 
 ### Description
-ScriptClean is a utility designed for AI developers to optimize scripts, enhancing readability and efficiency. Supporting Python .py, PowerShell .ps1, Batch .bat, and MQL5 .mql5 formats, it efficiently trims unnecessary comments and spaces, producing a streamlined script. Its user-friendly interface, highlighted with colored text and ASCII art, guarantees a smooth experience. The tool retains only essential comments and spaces, typically at the beginning of functions, classes, or sections. ScriptClean ensures precision, reducing errors and time consumption, from manually cleaning scripts. The tool prioritizes comments for Imports, Variables, Maps, and Functions. While tailored for AI developers, other programmers can also benefit from its capabilities for final script refinement. The scripts for ScriptClean have now been cleaned with, ScriptClean, so, if you want examples, then examine the scripts. 
+CleanCode-Py is a utility designed for AI developers to optimize scripts, enhancing readability and efficiency. Supporting Python .py, PowerShell .ps1, Batch .bat, and MQL5 .mql5 formats, it efficiently trims unnecessary comments and spaces, producing a streamlined script. Its user-friendly interface, highlighted with colored text and ASCII art, guarantees a smooth experience. The tool retains only essential comments and spaces, typically at the beginning of functions, classes, or sections. CleanCode-Py ensures precision, reducing errors and time consumption, from manually cleaning scripts. The tool prioritizes comments for Imports, Variables, Maps, and Functions. While tailored for AI developers, other programmers can also benefit from its capabilities for final script refinement. The scripts for CleanCode-Py have now been cleaned with, CleanCode-Py, so, if you want examples, then examine the scripts. 
 
 ### Features
 1. **Script Identification**: Employs rules to ascertain the script type, supporting `.py`, `.ps1`, `.bat`, and `.mql5`.
@@ -128,7 +128,7 @@ ScriptClean is a utility designed for AI developers to optimize scripts, enhanci
 
 ### Usage - Windows
 1. Deposit the script files you wish to clean in the `.\Scripts` folder.
-2. Double-click `ScriptClean.bat` for easy launching.
+2. Double-click `CleanCode-Py.bat` for easy launching.
 3. Adhere to the on-screen prompts to select a file for cleaning.
 4. Check folder ".\Cleaned" after processes complete, backups are in ".\Backup".
 
@@ -140,7 +140,7 @@ ScriptClean is a utility designed for AI developers to optimize scripts, enhanci
 
 ### Requirements
 - **Python Version**: Ensure you have Python 3.4-3.12, you can verify this by running `python --version` or `python3 --version` in your, terminal or command prompt.
-- **Operating System**: ScriptClean is designed to work on Windows and Linux. While it has been primarily tested on Windows, Linux users should be able to use it, though it remains largely untested on this platform. Mac OS users might also be able to run the script, but this hasn't been verified.
+- **Operating System**: CleanCode-Py is designed to work on Windows and Linux. While it has been primarily tested on Windows, Linux users should be able to use it, though it remains largely untested on this platform. Mac OS users might also be able to run the script, but this hasn't been verified.
 - **Dependencies**: No external Python libraries are required. The script utilizes standard libraries like `os`, `shutil`, `re` and `time`.
 
 ### Notes
