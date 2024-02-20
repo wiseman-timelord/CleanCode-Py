@@ -1,8 +1,11 @@
 # CleanCode-Py
 
-### Status: Working.
-Working(ish). The batches for this program may only run on Windows 10 due to the different PowerShell launch commands required for various OS versions, that microsoft have bizarly chosen to use for each OS, and may cause endless launch loop on other systems.
-- Plan for next update includes:
+### Status
+Release. The release version of this program is working almost as intended, however, the source version of the program is being converted and rebranded to CodeClean-Py. NExt steps are...
+- Convert CodeClean-Py.Bat for python launch.
+- Determine why contents of functions and imports is different in refractored scripts.
+- introduce, feedback and menu, from Ps CodeClean.
+<br> *** Left over work for script clean ***
 0) Refractor all code into themes used in other recent programs.
 1) identification and processing of variables for `.Mq5` scripts.
 2) identification of "while" as main loop in ".Ps1" scripts.
