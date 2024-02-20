@@ -1,186 +1,65 @@
-# Script: main.py
-
 # Imports
 import os
 import shutil
-import time
 import sys
 from colorama import init, Fore, Style
-from washup import determine_type, sanitize_script_content
-from ascii import ASCII_ART
-sys.stdout.write("\x1b]2;ScriptClean\x07")
+from scripts.display import show_main_menu, clear_screen
+from scripts.cleaner import process_script
+
+# Initialization
+sys.stdout.write("\x1b]2;ScriptClean\x07")  # Set terminal title
 sys.stdout.flush()
 if os.name == 'nt':
-    os.system('mode con: cols=78 lines=44')
+    os.system('color 70')  # Dark grey background, white text for Windows
 else:
-    os.system('echo -e "\e[8;44;78t"')
+    os.system('echo -e "\\e[100m\\e[97m"')  # Dark grey background, white text for Unix
 init(autoreset=True)
 
-# Variables
+# Global Variables
 terminal_width = shutil.get_terminal_size().columns
 
-# Dictionary Colors
-COLORS = {
-    "RED": Fore.RED,
-    "YELLOW": Fore.YELLOW,
-    "BLUE": Fore.BLUE,
-    "GREEN": Fore.GREEN,
-    "RESET": Style.RESET_ALL
+# Global Maps
+COMMENT_MAP = {
+    "Python": "#",
+    "PowerShell": "#",
+    "MQL5": "//",
+    "Batch": "REM"
 }
 
-# Function Display Text
-def display_colored_text(text, color):
-    print(f"{COLORS[color]}{text}")
+SECTION_MAP = {
+    "Python": {
+        "import": [r"^import\s+\w+", r"^from\s+\w+\s+import\s+\w+"],
+        "variable": [r"^\w+\s*=\s*.+"],
+        "dictionary": [r"^[a-zA-Z_]+ = \[", r"^[a-zA-Z_]+ = {"],
+        "function": [r"^def\s+\w+\(.*\):"]
+    },
+    "PowerShell": {
+        "import": [r"^Import-Module\s+\w+", r"^\.\s+\.\\[a-zA-Z0-9_\-]+\.ps1"],
+        "variable": [r"^\$\w+", r"\$global:\w+"],
+        "dictionary": [r"^\$global:(\w+)\s*=\s*@{"],
+        "function": [r"^function\s+[a-zA-Z_][a-zA-Z0-9_]*", r"^function\s+[a-zA-Z_][a-zA-Z0-9_]*\s*{"]
+    },
+    "Batch": {
+        "import": [r"^REM IMPORT \w+"],
+        "variable": [r"^set "],
+        "dictionary": [r"^REM MAP .+"],
+        "function": [r"^:[a-zA-Z_][a-zA-Z0-9_]*", r"^if .*\(", r"^for .*\("]
+    },
+    "MQL5": {
+        "import": [r"^import\s+\w+"],
+        "variable": [r"^\s*input\s+(int|double|string|ENUM_TIMEFRAMES)\s+\w+\s*=", r"^\s*(int|double|string)\s+\w+\s*="],
+        "dictionary": [r"^double\[\]\s+\w+;", r"^int\[\]\s+\w+;", r"string\[\]\s+\w+;"],
+        "function": [r"^(int|double|string|void|long|bool)\s+[a-zA-Z_][a-zA-Z0-9_]*\("]
+    },
+}
 
-# Function Align Center
-def align_center(text, width):
-    """Center the text within the given width."""
-    return text.center(width)
+FILE_EXTENSION_TO_TYPE_MAP = {
+    ".py": "Python",
+    ".ps1": "PowerShell",
+    ".mq5": "MQL5",
+    ".bat": "Batch"
+}
 
-# Function Show Header
-def show_title_header(title="", color="YELLOW", show_ascii=True, mode="menu"):
-    os.system('cls' if os.name == 'nt' else 'clear')
-    equals_line = "=" * 77
-    plus_line = "+" * 77
-    minus_line = "-" * 77
-    if mode == "processing":
-        centered_title = "                                 SCRIPT CLEAN"
-        display_colored_text(equals_line, "BLUE")
-        display_colored_text(centered_title, "YELLOW")
-        display_colored_text(equals_line, "BLUE")
-        display_colored_text(plus_line, "BLUE")
-        display_colored_text(" Processing Scripts:", "YELLOW")
-        display_colored_text(minus_line, "BLUE")
-        return
-    elif mode == "post_processing":
-        display_colored_text(plus_line, "BLUE")
-        return
-    display_colored_text(equals_line, "BLUE")
-    if show_ascii:
-        centered_ascii_art = align_center(ASCII_ART, terminal_width)
-        display_colored_text(centered_ascii_art, "YELLOW")
-        display_colored_text(equals_line, "BLUE")
-    display_colored_text(plus_line, "BLUE")
-    display_colored_text(title, color)
-    display_colored_text(minus_line, "BLUE")
-
-# Function Create Dirs
-def create_dirs():
-    for dir_name in ["Scripts", "Backup", "Cleaned"]:
-        if not os.path.exists(dir_name):
-            os.makedirs(dir_name)
-
-# Function Debug Scripts
-def debug_scripts():
-    for filename in os.listdir("./Cleaned"):
-        file_path = os.path.join("./Cleaned", filename)
-        try:
-            if os.path.isfile(file_path) or os.path.islink(file_path):
-                os.unlink(file_path)
-            elif os.path.isdir(file_path):
-                shutil.rmtree(file_path)
-        except Exception:
-            pass
-    for filename in os.listdir("./Backup"):
-        source = os.path.join("./Backup", filename)
-        destination = os.path.join("./Scripts", filename)
-        try:
-            if os.path.isfile(source) or os.path.islink(source):
-                shutil.copy2(source, destination)
-            elif os.path.isdir(source) and not os.path.exists(destination):
-                shutil.copytree(source, destination)
-        except Exception:
-            pass
-
-# Function Sanitize Script
-def sanitize_script(selected_file):
-    try:
-        with open(f"./Scripts/{selected_file}", 'r') as f:
-            lines = f.readlines()
-        total_lines_before = len(lines)
-        script_type = determine_type(selected_file)
-        if script_type == "Unknown":
-            return (0, 0, 0, 0, 0)
-        file_extension = os.path.splitext(selected_file)[1].lstrip('.')
-        results = sanitize_script_content(lines, selected_file, file_extension)
-        if results:
-            cleaned_lines, lines_removed, comments_removed, blank_lines_removed, standard_comments_added = results
-        else:
-            return (0, 0, 0, 0, 0)
-        with open(f"./Cleaned/{selected_file}", 'w') as f:
-            f.writelines(cleaned_lines)
-        total_lines_after = len(cleaned_lines)
-        return lines_removed, comments_removed, blank_lines_removed, total_lines_before, total_lines_after, standard_comments_added
-    except Exception as e:
-        display_colored_text(f"Error processing the file '{selected_file}': {e}", "RED")
-        import traceback
-        traceback.print_exc()
-        return 0, 0, 0, 0, 0, 0
-
-# Function Process Script
-def process_script(selected_file):
-    try:
-        shutil.copy(f"./Scripts/{selected_file}", f"./Backup/{selected_file}")
-        lines_removed, comments_removed, blank_lines_removed, total_lines_before, total_lines_after, standard_comments_added = sanitize_script(selected_file)
-        os.remove(f"./Scripts/{selected_file}")
-        total_removed = lines_removed + comments_removed
-        total_added = standard_comments_added
-        change = total_removed - total_added
-        if total_lines_before == 0:
-            change_percentage = 0
-        else:
-            change_percentage = (change / total_lines_before) * 100
-        display_colored_text(f"\n Next script from './Scripts' is: '{selected_file}',", "YELLOW")
-        display_colored_text(f" Script type is '{determine_type(selected_file)}' with extension '{os.path.splitext(selected_file)[1].lstrip('.')}'.", "YELLOW")
-        display_colored_text(f"     Removed: {blank_lines_removed} Blanks, {comments_removed} Comments,", "YELLOW")
-        display_colored_text(f"     Added: {total_added - blank_lines_removed} Blanks, {standard_comments_added} Comments,", "YELLOW")
-        display_colored_text(f"     Change: {total_lines_before} > {total_lines_after} = {change_percentage:.2f}%.", "YELLOW")
-        time.sleep(2)
-    except Exception as e:
-        display_colored_text(f"Error: {e}", "RED")
-
-# Function Main
-def main():
-    create_dirs()
-    while True:
-        terminal_width = shutil.get_terminal_size().columns
-        show_title_header(" Script Choices:", "YELLOW")
-        display_colored_text("\n Scanning Folder...", "YELLOW")
-        file_types = [f for f in os.listdir("./Scripts") if f.lower().endswith(('.py', '.bat', '.ps1', '.mq5'))]
-        if not file_types:
-            display_colored_text(" No Scripts Found!\n                           No Scripts In './Scripts'", "RED")
-        else:
-            display_colored_text(" ...Scripts Found.", "GREEN")
-            for i, f in enumerate(file_types[:9], start=1):
-                display_colored_text(f"                             {i}. {f}", "YELLOW")
-            display_colored_text("                             0. Clean All Scripts", "YELLOW")
-            if len(file_types) > 9:
-                display_colored_text("\n         ...and more files not shown", "YELLOW")
-        display_colored_text("\n Select, '0-9' = Choice, 'r' = Re-detect, 'd' = Debug, 'q' = Exit: ", "YELLOW")
-        choice = input()
-        display_colored_text("\n" + "+" * 78, "BLUE")
-        if choice.lower() == 'q':
-            break
-        elif choice.lower() == 'r':
-            continue
-        elif choice.lower() == 'd':
-            debug_scripts()
-            continue
-        elif choice == '0' and file_types:
-            show_title_header(mode="processing")
-            for f in file_types:
-                process_script(f)
-            print()
-            show_title_header(mode="post_processing")
-            continue
-        try:
-            show_title_header(mode="processing")
-            selected_file = file_types[int(choice) - 1]
-            process_script(selected_file)
-            print()
-            show_title_header(mode="post_processing")
-        except (ValueError, IndexError):
-            display_colored_text("Invalid choice.", "RED")
-            continue
+# Entry Point
 if __name__ == "__main__":
-    main()
+    show_main_menu()
