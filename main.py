@@ -46,11 +46,10 @@ SECTION_MAP = {
         "function": [r"^:[a-zA-Z_][a-zA-Z0-9_]*", r"^if .*\(", r"^for .*\("]
     },
     "MQL5": {
-        "import": [r"^import\s+\w+"],
-        "variable": [r"^\s*input\s+(int|double|string|ENUM_TIMEFRAMES)\s+\w+\s*=", r"^\s*(int|double|string)\s+\w+\s*="],
-        "dictionary": [r"^double\[\]\s+\w+;", r"^int\[\]\s+\w+;", r"string\[\]\s+\w+;"],
-        "function": [r"^(int|double|string|void|long|bool)\s+[a-zA-Z_][a-zA-Z0-9_]*\("]
-    },
+        "import": [r"^#import\s+\w+"],
+        "input": [r"^\s*input\s+\w+\s+\w+\s*="],
+        "variable": [r"^\s*double\s+\w+\s*=", r"^\s*int\s+\w+\s*=", r"^\s*string\s+\w+\s*=", r"^\s*bool\s+\w+\s*="],
+        "function": [r"^(void|int|double|string|bool)\s+\w+\(.*\)"],
 }
 
 FILE_EXTENSION_TO_TYPE_MAP = {

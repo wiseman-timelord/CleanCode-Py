@@ -1,8 +1,11 @@
 # Script: cleaner.py
 
+# Imports
+import re
+
 # process scripts
 def process_script(filename):
-    """Processes and cleans the script specified by filename."""
+    """Processes and cleans the script specified by filename, enhancing with comments."""
     script_type = determine_type(filename)
     if script_type == "Unknown":
         print(f"Skipping unknown script type: {filename}")
@@ -30,15 +33,26 @@ def process_script(filename):
     except Exception as e:
         print(f"Error processing {filename}: {e}")
 
+
 # remove blank lines
 def clean_lines(lines, script_type):
-    """Removes comments and empty lines based on script type."""
-    comment_symbol = COMMENT_MAP.get(script_type, None)
-    if not comment_symbol:
-        return lines
-
+    """Removes comments, empty lines, and inserts section comments based on script type."""
+    patterns = SECTION_MAP.get(script_type, {})
     cleaned = []
     for line in lines:
-        if not line.strip().startswith(comment_symbol) and line.strip():
-            cleaned.append(line)
+        # Check and remove comments and empty lines
+        comment_symbol = COMMENT_MAP.get(script_type, None)
+        if comment_symbol and line.strip().startswith(comment_symbol) or not line.strip():
+            continue
+        
+        # Insert comments before sections
+        for section, regex_patterns in patterns.items():
+            for pattern in regex_patterns:
+                if re.match(pattern, line.strip()):
+                    section_comment = f"// {section.title()} section\n"
+                    if section_comment not in cleaned:
+                        cleaned.append(section_comment)
+                    break
+        
+        cleaned.append(line)
     return cleaned
