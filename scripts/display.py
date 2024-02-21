@@ -1,24 +1,37 @@
 # Script: display.py
 
-from scripts.cleaner import process_script
+from scripts.utility import process_script
 import os, time
 
 def clear_screen():
-    """Clears the terminal screen."""
     import os
     os.system('cls' if os.name == 'nt' else 'clear')
 
+def set_default_colors():
+    print("Configuring Display..")
+    sys.stdout.write('\033[37;100m')
+    sys.stdout.flush()
+    # Clear screen and re-print
+    clear_screen()
+    print("Configuring Display..")
+    print("..Display Configured.")
+
+def draw_title():
+    print("\n=========================( CleanCode-Py )=========================\n")
+    
+def draw_separator():
+    print("\n------------------------------------------------------------------")
+
 def show_main_menu():
-    """Displays the main menu options to the user and handles all user interactions."""
-    create_dirs()  # Ensure necessary directories exist at the start.
     while True:
         clear_screen()
-        print("Main Menu:")
-        print("1. Option 1")
-        print("2. Option 2")
-        choice = input("Select, '0-9' = Choice, 'r' = Re-detect, 'd' = Debug, 'q' = Exit: ").strip().lower()
+        draw_title()
+        print("1. Clean Scripts")
+        print("2. Clean Logs")
+        draw_separator()
+        choice = input("Select; Options = 1-2, Reload = R, Debug = D, Exit = X: ").strip().lower()
 
-        if choice == 'q':
+        if choice == 'x':
             break
         elif choice == 'r':
             continue 

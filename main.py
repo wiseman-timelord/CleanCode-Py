@@ -4,7 +4,7 @@ import shutil
 import sys
 from colorama import init, Fore, Style
 from scripts.display import show_main_menu, clear_screen
-from scripts.cleaner import process_script
+from scripts.utility import process_script
 
 # Initialization
 sys.stdout.write("\x1b]2;ScriptClean\x07")  # Set terminal title
@@ -50,7 +50,9 @@ SECTION_MAP = {
         "input": [r"^\s*input\s+\w+\s+\w+\s*="],
         "variable": [r"^\s*double\s+\w+\s*=", r"^\s*int\s+\w+\s*=", r"^\s*string\s+\w+\s*=", r"^\s*bool\s+\w+\s*="],
         "function": [r"^(void|int|double|string|bool)\s+\w+\(.*\)"],
+    }
 }
+
 
 FILE_EXTENSION_TO_TYPE_MAP = {
     ".py": "Python",
@@ -59,6 +61,14 @@ FILE_EXTENSION_TO_TYPE_MAP = {
     ".bat": "Batch"
 }
 
+# 
+def initialize_program():
+    print("\nInitializing Program...")
+    set_default_colors()
+    # ANSI escape code to set text color to white (37) and background to dark grey (100)
+    print("\n...Program Initialized.")
+
 # Entry Point
 if __name__ == "__main__":
+    initialize_program()
     show_main_menu()

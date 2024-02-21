@@ -64,7 +64,7 @@ echo.
 echo =========================( CleanCode-Py )=========================
 echo.
 timeout /t 1 /nobreak >nul
-echo Maintenenace Started..
+echo Maintenance Started..
 if exist ".\Errors-Crash.Log" (
     echo Deleted: Errors-Crash.Log
     del ".\Errors-Crash.Log"
@@ -72,14 +72,21 @@ if exist ".\Errors-Crash.Log" (
 echo ..Maintenance Done.
 echo.
 timeout /t 1 /nobreak >nul
-echo Launching Script...
-echo.
-timeout /t 1 /nobreak >nul
-if "%Pyth_Ver:~0,1%"=="3" (
-    python.exe main.py 2> Errors-Crash.Log
-    echo Script Execution Successful.
+
+:: Attempt to use python command directly as python3 might not be recognized on Windows
+echo Attempting to run script using Python...
+python main.py 2> Errors-Crash.Log
+if %ERRORLEVEL% equ 0 (
+    echo Script ran successfully with Python.
 ) else (
-    echo Use Python 3, Execution Failed.
+    echo Failed to run script. Checking for Python installation...
+    where python >nul 2>&1
+    if %ERRORLEVEL% equ 0 (
+        echo Python installation found. Please check the script for errors.
+    ) else (
+        echo Python not found. Ensure Python is installed and in your PATH.
+        exit /b 1
+    )
 )
 echo.
 color 80
@@ -98,7 +105,6 @@ set missing=0
 timeout /t 1 /nobreak >nul
 if not exist ".\scripts\utility.py" set missing=1
 if not exist ".\scripts\display.py" set missing=1
-if not exist ".\scripts\cleaner.py" set missing=1
 if not exist ".\main.py" set missing=1
 if %missing%==1 (
     echo ..Failure, Re-Install Program!
