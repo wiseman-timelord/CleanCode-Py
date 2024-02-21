@@ -2,16 +2,13 @@
 
 ### Status
 Release. The release version of this program is working almost as intended, however, the source version of the program is being converted and rebranded to CodeClean-Py. NExt steps are...
-- Convert CodeClean-Py.Bat for python launch.
 - Determine why contents of functions and imports is different in refractored scripts.
 - introduce, feedback and menu, from Ps CodeClean.
 <br> *** Left over work for script clean ***
 0) Refractor all code into themes used in other recent programs.
-1) identification and processing of variables for `.Mq5` scripts.
-2) identification of "while" as main loop in ".Ps1" scripts.
-3) Clean Ansii Codes From Ps Error Logs.
-4) clean log files.
-5) MAintenance 6m backup, 4m clean, 2m reject
+2) identification of entry point comment, and comment as # Entry Point.
+3) Clean Ansii Codes From Logs.
+5) MAintenance 6month backup, 4month clean, 2month reject
 6) reject folder for files that do not fit "*.ps1, *.py, *.bat, *.mq5, *.log" 
 
 ### Description
