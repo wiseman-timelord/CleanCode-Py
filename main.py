@@ -1,11 +1,8 @@
 # Imports
-import os
-import shutil
-import sys
-from colorama import init, Fore, Style
+import os, shutil, sys, time
 from scripts.display import show_main_menu, clear_screen, draw_title, set_default_colors
 from scripts.utility import process_script, run_old_files_maintenance, run_remove_unsupported_files
-
+from Color_Console import color
 
 # Global Variables
 terminal_width = shutil.get_terminal_size().columns
@@ -52,12 +49,18 @@ FILE_EXTENSION_TO_TYPE_MAP = {
 
 # Function finalize_program
 def initialize_program():
+    clear_screen()
     draw_title()
     print("Initializing Program...\n")
+    time.sleep(1)
     set_default_colors()
+    time.sleep(1)
     run_old_files_maintenance()
+    time.sleep(1)
     run_remove_unsupported_files()
-    print("\n...Program Initialized.")
+    time.sleep(1)
+    print("...Program Initialized.\n")
+    time.sleep(2)
 
 # Function finalize_program
 def finalize_program():

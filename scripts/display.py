@@ -2,31 +2,32 @@
 
 from scripts.utility import process_script, backup_files
 import os, time, sys
-from colorama import init
+from Color_Console import color
 
+# Function clear_screen
 def clear_screen():
-    os.system('cls' if os.name == 'nt' else 'clear')
+    os.system('cls')
 
+# Function set_default_colors
 def set_default_colors():
     print("Configuring Display..")
     sys.stdout.flush()
-    if os.name == 'nt':
-        init(autoreset=True)
-        os.system('color 70')
-    else:
-        os.system('echo -e "\\033[97m\\033[100m"')
-        init(autoreset=True)
-    
+    color(text="bright white", bg="gray")
     clear_screen()
+    draw_title()
+    print("Initializing Program...\n")
     print("Configuring Display..")
-    print("..Display Configured.")
+    print("..Display Configured.\n")
 
+# Function draw_title
 def draw_title():
     print("\n=========================( CleanCode-Py )=========================\n")
-    
+
+# Function draw_separator
 def draw_separator():
     print("\n------------------------------------------------------------------")
 
+# Function show_main_menu
 def show_main_menu():
     while True:
         clear_screen()
