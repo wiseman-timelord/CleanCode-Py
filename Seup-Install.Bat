@@ -43,11 +43,6 @@ if not exist ".\Reject\" (
 echo ..Directories Done.
 echo.
 timeout /t 1 /nobreak >nul
-echo Installing Requirements..
-echo pip install -r .\requirements.txt
-echo ..Requirements Installed.
-echo.
-timeout /t 1 /nobreak >nul
 echo ...Setup-Install Complete.
 echo.
 pause
