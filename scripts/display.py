@@ -11,6 +11,7 @@ def clear_screen():
 # Function set_default_colors
 def set_default_colors():
     print("Configuring Display..")
+    time.sleep(1)
     sys.stdout.flush()
     color(text="bright white", bg="gray")
     clear_screen()
