@@ -2,9 +2,10 @@
 
 ### Status
 Release. The release version of this program is working almost as intended, however, the source version of the program is being converted and rebranded to CodeClean-Py. NExt steps are...
-- identification of entry point comment, and comment as # Entry Point.
-- Test & fix, cleaning and commenting, for scripts.
-- Test & fix, Clean Ansii Codes From Logs.
+- Test & as required update, cleaning and commenting, for scripts.
+- Test & as required update, Clean Ansii Codes From Logs.
+- Test & as required updated, identification/insertion of entry point comment.
+- Update documentation on GitHub
 
 ### Description
 CleanCode-Py is a utility designed for AI developers to optimize scripts, enhancing readability and efficiency. Supporting Python .py, PowerShell .ps1, Batch .bat, and MQL5 .mql5 formats, it efficiently trims unnecessary comments and spaces, producing a streamlined script. Its user-friendly interface, highlighted with colored text and ASCII art, guarantees a smooth experience. The tool retains only essential comments and spaces, typically at the beginning of functions, classes, or sections. CleanCode-Py ensures precision, reducing errors and time consumption, from manually cleaning scripts. The tool prioritizes comments for Imports, Variables, Maps, and Functions. While tailored for AI developers, other programmers can also benefit from its capabilities for final script refinement. The scripts for CleanCode-Py have now been cleaned with, CleanCode-Py, so, if you want examples, then examine the scripts. 
