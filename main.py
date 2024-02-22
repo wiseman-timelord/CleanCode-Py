@@ -1,5 +1,7 @@
+# Script: main.py
+
 # Imports
-import os, shutil, sys, time
+import os, shutil, sys, time, datetime
 from scripts.display import show_main_menu, clear_screen, draw_title, set_default_colors
 from scripts.utility import process_script, run_old_files_maintenance, run_remove_unsupported_files
 from Color_Console import color
@@ -46,6 +48,11 @@ FILE_EXTENSION_TO_TYPE_MAP = {
     ".mq5": "MQL5",
     ".bat": "Batch"
 }
+FOLDERS_WITH_CUTOFFS = {
+    './Backup': datetime.datetime.now() - datetime.timedelta(days=180),
+    './Clean': datetime.datetime.now() - datetime.timedelta(days=120),
+    './Reject': datetime.datetime.now() - datetime.timedelta(days=60),
+}
 
 # Function finalize_program
 def initialize_program():
@@ -55,7 +62,7 @@ def initialize_program():
     time.sleep(1)
     set_default_colors()
     time.sleep(1)
-    run_old_files_maintenance()
+    run_old_files_maintenance(folders_with_cutoffs)
     time.sleep(1)
     run_remove_unsupported_files()
     time.sleep(1)
