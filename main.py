@@ -3,17 +3,9 @@ import os
 import shutil
 import sys
 from colorama import init, Fore, Style
-from scripts.display import show_main_menu, clear_screen
-from scripts.utility import process_script
+from scripts.display import show_main_menu, clear_screen, draw_title, set_default_colors
+from scripts.utility import process_script, run_old_files_maintenance, run_remove_unsupported_files
 
-# Initialization
-sys.stdout.write("\x1b]2;ScriptClean\x07")  # Set terminal title
-sys.stdout.flush()
-if os.name == 'nt':
-    os.system('color 70')  # Dark grey background, white text for Windows
-else:
-    os.system('echo -e "\\e[100m\\e[97m"')  # Dark grey background, white text for Unix
-init(autoreset=True)
 
 # Global Variables
 terminal_width = shutil.get_terminal_size().columns
@@ -25,7 +17,6 @@ COMMENT_MAP = {
     "MQL5": "//",
     "Batch": "REM"
 }
-
 SECTION_MAP = {
     "Python": {
         "import": [r"^import\s+\w+", r"^from\s+\w+\s+import\s+\w+"],
@@ -52,8 +43,6 @@ SECTION_MAP = {
         "function": [r"^(void|int|double|string|bool)\s+\w+\(.*\)"],
     }
 }
-
-
 FILE_EXTENSION_TO_TYPE_MAP = {
     ".py": "Python",
     ".ps1": "PowerShell",
@@ -61,14 +50,25 @@ FILE_EXTENSION_TO_TYPE_MAP = {
     ".bat": "Batch"
 }
 
-# 
+# Function finalize_program
 def initialize_program():
-    print("\nInitializing Program...")
+    draw_title()
+    print("Initializing Program...\n")
     set_default_colors()
-    # ANSI escape code to set text color to white (37) and background to dark grey (100)
+    run_old_files_maintenance()
+    run_remove_unsupported_files()
     print("\n...Program Initialized.")
+
+# Function finalize_program
+def finalize_program():
+    draw_title()
+    print("Finalizing Program...\n")
+    print("\n...Program Finalized.")
+    exit()
+
 
 # Entry Point
 if __name__ == "__main__":
     initialize_program()
     show_main_menu()
+    finalize_program()

@@ -1,7 +1,8 @@
 # Script: utility.py
 
 # Imports
-import re
+import re, os, datetime, shutil
+from pathlib import Path
 
 # process scripts
 def process_script(filename):
@@ -61,3 +62,63 @@ def clean_lines(lines, script_type):
 def determine_type(filename):
     file_extension = os.path.splitext(filename)[1].lower()
     return FILE_EXTENSION_TO_TYPE_MAP.get(file_extension, "Unknown")
+
+def backup_files(file_type):
+    """Backup script or log files based on the file type parameter."""
+    try:
+        files = []
+        backup_path = "./Backup"
+        os.makedirs(backup_path, exist_ok=True)  # Ensure backup directory exists
+
+        if file_type == "Script":
+            extensions = ('.ps1', '.py', '.bat', '.mq5')
+        elif file_type == "Log":
+            extensions = ('.log',)
+
+        for filename in os.listdir("./Dirty"):
+            if os.path.splitext(filename)[1] in extensions:
+                files.append(filename)
+
+        for filename in files:
+            source = os.path.join("./Dirty", filename)
+            destination = os.path.join(backup_path, filename)
+            shutil.copy(source, destination)
+
+        print(f"Backed Up: {len(files)} {file_type}(s)")
+    except Exception as e:
+        print(f"Backup failed: {e}")
+
+# delete old scripts
+def run_old_files_maintenance():
+    folders_with_cutoffs = {
+        './Backup': datetime.datetime.now() - datetime.timedelta(days=180),  # 6 months
+        './Clean': datetime.datetime.now() - datetime.timedelta(days=120),   # 4 months
+        './Reject': datetime.datetime.now() - datetime.timedelta(days=60),   # 2 months
+    }
+    print("Checking Old files..")
+    for folder, cutoff_date in folders_with_cutoffs.items():
+        old_files = [f for f in Path(folder).iterdir() if f.is_file() and datetime.datetime.fromtimestamp(f.stat().st_mtime) < cutoff_date]
+        if old_files:
+            print(f"Detected In: {folder}")
+            for file in old_files:
+                print(f"Removing: {file.name}")
+                file.unlink()  # Removes the file
+        else:
+            print(f"Checked: {folder}")
+    print("..Maintenance done.\n")
+
+# remove unsupported
+def run_remove_unsupported_files():
+    allowed_extensions = ['.ps1', '.py', '.bat', '.mq5', '.log']
+    script_files = Path("./Dirty").glob("*.*")
+    unsupported_files = [f for f in script_files if f.suffix.lower() not in allowed_extensions]
+    print("Checking ./Dirty Folder..")
+    if unsupported_files:
+        print("..Unsupported Scripts!")
+        for file in unsupported_files:
+            destination = Path("./Reject") / file.name
+            shutil.move(str(file), str(destination))
+            print(f"Rejected: {file.name}")
+    else:
+        print("..All scripts supported.")
+    print("")
