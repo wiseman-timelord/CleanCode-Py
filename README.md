@@ -2,7 +2,6 @@
 
 ### Status
 Release. The release version of this program is working almost as intended, however, the source version of the program is being converted and rebranded to CodeClean-Py. NExt steps are...
-- Fix default color issues
 - identification of entry point comment, and comment as # Entry Point.
 - Test & fix, cleaning and commenting, for scripts.
 - Test & fix, Clean Ansii Codes From Logs.
@@ -23,7 +22,7 @@ CleanCode-Py is a utility designed for AI developers to optimize scripts, enhanc
 10. **Insightful Statistics**: Offers a detailed breakdown of the cleaning process, highlighting the number of lines and comments modified.
 11. **Looping Interface**: Enables continuous cleaning operations with options to re-detect, clean anew, or gracefully exit.
 12. **Concise Comments**: Comment details for, imports, variables, maps, functions, not yet perfected for all formats.
-13. **Color Text**: Through use of colorama library, the color text is safe for, windows and linux.
+13. **Color Text**: Through use of Color-Console library, superior to Colorama, does not require each printed line have code.
 
 ### Output
 **Display Options**: Lists detected scripts, and provides options...
