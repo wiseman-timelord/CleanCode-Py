@@ -62,7 +62,7 @@ def initialize_program():
     time.sleep(1)
     set_default_colors()
     time.sleep(1)
-    run_old_files_maintenance(folders_with_cutoffs)
+    run_old_files_maintenance(FOLDERS_WITH_CUTOFFS)
     time.sleep(1)
     run_remove_unsupported_files()
     time.sleep(1)

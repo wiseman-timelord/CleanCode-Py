@@ -49,12 +49,10 @@ def process_logs(filename):
     print(f"Cleaning log file: {filename}")
     time.sleep(1)
     source_path = os.path.join("./Dirty", filename)
-
     try:
         ansi_escape_pattern = re.compile(r'\x1B\[[0-?]*[ -/]*[@-~]')
         with open(source_path, 'r', encoding='utf-8') as log_file:
             filtered_content = [ansi_escape_pattern.sub('', line) for line in log_file]
-
         with open(source_path, 'w', encoding='utf-8') as log_file:
             log_file.writelines(filtered_content)
         print(f"Log file cleaned: {filename}")
@@ -63,20 +61,20 @@ def process_logs(filename):
 
 # Function clean_lines
 def clean_lines(lines, script_type):
-    comment_symbol = COMMENT_MAP.get(script_type, "#")  # Default to Python comment symbol
+    comment_symbol = COMMENT_MAP.get(script_type, "#")
     patterns = SECTION_MAP.get(script_type, {})
     cleaned = []
 
     for line in lines:
         if line.strip().startswith(comment_symbol) or not line.strip():
-            continue  # Skip comments and empty lines
+            continue
         for section, regex_patterns in patterns.items():
             matched_section = next((pattern for pattern in regex_patterns if re.match(pattern, line.strip())), None)
             if matched_section:
                 section_comment = f"{comment_symbol} {section.title()}\n"
                 if section_comment not in cleaned:
-                    cleaned.append(section_comment)  # Insert section comment once
-                break  # Stop checking other sections if a match is found
+                    cleaned.append(section_comment)
+                break
         cleaned.append(line)
     return cleaned
     
@@ -139,9 +137,9 @@ def run_remove_unsupported_files():
     print("")
 
 # Function run_old_files_maintenance
-def run_old_files_maintenance(folders_with_cutoffs):
+def run_old_files_maintenance(FOLDERS_WITH_CUTOFFS):
     print("Checking Old files..")
-    for folder, cutoff_date in folders_with_cutoffs.items():
+    for folder, cutoff_date in FOLDERS_WITH_CUTOFFS.items():
         old_files = [f for f in Path(folder).iterdir() if f.is_file() and datetime.datetime.fromtimestamp(f.stat().st_mtime) < cutoff_date]
         if old_files:
             print(f"Detected In: {folder}")

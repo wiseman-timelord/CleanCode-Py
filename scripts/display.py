@@ -1,6 +1,6 @@
 # Script: display.py
 
-from scripts.utility import  process_file, clear_screen, draw_title, draw_separator, backup_files
+from scripts.utility import  process_file, backup_files
 import os, time, sys
 from Color_Console import color
 
