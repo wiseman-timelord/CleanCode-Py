@@ -4,14 +4,14 @@
 Release. ScriptClean is being converted and rebranded to CodeClean-Py. Most of it is done, next steps are...
 
 ...logic to processing...
-- Firstly ALL, blank lines and comments and comments after code, are removed.
-- The name of the script is at the top, for example "# Script: ScriptName.Ext", and also there is no blank line above the comment.  
-- Imports are done in a block near the top of the script, for example "# Imports"; there is only 1 block of imports, where all imports will then be back to back under the comment, and also there is a blank line above the comment. 
-- there are no comments within any line featuring code; lines have, comments or code, not both, and also there is a blank line above the comment.  
-- Variables are done in a block, for example "# Variables"; there is only 1 block of variables, where all variables will then be back to back under the comment, and also there is a blank line above the comment.
-- Maps are done in a block, for example "# Maps", where all maps will then be back to back under the comment; there is only 1 block of variables, and also there is a blank line above the comment.
-- Functions are done individually, where for each function the name of the function is present, for example "# Function example_function_name", where all function will then be separate to each other, but no comments within the given functions, even if there are nested functions within the functions.
-- The Entry Point will be at the bottom of the script, for example "# Entry Point" with a blank line above it, and there will be only 1 of them, and they will start with, while or if or calls to functions. 
+- Remove all blank lines, comments, and trailing comments from the code.
+- Place the script name at the top using the format "# Script: ScriptName.Ext" without a blank line above this comment.
+- Group all import statements in a single block near the top under the "# Imports" comment, ensuring there is a blank line above this comment.
+- Ensure code lines contain either code or comments, but not both, with a blank line preceding any comment block.
+- Organize variables into a single block under the "# Variables" comment, with a blank line above this comment.
+- Consolidate maps into one block under the "# Maps" comment, maintaining a single block for variables with a blank line above the comment.
+- Define functions individually, prefaced by a comment in the format "# Function example_function_name", separating each function without embedding comments within them.
+- Place the entry point at the script's bottom, labeled "# Entry Point" with a blank line above it, ensuring only one entry point exists, initiated by, for example, while, if, or direct function calls.
 
 ...tasks...
 - Test & as required update, cleaning and commenting, for scripts.
