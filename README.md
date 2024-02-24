@@ -1,11 +1,12 @@
 # CleanCode-Py
 
 ### Status
-Release. The release version of this program is working almost as intended, however, the source version of the program is being converted and rebranded to CodeClean-Py. NExt steps are...
+Release. The release version of this program is working almost as intended, however, the source version of the program is being converted and rebranded to CodeClean-Py. Most of it is done, next steps are...
 - Test & as required update, cleaning and commenting, for scripts.
 - Test & as required update, Clean Ansii Codes From Logs.
 - Test & as required updated, identification/insertion of entry point comment.
 - Update documentation on GitHub below.
+- Use completed code to update powershell version.
 
 ### Description
 CleanCode-Py is a utility designed for AI developers to, optimize scripts and clean ansi codes from error logs...
