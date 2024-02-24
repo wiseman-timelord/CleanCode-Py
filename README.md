@@ -55,7 +55,7 @@ Select; Options = 1-2, Refresh = R, Exit = X:
 =========================( CleanCode-Py )=========================
 
 Checking File Types..
-Checking ./Dirty Folder..
+..Checking ./Dirty Folder..
 ..All scripts supported.
 
 Backing Up Scripts..
