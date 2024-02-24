@@ -17,7 +17,7 @@ CleanCode-Py is a utility designed for AI developers to, optimize scripts and cl
 - **Multi-Script Support** -  Supporting Python `.py`, PowerShell `.ps1`, Batch `.bat`, and MQL5 `.mql5` formats, as well as Logs `.log`.
 
 ### Output
-- Main Menu - Lists detected scripts/logs, and provides options...
+- Main Menu - Lists detected scripts/logs, and provides options (Alpha)...
 ```
 =========================( CleanCode-Py )=========================
 
@@ -50,7 +50,7 @@ CleanCode-Py is a utility designed for AI developers to, optimize scripts and cl
 Select; Options = 1-2, Refresh = R, Exit = X:
 
 ```
-- Script cleaning statistics...
+- Script cleaning statistics (Alpha)...
 ```
 =========================( CleanCode-Py )=========================
 
