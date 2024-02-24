@@ -13,7 +13,7 @@ def clean_scripts():
     draw_title()
     run_remove_unsupported_files()
     backup_files("Script")
-    script_files = [f for f in os.listdir("./Dirty") if os.path.splitext(f)[1] in ('.ps1', '.py', '.bat', '.mq5')]
+    script_files = [f for f in os.listdir("./Dirty") if os.path.splitext(f)[1].lower() in ('.ps1', '.py', '.bat', '.mq5')]
     print("Processing Scripts...")
     for filename in script_files:
         process_script(filename)
@@ -29,7 +29,7 @@ def clean_logs():
     draw_title()
     run_remove_unsupported_files()
     backup_files("Log")
-    log_files = [f for f in os.listdir("./Dirty") if os.path.splitext(f)[1] == '.log']
+    log_files = [f for f in os.listdir("./Dirty") if os.path.splitext(f)[1].lower() == '.log']
     print("Processing Logs...")
     for filename in log_files:
         process_logs(filename)
@@ -66,43 +66,28 @@ def process_script(filename):
     try:
         with open(source_path, 'r', encoding='utf-8') as src_file:
             lines = src_file.readlines()
-        
-        # Counting before cleaning
         total_lines_before = len(lines)
         blanks_before = sum(1 for line in lines if not line.strip())
         comments_before = sum(1 for line in lines if line.strip().startswith(COMMENT_MAP.get(script_type, "#")))
-        
         entry_comment = "# Entry Point" if any("entry" in line.lower() and COMMENT_MAP.get(script_type, "") in line for line in lines) else None
         cleaned_lines = clean_lines(lines, script_type)
-        
         if entry_comment:
             insert_index = find_insertion_index(cleaned_lines, script_type)
             cleaned_lines.insert(insert_index, "\n" + entry_comment)
-            
-        # Counting after cleaning
         total_lines_after = len(cleaned_lines)
         blanks_after = sum(1 for line in cleaned_lines if not line.strip())
         comments_after = sum(1 for line in cleaned_lines if line.strip().startswith(COMMENT_MAP.get(script_type, "#")))
-        
         with open(cleaned_path, 'w', encoding='utf-8') as cleaned_file:
             cleaned_file.writelines(cleaned_lines)
-        
-        # Calculating reduction
         reduction_percentage = (1 - total_lines_after / total_lines_before) * 100 if total_lines_before else 0
-        
         print(f"\nCleaning Script: {filename}")
         print(f"Before: Blanks={blanks_before}, Comments={comments_before}, Lines={total_lines_before}")
         print(f"After: Blanks={blanks_after}, Comments={comments_after}, Lines={total_lines_after}")
         print(f"Reduction: {reduction_percentage:.2f}%")
         time.sleep(1)
-        
-        # Move the original file to the Clean folder after processing
-        os.remove(source_path)  # Remove the original file from the Dirty folder
-        
+        os.remove(source_path)
     except Exception as e:
         print(f"Error processing {filename}: {e}")
-
-
 
 # Function process_logs
 def process_logs(filename):
@@ -126,7 +111,6 @@ def process_logs(filename):
         print(f"After: Ansi Codes = {ansi_codes_after}")
     except Exception as e:
         print(f"Error cleaning log file {filename}: {e}")
-
 
 # Function clean_lines
 def clean_lines(lines, script_type):
@@ -183,8 +167,9 @@ def backup_files(file_type):
             extensions = ('.ps1', '.py', '.bat', '.mq5')
         elif file_type == "Log":
             extensions = ('.log',)
+        extensions = tuple(ext.lower() for ext in extensions)
         for filename in os.listdir("./Dirty"):
-            if os.path.splitext(filename)[1] in extensions:
+            if os.path.splitext(filename)[1].lower() in extensions:
                 files.append(filename)
         for filename in files:
             source = os.path.join("./Dirty", filename)

@@ -30,7 +30,6 @@ def finalize_program():
     print("\n...Program Finalized.")
     exit()
 
-
 # Entry Point
 if __name__ == "__main__":
     initialize_program()
