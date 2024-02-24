@@ -5,50 +5,18 @@ Release. The release version of this program is working almost as intended, howe
 - Test & as required update, cleaning and commenting, for scripts.
 - Test & as required update, Clean Ansii Codes From Logs.
 - Test & as required updated, identification/insertion of entry point comment.
-- Update documentation on GitHub
+- Update documentation on GitHub below.
 
 ### Description
 CleanCode-Py is a utility designed for AI developers to optimize scripts, enhancing readability and efficiency. Supporting Python .py, PowerShell .ps1, Batch .bat, and MQL5 .mql5 formats, it efficiently trims unnecessary comments and spaces, producing a streamlined script. Its user-friendly interface, highlighted with colored text and ASCII art, guarantees a smooth experience. The tool retains only essential comments and spaces, typically at the beginning of functions, classes, or sections. CleanCode-Py ensures precision, reducing errors and time consumption, from manually cleaning scripts. The tool prioritizes comments for Imports, Variables, Maps, and Functions. While tailored for AI developers, other programmers can also benefit from its capabilities for final script refinement. The scripts for CleanCode-Py have now been cleaned with, CleanCode-Py, so, if you want examples, then examine the scripts. 
 
 ### Features
-1. **Script Identification**: Employs rules to ascertain the script type, supporting `.py`, `.ps1`, `.bat`, and `.mql5`.
-2. **Directory Management**: Seamlessly sets up vital directories ("Scripts", "Backup", "Cleaned") if absent.
-3. **File Scanning**: Probes the "./Scripts" directory for supported script files.
-4. **Interactive UI**: Showcases a numbered list of detected scripts for effortless selection.
-5. **File Backup**: Safeguards the selected file in the "./Backup" directory pre-cleaning.
-6. **Script Streamlining**: Excises specific comments and blank lines based on refined rules.
-7. **Preserving Essentials**: Ensures the presence of a comment before functions, classes, or vital sections.
-8. **File Archiving**: Deposits the refined script in the "./Cleaned" directory.
-9. **Original File Management**: Erases the initial script from the "./Scripts" directory after refinement.
-10. **Insightful Statistics**: Offers a detailed breakdown of the cleaning process, highlighting the number of lines and comments modified.
-11. **Looping Interface**: Enables continuous cleaning operations with options to re-detect, clean anew, or gracefully exit.
-12. **Concise Comments**: Comment details for, imports, variables, maps, functions, not yet perfected for all formats.
-13. **Color Text**: Through use of Color-Console library, superior to Colorama, does not require each printed line have code.
+- To be detailed.
 
 ### Output
-**Display Options**: Lists detected scripts, and provides options...
+- Main Menu - Lists detected scripts/logs, and provides options...
 ```
-==============================================================================
-   _________            .__        __   _________ .__
-  /   _____/ ___________|__|______/  |_ \_   ___ \|  |   ____ _____    ____
-  \_____  \_/ ___\_  __ \  \____ \   __\/    \  \/|  | _/ __ \\__  \  /    \
-  /        \  \___|  | \/  |  |_> >  |  \     \___|  |_\  ___/ / __ \|   |  \
- /_______  /\___  >__|  |__|   __/|__|   \______  /____/\___  >____  /___|  /
-         \/     \/         |__|                 \/          \/     \/     \/
-==============================================================================
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- Script Choices:
-------------------------------------------------------------------------------
-
- Scanning Folder...
- ...Scripts Found.
-                             1. batch_test.bat
-                             2. mql5_test.Mql5
-                             3. powershell_test.ps1
-                             4. python_test.py
-                             0. Clean All Scripts
-
- Select, '0-9' = Choice, 'r' = Re-detect, 'd' = Debug, 'q' = Exit:
+=========================( CleanCode-Py )=========================
 
 
 
@@ -56,95 +24,87 @@ CleanCode-Py is a utility designed for AI developers to optimize scripts, enhanc
 
 
 
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+                       1. Clean Scripts,
+                            (6 Found)
+
+                       2. Clean Logs.
+                            (0 Found)
+
+
+
+
+
+
+
+
+
+
+
+------------------------------------------------------------------
+Select; Options = 1-2, Refresh = R, Exit = X:
+
 ```
-**Feedback**: Script cleaning statistics (on already somewhat clean scripts)...
+- Script cleaning statistics...
 ```
-==============================================================================
-                                 SCRIPT CLEAN
-==============================================================================
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- Processing Scripts:
-------------------------------------------------------------------------------
+=========================( CleanCode-Py )=========================
 
- Next script from './Scripts' is: 'batch_test.bat',
- Script type is 'Batch' with extension 'bat'.
-     Removed: 11 Blanks, 14 Comments,
-     Added: 2 Blanks, 13 Comments,
-     Change: 191 > 188 = 2.09%.
+Checking File Types..
+Checking ./Dirty Folder..
+..All scripts supported.
 
- Next script from './Scripts' is: 'mql5_test.Mql5',
- Script type is 'MQL5' with extension 'Mql5'.
-     Removed: 12 Blanks, 44 Comments,
-     Added: 4 Blanks, 16 Comments,
-     Change: 410 > 378 = 14.63%.
+Backing Up Scripts..
+Backed Up: 4 Script(s)
+..Scripts Backed Up.
 
- Next script from './Scripts' is: 'powershell_test.ps1',
- Script type is 'PowerShell' with extension 'ps1'.
-     Removed: 2 Blanks, 10 Comments,
-     Added: 7 Blanks, 9 Comments,
-     Change: 200 > 188 = 6.50%.
+Processing Scripts...
 
- Next script from './Scripts' is: 'python_test.py',
- Script type is 'Python' with extension 'py'.
-     Removed: 2 Blanks, 17 Comments,
-     Added: 8 Blanks, 10 Comments,
-     Change: 175 > 156 = 14.86%.
+Cleaning Script: display.ps1
+Before: Blanks=29, Comments=7, Lines=193
+After: Blanks=0, Comments=2, Lines=134
+Reduction: 30.57%
 
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Cleaning Script: main.ps1
+Before: Blanks=8, Comments=7, Lines=46
+After: Blanks=0, Comments=2, Lines=30
+Reduction: 34.78%
+
+Cleaning Script: setup.py
+Before: Blanks=6, Comments=2, Lines=96
+After: Blanks=0, Comments=3, Lines=67
+Reduction: 30.21%
+
+Cleaning Script: utility.ps1
+Before: Blanks=26, Comments=6, Lines=202
+After: Blanks=0, Comments=2, Lines=137
+Reduction: 32.18%
+
+...Scripts Cleaned.
+
+------------------------------------------------------------------
+Returning To Menu...
+
 ```
-**Loop**: After process, then re-displays the menu until the user exits...
-```
-==============================================================================
-   _________            .__        __   _________ .__
-  /   _____/ ___________|__|______/  |_ \_   ___ \|  |   ____ _____    ____
-  \_____  \_/ ___\_  __ \  \____ \   __\/    \  \/|  | _/ __ \\__  \  /    \
-  /        \  \___|  | \/  |  |_> >  |  \     \___|  |_\  ___/ / __ \|   |  \
- /_______  /\___  >__|  |__|   __/|__|   \______  /____/\___  >____  /___|  /
-         \/     \/         |__|                 \/          \/     \/     \/
-==============================================================================
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- Script Choices:
-------------------------------------------------------------------------------
 
- Scanning Folder...
- No Scripts Found!
-                           No Scripts In './Scripts'
-
- Select, '0-9' = Choice, 'r' = Re-detect, 'd' = Debug, 'q' = Exit:
-
-
-
-
-
-
-
-
-
-
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-```
 ##
 
-### Usage - Windows
-1. Deposit the script files you wish to clean in the `.\Scripts` folder.
+### Usage
+1. Run `Setup-Install.Bat` to setup directories and install requirements.
+1. Deposit the script/log files you wish to clean in the `.\Dirty` folder.
 2. Double-click `CleanCode-Py.bat` for easy launching.
-3. Adhere to the on-screen prompts to select a file for cleaning.
-4. Check folder ".\Cleaned" after processes complete, backups are in ".\Backup".
-
-### Usage - Linux & wsl
-1. Deposit the script files you wish to clean in the `./Scripts` folder.
-2. Run `python main.py`, this may additionally require admin mode.
-3. Adhere to the on-screen prompts to select a file for cleaning.
-4. Check folder "./Cleaned" after processes complete, backups are in "./Backup".
+3. Check the options on the menu, Scripts/Logs=1-2, Refresh=R, Exit=X.
+4. If you selected 1 or 2, then check the ".\Clean" folder after processing  (it will over-write!).
+5. IF you need the original then check the ".\Backup" folder (it will over-write!).
 
 ### Requirements
-- **Python Version**: Ensure you have Python 3.4-3.12, you can verify this by running `python --version` or `python3 --version` in your, terminal or command prompt.
-- **Operating System**: CleanCode-Py is designed to work on Windows and Linux. While it has been primarily tested on Windows, Linux users should be able to use it, though it remains largely untested on this platform. Mac OS users might also be able to run the script, but this hasn't been verified.
-- **Dependencies**: No external Python libraries are required. The script utilizes standard libraries like `os`, `shutil`, `re` and `time`.
+- Windows - Batch Support and Scripting Host, Enabled.
+- Python - Version compatability to be calculated.
+- Libraries - Check the requirements.txt (installed via Setup-Install.Bat)
 
 ### Notes
-- The 'd' for debug option, will, copy back all the "./Backup" files to "./Scripts" and delete the "./Cleaned" files; its used for, testing and development, basically do not use it unless you are developing the code.
+- To be detailed.
 
 ## DISCLAIMER
 This software is subject to the terms in License.Txt, covering usage, distribution, and modifications. For full details on your rights and obligations, refer to License.Txt.
