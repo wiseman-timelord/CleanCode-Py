@@ -96,8 +96,12 @@ def process_script(filename):
         print(f"Reduction: {reduction_percentage:.2f}%")
         time.sleep(1)
         
+        # Move the original file to the Clean folder after processing
+        os.remove(source_path)  # Remove the original file from the Dirty folder
+        
     except Exception as e:
         print(f"Error processing {filename}: {e}")
+
 
 
 # Function process_logs
@@ -106,15 +110,23 @@ def process_logs(filename):
     print(f"Cleaning log file: {filename}")
     time.sleep(1)
     source_path = os.path.join("./Dirty", filename)
+    cleaned_path = os.path.join("./Clean", filename)
     try:
         ansi_escape_pattern = re.compile(r'\x1B\[[0-?]*[ -/]*[@-~]')
         with open(source_path, 'r', encoding='utf-8') as log_file:
-            filtered_content = [ansi_escape_pattern.sub('', line) for line in log_file]
-        with open(source_path, 'w', encoding='utf-8') as log_file:
-            log_file.writelines(filtered_content)
-        print(f"Log file cleaned: {filename}")
+            content = log_file.readlines()
+        ansi_codes_before = sum(len(ansi_escape_pattern.findall(line)) for line in content)
+        filtered_content = [ansi_escape_pattern.sub('', line) for line in content]
+        ansi_codes_after = sum(len(ansi_escape_pattern.findall(line)) for line in filtered_content)
+        with open(cleaned_path, 'w', encoding='utf-8') as cleaned_file:
+            cleaned_file.writelines(filtered_content)
+        os.remove(source_path)
+        print(f"Log cleaned: {filename}")
+        print(f"Before: Ansi Codes = {ansi_codes_before}")
+        print(f"After: Ansi Codes = {ansi_codes_after}")
     except Exception as e:
         print(f"Error cleaning log file {filename}: {e}")
+
 
 # Function clean_lines
 def clean_lines(lines, script_type):

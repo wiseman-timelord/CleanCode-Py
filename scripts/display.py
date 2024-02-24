@@ -35,8 +35,8 @@ def show_main_menu():
         draw_title()
         script_extensions = ('.ps1', '.py', '.bat', '.mq5')
         log_extension = '.log'
-        script_files = [f for f in os.listdir("./Dirty") if os.path.splitext(f)[1] in script_extensions]
-        log_files = [f for f in os.listdir("./Dirty") if os.path.splitext(f)[1] == log_extension]
+        script_files = [f for f in os.listdir("./Dirty") if os.path.splitext(f)[1].lower() in [ext.lower() for ext in script_extensions]]
+        log_files = [f for f in os.listdir("./Dirty") if os.path.splitext(f)[1].lower() == log_extension.lower()]
         script_count = len(script_files)
         log_count = len(log_files)
         print("\n\n\n\n\n\n\n\n")
