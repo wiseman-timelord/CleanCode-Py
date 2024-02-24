@@ -19,9 +19,7 @@ def initialize_program():
     set_default_colors()
     time.sleep(1)
     run_old_files_maintenance(FOLDERS_WITH_CUTOFFS)
-    time.sleep(1)
     run_remove_unsupported_files()
-    time.sleep(1)
     print("...Program Initialized.\n")
     time.sleep(2)
 

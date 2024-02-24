@@ -1,6 +1,6 @@
 # Script: display.py
 
-from scripts.utility import  process_file, backup_files, process_script, process_logs
+# Imports
 import os, time, sys
 from Color_Console import color
 
@@ -55,30 +55,18 @@ def show_main_menu():
         elif choice == 'r':
             print("Refreshing Display...")
             time.sleep(2)
-            continue 
-        elif choice == '1':
-            print("Cleaning Scripts...")
-            time.sleep(2)
-            clear_screen()
-            draw_title()
-            print("Backing up Scripts...")
-            backup_files("Script")
-            print("Processing Scripts...")
-            for filename in script_files:
-                process_script(filename)
-            time.sleep(2)
-        elif choice == '2':
-            print("Cleaning Logs...")
-            time.sleep(2)
-            clear_screen()
-            draw_title()
-            print("Backing up Logs...")
-            backup_files("Log")
-            print("Processing Logs...")
-            for filename in log_files:
-                process_logs(filename)
-            time.sleep(2)
+            continue
         else:
-            print("Invalid choice, please try again.")
-            time.sleep(2)
+            from scripts.utility import clean_scripts, clean_logs
+            if choice == '1':
+                print("Cleaning scripts...")
+                time.sleep(2)
+                clean_scripts()
+            elif choice == '2':
+                print("Cleaning Logs...")
+                time.sleep(2)
+                clean_logs()
+            else:
+                print("Invalid choice, please try again.")
+                time.sleep(2)
 
