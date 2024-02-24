@@ -8,10 +8,13 @@ Release. The release version of this program is working almost as intended, howe
 - Update documentation on GitHub below.
 
 ### Description
-CleanCode-Py is a utility designed for AI developers to optimize scripts, enhancing readability and efficiency. Supporting Python .py, PowerShell .ps1, Batch .bat, and MQL5 .mql5 formats, it efficiently trims unnecessary comments and spaces, producing a streamlined script. Its user-friendly interface, highlighted with colored text and ASCII art, guarantees a smooth experience. The tool retains only essential comments and spaces, typically at the beginning of functions, classes, or sections. CleanCode-Py ensures precision, reducing errors and time consumption, from manually cleaning scripts. The tool prioritizes comments for Imports, Variables, Maps, and Functions. While tailored for AI developers, other programmers can also benefit from its capabilities for final script refinement. The scripts for CleanCode-Py have now been cleaned with, CleanCode-Py, so, if you want examples, then examine the scripts. 
+CleanCode-Py is a utility designed for AI developers to, optimize scripts and clean ansi codes from error logs...
+- For scripts it enhances readability and efficiency, it efficiently trims unnecessary comments and spaces, producing a streamlined script. This is especially useful for AI programmers whom may have scripts with multiple long comments in each function, the results of embedded AI notations/instructions, therein, removing these comments can introduce errors, especially for novice programmers.
+- For logs, specifically only ones that feature Ansii codes, it removes the Ansii codes, producing a Error Log readable through for example Notepad.
 
 ### Features
-- To be detailed.
+- **Minimal Comments** - The Processed Scripts retains only essential comments and spaces, typically at the beginning of functions, classes, or sections.
+- **Multi-Script Support** -  Supporting Python `.py`, PowerShell `.ps1`, Batch `.bat`, and MQL5 `.mql5` formats, as well as Logs `.log`.
 
 ### Output
 - Main Menu - Lists detected scripts/logs, and provides options...
