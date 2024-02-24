@@ -1,7 +1,7 @@
 # CleanCode-Py
 
 ### Status
-Release. The release version of this program is working almost as intended, however, the source version of the program is being converted and rebranded to CodeClean-Py. Most of it is done, next steps are...
+Release. ScriptClean is being converted and rebranded to CodeClean-Py. Most of it is done, next steps are...
 - Test & as required update, cleaning and commenting, for scripts.
 - Test & as required updated, identification/insertion of entry point comment.
 - Clean Ansii Codes From Logs works, but check again after completing scripts.
