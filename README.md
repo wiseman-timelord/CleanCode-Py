@@ -6,7 +6,7 @@ Release. The release version of this program is working almost as intended, howe
 - Test & as required update, Clean Ansii Codes From Logs.
 - Test & as required updated, identification/insertion of entry point comment.
 - Update documentation on GitHub below.
-- Use completed code to update powershell version.
+- Use, completed code and improvements, to update powershell version.
 
 ### Description
 CleanCode-Py is a utility designed for AI developers to, optimize scripts and clean ansi codes from error logs...
