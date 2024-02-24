@@ -104,7 +104,7 @@ Returning To Menu...
 - Libraries - Check the requirements.txt (installed via Setup-Install.Bat)
 
 ### Notes
-- To be detailed.
+- This Program is a somewhat complete remake of "ScriptClean", you may find the, latest and only remaining, version as the oldest release available. ScriptClean was my first proper program, hence CodeClean-Py is somewhat of a return to the source.
 
 ## DISCLAIMER
 This software is subject to the terms in License.Txt, covering usage, distribution, and modifications. For full details on your rights and obligations, refer to License.Txt.
