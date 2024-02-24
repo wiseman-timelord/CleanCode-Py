@@ -1,6 +1,6 @@
 # Script: display.py
 
-from scripts.utility import  process_file, backup_files
+from scripts.utility import  process_file, backup_files, process_script, process_logs
 import os, time, sys
 from Color_Console import color
 
@@ -39,14 +39,15 @@ def show_main_menu():
         log_files = [f for f in os.listdir("./Dirty") if os.path.splitext(f)[1] == log_extension]
         script_count = len(script_files)
         log_count = len(log_files)
-        print("\n\n\n\n\n\n\n\n\n")
+        print("\n\n\n\n\n\n\n\n")
         print(f"                       1. Clean Scripts,")
         print(f"                            ({script_count} Found)\n")
         print(f"                       2. Clean Logs.")
         print(f"                            ({log_count} Found)")
         print("\n\n\n\n\n\n\n\n\n")
         draw_separator()
-        choice = input("Select; Options = 1-2, Reload = R, Exit = X: ").strip().lower()
+        print("Select; Options = 1-2, Reload = R, Exit = X: ", end='')
+        choice = input().strip().lower()
         if choice == 'x':
             print("Exit Initiated...")
             time.sleep(2)
@@ -56,6 +57,10 @@ def show_main_menu():
             time.sleep(2)
             continue 
         elif choice == '1':
+            print("Cleaning Scripts...")
+            time.sleep(2)
+            clear_screen()
+            draw_title()
             print("Backing up Scripts...")
             backup_files("Script")
             print("Processing Scripts...")
@@ -63,6 +68,10 @@ def show_main_menu():
                 process_script(filename)
             time.sleep(2)
         elif choice == '2':
+            print("Cleaning Logs...")
+            time.sleep(2)
+            clear_screen()
+            draw_title()
             print("Backing up Logs...")
             backup_files("Log")
             print("Processing Logs...")
@@ -72,3 +81,4 @@ def show_main_menu():
         else:
             print("Invalid choice, please try again.")
             time.sleep(2)
+

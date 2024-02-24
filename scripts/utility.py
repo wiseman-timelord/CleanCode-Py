@@ -1,8 +1,9 @@
 # Script: utility.py
 
 # Imports
-import re, os, datetime, shutil
+import re, os, datetime, shutil, time
 from pathlib import Path
+from scripts.maps import COMMENT_MAP, SECTION_MAP, FILE_EXTENSION_TO_TYPE_MAP, FOLDERS_WITH_CUTOFFS
 
 def process_file(filename):
     file_extension = os.path.splitext(filename)[1].lower()
@@ -27,12 +28,12 @@ def process_script(filename):
         return
     source_path = os.path.join("./Dirty", filename)
     backup_path = os.path.join("./Backup", filename)
-    cleaned_path = os.path.join("./Cleaned", filename)
+    cleaned_path = os.path.join("./Clean", filename)
     shutil.copy(source_path, backup_path)
     try:
         with open(source_path, 'r', encoding='utf-8') as src_file:
             lines = src_file.readlines()
-        entry_comment = "# Entry Point\n" if any("entry" in line.lower() and COMMENT_MAP.get(script_type, "") in line for line in lines) else None
+        entry_comment = "# Entry Point" if any("entry" in line.lower() and COMMENT_MAP.get(script_type, "") in line for line in lines) else None
         cleaned_lines = clean_lines(lines, script_type)
         if entry_comment:
             insert_index = find_insertion_index(cleaned_lines, script_type)
@@ -40,8 +41,10 @@ def process_script(filename):
         with open(cleaned_path, 'w', encoding='utf-8') as cleaned_file:
             cleaned_file.writelines(cleaned_lines)
         print(f"Script cleaned and saved: {filename}")
+        time.sleep(1)
     except Exception as e:
         print(f"Error processing {filename}: {e}")
+        time.sleep(1)
 
 # Function process_logs
 def process_logs(filename):
